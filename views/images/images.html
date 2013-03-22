@@ -1,0 +1,107 @@
+{{extend 'layout.html'}}
+
+<h3>
+	{{ =T('Photo gallery') }}
+	{{if auth.has_membership('manager'):}}
+		{{=manager_toolbar()}}
+	{{ pass }}
+</h3>
+{{images_col1 = images_list[::3]}}
+{{images_col2 = images_list[1::3]}}
+{{images_col3 = images_list[2::3]}}
+
+<div class="container offset1">
+	<div class="span3">
+		{{enum_images = enumerate(images_col1)}}
+		{{for index, image in enum_images:}}
+			<div class="modal hide" id="{{='image_1_'+str(index)}}">
+				<div class="modal-header"> <a class="close" data-dismiss="modal">×</a>
+					<h2>{{=image.name}}</h2>
+					<p>
+						<h5>{{=image.comment}}</h5>
+					</p>
+				</div>
+					<div class="modal-body">
+						<img src="{{=URL('static','images/photo_gallery/%s' %(image.file))}}">
+				</div>
+				<div class="modal-footer"> <a class="btn btn-info" data-dismiss="modal">Fermer</a> </div>
+			</div>
+			<div >
+				<p>
+					{{if auth.has_membership('manager'):}}
+						{{=manager_toolbar(image.id)}}
+					{{ pass }}
+					<h4>{{=image.name}}</h4>
+					<a data-toggle="modal" href="#{{='image_1_'+str(index)}}">
+						<img src="{{=URL('static','images/photo_gallery/thumbs/%s' %(image.thumb))}}">
+					</a>
+				</p>
+			</div>
+			{{if (index+1) < MAX_IMAGES:}}
+				<HR>
+			{{pass}}	
+		{{pass}}
+	</div>
+	<div class="span3">
+		{{enum_images = enumerate(images_col2)}}
+		{{for index, image in enum_images:}}
+			<div class="modal hide" id="{{='image_2_'+str(index)}}">
+				<div class="modal-header"> <a class="close" data-dismiss="modal">×</a>
+					<h2>{{=image.name}}</h2>
+					<p>
+						<h5>{{=image.comment}}</h5>
+					</p>
+				</div>
+					<div class="modal-body">
+						<img src="{{=URL('static','images/photo_gallery/%s' %(image.file))}}">
+				</div>
+				<div class="modal-footer"> <a class="btn btn-info" data-dismiss="modal">Fermer</a> </div>
+			</div>
+			<div>
+				<p>
+					{{if auth.has_membership('manager'):}}
+						{{=manager_toolbar(image.id)}}
+					{{ pass }}
+					<h4>{{=image.name}}</h4>
+					<a data-toggle="modal" href="#{{='image_2_'+str(index)}}">
+						<img src="{{=URL('static','images/photo_gallery/thumbs/%s' %(image.thumb))}}">
+					</a>
+				</p>
+			</div>
+			{{if (index+1) < MAX_IMAGES:}}
+				<HR>
+			{{pass}}	
+		{{pass}}
+	</div>
+	<div class="span3">
+		{{enum_images = enumerate(images_col3)}}
+		{{for index, image in enum_images:}}
+			<div class="modal hide" id="{{='image_3_'+str(index)}}">
+				<div class="modal-header"> <a class="close" data-dismiss="modal">×</a>
+					<h2>{{=image.name}}</h2>
+					<p>
+						<h5>{{=image.comment}}</h5>
+					</p>
+				</div>
+					<div class="modal-body">
+						<img src="{{=URL('static','images/photo_gallery/%s' %(image.file))}}">
+				</div>
+				<div class="modal-footer"> <a class="btn btn-info" data-dismiss="modal">Fermer</a> </div>
+			</div>
+			<div>
+				<p>
+					{{if auth.has_membership('manager'):}}
+						{{=manager_toolbar(image.id)}}
+					{{ pass }}
+					<h4>{{=image.name}}</h4>
+					<a data-toggle="modal" href="#{{='image_3_'+str(index)}}">
+						<img src="{{=URL('static','images/photo_gallery/thumbs/%s' %(image.thumb))}}">
+					</a>
+				</p>
+			</div>
+			{{if (index+1) < MAX_IMAGES:}}
+				<HR>
+			{{pass}}	
+		{{pass}}
+	</div>
+</div>

@@ -1,0 +1,11 @@
+{{extend 'layout.html'}}
+<h1>{{=T('Calendar booking')}}</h1>
+<br />
+{{block left_sidebar}}
+	<div class="contact">
+		{{=LOAD('default', 'address.load', ajax=False)}}
+	</div>
+{{end}}
+
+{{=form}}
+<script>jQuery('textarea').css('width','94%').css('height','60px');</script>

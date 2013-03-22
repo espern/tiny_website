@@ -1,0 +1,23 @@
+{{extend 'layout.html'}}
+{{ if len(request.args) > 0: }}
+	<h1>{{=T('Edit page')}}</h1>
+{{ else: }}
+	<h1>{{=T('Add a new page')}}</h1>
+{{ pass }}
+{{=form}}
+
+{{ if len(request.args) > 0: }}
+	<script type="text/javascript" src="{{=URL('static', 'nicEdit/nicEditComplete.js')}}"></script>
+		<script type="text/javascript">
+			bkLib.onDomLoaded(function() { 
+				new nicEditors.allTextAreas({
+					iconsPath :"{{=URL('static', 'nicEdit/nicEditorIcons.gif')}}",
+					buttonList : ['bold','italic','underline','strikeThrough','left', 'center',
+						'right', 'justify', 'ol', 'ul', 'fontSize', 'fontFormat', 'indent', 'outdent', 'link', 'upload'],
+					uploadURI : "{{=URL('images', 'nicedit_image_upload', args=request.args(0))}}",
+				})
+			});
+		</script>
+	</script>
+	<script>jQuery('textarea').css('width','600px').css('height','50px');</script>
+{{pass}}

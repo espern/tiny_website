@@ -1,0 +1,10 @@
+{{extend 'layout.html'}}
+{{ if len(request.args) > 0: }}
+	<h1>{{=T('Edit image gallery')}}</h1>
+{{ else: }}
+	<h1>{{=T('Add image in the Gallery')}}</h1>
+{{ pass }}
+{{=form}}
+<div>
+	<img src="{{=URL('static','images/photo_gallery/thumbs/%s' %(thumb))}}">
+</div>
