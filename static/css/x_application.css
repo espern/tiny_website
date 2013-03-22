@@ -2,11 +2,11 @@
 
 @font-face {
     font-family: 'BlackJackRegular';
-    src: url('../polices/blackjar-webfont.eot');
-    src: url('../polices/blackjar-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../polices/blackjar-webfont.woff') format('woff'),
-         url('../polices/blackjar-webfont.ttf') format('truetype'),
-         url('../polices/blackjar-webfont.svg#BlackJackRegular') format('svg');
+    src: url('../fonts/blackjar-webfont.eot');
+    src: url('../fonts/blackjar-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/blackjar-webfont.woff') format('woff'),
+         url('../fonts/blackjar-webfont.ttf') format('truetype'),
+         url('../fonts/blackjar-webfont.svg#BlackJackRegular') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -14,11 +14,11 @@
 
 @font-face {
     font-family: 'DayRomanRegular';
-    src: url('../polices/dayrom__-webfont.eot');
-    src: url('../polices/dayrom__-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../polices/dayrom__-webfont.woff') format('woff'),
-         url('../polices/dayrom__-webfont.ttf') format('truetype'),
-         url('../polices/dayrom__-webfont.svg#DayRomanRegular') format('svg');
+    src: url('../fonts/dayrom__-webfont.eot');
+    src: url('../fonts/dayrom__-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/dayrom__-webfont.woff') format('woff'),
+         url('../fonts/dayrom__-webfont.ttf') format('truetype'),
+         url('../fonts/dayrom__-webfont.svg#DayRomanRegular') format('svg');
     font-weight: normal;
     font-style: normal;
 
