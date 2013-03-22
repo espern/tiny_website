@@ -89,7 +89,7 @@ tmpContent = """
 	Password : <strong>pass</strong><br />
 </p>
 <p>
-	Once connected, try to add images in the photo gallery (need to have python PIL installed)
+	Once connected, try to add images in the photo gallery (<em>need to have python PIL installed</em>)
 </p
 <p>
 	You can edit the website parameters in models/db_menu.py
