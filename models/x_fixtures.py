@@ -100,13 +100,13 @@ if db(db.page.is_index == True).count() == 0:
 	gallery_component = db(db.page_component.name == 'photo_gallery.load').select().first()
 	db.page.insert(
         title='Index',
-        subtitle='The index page...',
+        subtitle='The index page',
         url='index',
         content=tmpContent,
         is_index=True,
         left_sidebar_enabled=True,
         right_sidebar_enabled=True,
-        left_sidebar_component=gallery_component
+        left_sidebar_component=gallery_component,
         right_sidebar_component=news_component
     )
 
