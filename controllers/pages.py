@@ -43,8 +43,8 @@ def delete_page():
         form = FORM.confirm(T('Yes, I really want to delete this page'),{T('Back'):URL('show_page', args=page.id)})
         if form.accepted:
             #remove images linked to the page
-            pathname = os.path.join(request.folder,'static','images', 'pages_content', str(form.vars.id))
-            if os.path.exists(pathname):
+            pathname = path.join(request.folder,'static','images', 'pages_content', str(form.vars.id))
+            if path.exists(pathname):
                 shutil.rmtree(pathname)
             #remove the page
             db(db.page.id==page.id).delete()

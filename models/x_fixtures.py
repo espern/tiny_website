@@ -97,14 +97,16 @@ tmpContent = """
 """
 if db(db.page.is_index == True).count() == 0:
 	news_component = db(db.page_component.name == 'news.load').select().first()
+	gallery_component = db(db.page_component.name == 'photo_gallery.load').select().first()
 	db.page.insert(
         title='Index',
         subtitle='The index page...',
         url='index',
         content=tmpContent,
         is_index=True,
-        left_sidebar_enabled=False,
+        left_sidebar_enabled=True,
         right_sidebar_enabled=True,
+        left_sidebar_component=gallery_component
         right_sidebar_component=news_component
     )
 
@@ -154,3 +156,67 @@ if db(db.news).count() == 0:
 		text='This is your first news',
 		published_on=request.now
 		)
+
+#add default images
+if db(db.image.name == "demo1").count() == 0:
+	db.image.insert(
+	    name='demo1',
+	    alt='demo1',
+	    comment='my first image',
+	    file='demo1.jpg',
+	    thumb='demo1.jpg',
+	    show_in_gallery=True
+	)
+if db(db.image.name == "demo2").count() == 0:
+	db.image.insert(
+	    name='demo2',
+	    alt='demo2',
+	    comment='my first image',
+	    file='demo2.jpg',
+	    thumb='demo2.jpg',
+	    show_in_gallery=True
+	)
+if db(db.image.name == "demo3").count() == 0:
+	db.image.insert(
+	    name='demo3',
+	    alt='demo3',
+	    comment='my first image',
+	    file='demo3.jpg',
+	    thumb='demo3.jpg',
+	    show_in_gallery=True
+	)
+if db(db.image.name == "demo4").count() == 0:
+	db.image.insert(
+	    name='demo4',
+	    alt='demo4',
+	    comment='my first image',
+	    file='demo4.jpg',
+	    thumb='demo4.jpg',
+	    show_in_gallery=True
+	)
+if db(db.image.name == "demo5").count() == 0:
+	db.image.insert(
+	    name='demo5',
+	    alt='demo5',
+	    comment='my first image',
+	    file='demo5.jpg',
+	    thumb='demo5.jpg',
+	    show_in_gallery=True
+	)
+if db(db.image.name == "demo6").count() == 0:
+	db.image.insert(
+	    name='demo6',
+	    alt='demo6',
+	    comment='my first image',
+	    file='demo6.jpg',
+	    thumb='demo6.jpg',
+	    show_in_gallery=True
+	)
+
+#Add a file to download
+if db(db.file.title == "web2py manual 5th").count() == 0:
+	db.file.insert(
+	    title='web2py manual 5th',
+	    comment='A really great web framework!',
+	    file='demo.pdf'
+	)

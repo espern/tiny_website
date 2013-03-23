@@ -132,7 +132,7 @@ def contact_form():
 #     from gluon.myregex import regex_expose
      
 #     # Finding You Controllers
-#     ctldir = os.path.join(request.folder,"controllers")
+#     ctldir = path.join(request.folder,"controllers")
 #     ctls=os.listdir(ctldir)
 #     # Excluding The appadmin.py and the Manage.py
 #     if 'appadmin.py' in ctls: ctls.remove('appadmin.py')
@@ -153,7 +153,7 @@ def contact_form():
      
 #     for ctl in ctls:
 #         if ctl.endswith(".bak") == False:
-#             filename = os.path.join(ctldir,ctl)
+#             filename = path.join(ctldir,ctl)
 #             data = open(filename, 'r').read()
 #             functions = regex_expose.findall(data)
 #             ctl = ctl[:-3].replace("_"," ")

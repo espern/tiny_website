@@ -19,11 +19,11 @@ def delete_image():
         form = FORM.confirm(T('Yes, I really want to delete this image'),{T('Back'):URL('images')})
         if form.accepted:
             #remove image and thumb
-            pathname = os.path.join(request.folder,'static','images', 'photo_gallery', str(form.vars.file))
-            if os.path.exists(pathname):
+            pathname = path.join(request.folder,'static','images', 'photo_gallery', str(form.vars.file))
+            if path.exists(pathname):
                 shutil.rmtree(pathname)
-            pathname = os.path.join(request.folder,'static','images', 'photo_gallery', str(form.vars.thumb))
-            if os.path.exists(pathname):
+            pathname = path.join(request.folder,'static','images', 'photo_gallery', str(form.vars.thumb))
+            if path.exists(pathname):
                 shutil.rmtree(pathname)
             #remove the image
             db(db.image.id==image.id).delete()
@@ -69,13 +69,16 @@ def __makeThumbnail(dbtable,ImageID,image_size=(600,600), thumbnail_size=(260,26
         from PIL import Image
     except: return
 
-    full_path = os.path.join(request.folder,'static','images','photo_gallery',thisImage.file)
+    full_path = path.join(request.folder,'static','images','photo_gallery',thisImage.file)
     im = Image.open(full_path)
     im.thumbnail(image_size,Image.ANTIALIAS)
     im.save(full_path)
     thumbName='thumb.%s' % (thisImage.file)
-    full_path = os.path.join(request.folder,'static','images','photo_gallery', 'thumbs',thumbName)
-    im.thumbnail(thumbnail_size,Image.ANTIALIAS)
+    full_path = path.join(request.folder,'static','images','photo_gallery', 'thumbs',thumbName)
+    try: 
+        im.thumbnail(thumbnail_size,Image.ANTIALIAS)
+    except:
+        pass
     im.save(full_path)
     thisImage.update_record(thumb=thumbName)
     return
@@ -87,11 +90,11 @@ def nicedit_image_upload():
     from gluon.contrib.simplejson import dumps
     
     page_id = request.args(0)
-    pathname = os.path.join(request.folder,'static','images', 'pages_content', page_id)
-    if not os.path.exists(pathname):
+    pathname = path.join(request.folder,'static','images', 'pages_content', page_id)
+    if not path.exists(pathname):
         os.mkdir(pathname)
 
-    pathfilename = os.path.join(pathname, request.vars.image.filename)
+    pathfilename = path.join(pathname, request.vars.image.filename)
     dest_file = open(pathfilename, 'wb')
     
     try:
