@@ -1,4 +1,5 @@
-The web2py welcome app is licensed under public domain 
-(except for the css and js files that it includes, which have their own third party licenses).
-
-You can modify this license when you add your own code.
+"""
+This file is part of tiny_website a basic CMS
+Copyrighted by Loïc Espern <loic@espern.net>
+License: LGPLv3 (http://www.gnu.org/licenses/lgpl.html)
+"""
