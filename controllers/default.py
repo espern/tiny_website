@@ -2,14 +2,6 @@
 
 # from gluon.debug import dbg
 
-########## TODO #################
-#
-# Voir dans le web2py book les URL Rewrite Pattern-based system pour rediriger pusieurs ndd sur des appli différentes
-#
-# Regarder le principe des "Callable" python pour faire un objet "Toolbar", et un callable "Manager_toolbas" qu'on init en passant ou pas un id
-#
-#################################
-
 def index():
     """
 

@@ -9,15 +9,6 @@ def show_page():
         page = db.page(request.args(0))
     else:
         page = db(db.page.url==request.args(0)).select().first()
-     
-    # if page:    #set the "active" page in menu
-    #     for index, menu in enumerate(response.menu):
-    #         if menu[0]==page.title:
-    #             is_enabled=True
-    #         else:
-    #             is_enabled=False
-    #         response.menu[index]=menu[:1]+(is_enabled,)+menu[2:]
-    # else:
     if not page:
         if request.args(0).lower() == 'images':
             redirect(URL('images'))
