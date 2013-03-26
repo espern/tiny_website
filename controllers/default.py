@@ -6,11 +6,64 @@ def index():
     """
 
     """
+    #Check if WEBSITE_PARAMETERS initialised. If not, we can either start with dummy data, or a blank database
+    if not WEBSITE_PARAMETERS:
+        form = FORM.confirm(T('I want to start with an empty database'),{T('I want to try the example database'):URL('populate_example_database')})
+        if form.accepted:
+            redirect(URL('default','create_empty_database'))
+        return dict(form=form)
     page = db(db.page.is_index==True).select().first()
     if not page:
         raise HTTP(404, T('sorry, the page you requested does not exist'))
     redirect(URL('pages','show_page',args=page.url))
     
+def create_empty_database():
+    form = SQLFORM(db.website_parameters)
+    if form.process().accepted:
+        if db(db.page.is_index == True).count() == 0:
+            db.page.insert(
+                title='Index',
+                subtitle='The index page',
+                url='index',
+                content='Empty database created. If you want, you can now remove *.tiny_demo files in your app folder',
+                is_index=True,
+                left_sidebar_enabled=False,
+                right_sidebar_enabled=False
+            )
+        redirect(URL('index'))
+    elif form.errors:
+       response.flash = T('form has errors')
+    return dict(form=form)
+    
+def populate_example_database():
+    from os import rename
+
+    fixtures_path = path.join(request.folder,'models')
+    banner_image_path = path.join(request.folder,'static', 'images', 'banner')
+    photo_gallery_path = path.join(request.folder,'static', 'images', 'photo_gallery')
+    photo_gallery_thumb_path = path.join(request.folder,'static', 'images', 'photo_gallery', 'thumbs')
+    uploaded_files_path = path.join(request.folder,'static', 'uploaded_files')
+
+    if request.args(0):
+        #rename x_fixtures.bak in x_fixtures.py to avoid populate the database in the future
+        if path.exists(path.join(fixtures_path,'x_fixtures.py')):
+            rename(path.join(fixtures_path,'x_fixtures.py'),path.join(fixtures_path,'x_fixtures.tiny_demo'))
+        redirect(URL('index'))
+    #rename x_fixtures.bak in x_fixtures.py to populate the database
+    if path.exists(path.join(fixtures_path,'x_fixtures.tiny_demo')):
+        rename(path.join(fixtures_path,'x_fixtures.tiny_demo'),path.join(fixtures_path,'x_fixtures.py'))
+    #activate the demo banner
+    if path.exists(path.join(banner_image_path,'banner.tiny_demo')):
+        rename(path.join(banner_image_path,'banner.tiny_demo'),path.join(banner_image_path,'banner.jpg'))
+    #activate photo gallery images
+    for i in range(1,7):
+        if path.exists(path.join(photo_gallery_path,'demo%d.tiny_demo' %i)):
+            rename(path.join(photo_gallery_path,'demo%d.tiny_demo' %i),path.join(photo_gallery_path,'demo%d.jpg' %i))
+    #activate photo gallery thumb images
+    for i in range(1,7):
+        if path.exists(path.join(photo_gallery_thumb_path,'demo%d.tiny_demo' %i)):        
+            rename(path.join(photo_gallery_thumb_path,'demo%d.tiny_demo' %i),path.join(photo_gallery_thumb_path,'demo%d.jpg' %i))
+    redirect(URL(populate_example_database,args=True))
 
 def user():
     """

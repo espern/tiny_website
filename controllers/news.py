@@ -26,7 +26,7 @@ def delete_news():
             #remove the news
             db(db.news.id==news.id).delete()
             session.flash = T('News deleted')
-            redirect(URL('index'))
+            redirect(URL('default', 'index'))
     return dict(news=news, form=form)
 
 def rss_news():

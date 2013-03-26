@@ -18,7 +18,7 @@ db._common_fields.append(signature) #db._common_fields is a list of fields that 
 db.define_table('website_parameters',
     Field('website_name_long', label=T('Website name long')),
     Field('website_name', label=T('Website name')),
-    Field('website_url', requires=IS_URL(), label=T('Url')),
+    Field('website_url', label=T('Url')),
     Field('contact_name', label=T('Contact name')),
     Field('contact_trade_register_number', label=T('Trade register number')),
     Field('contact_address', 'text', label=T('Address')),
@@ -26,19 +26,30 @@ db.define_table('website_parameters',
     Field('contact_telephone', label=T('Telephone')),
     Field('contact_fax', label=T('Fax')),
     Field('contact_mobile', label=T('Mobile')),
-    Field('contact_form_email', requires=IS_EMAIL(), label=T('Contact form email')),
-    Field('contact_form_cc', requires=IS_EMAIL(), label=T('Contact form cc')),
-    Field('contact_form_bcc', requires=IS_EMAIL(), label=T('Contact form cci')),
-    Field('booking_form_email', requires=IS_EMAIL(), label=T('Booking form email')),
-    Field('booking_form_cc', requires=IS_EMAIL(), label=T('Booking form cc')),
-    Field('booking_form_bcc', requires=IS_EMAIL(), label=T('Booking form cci')),
+    Field('contact_form_email', label=T('Contact form email')),
+    Field('contact_form_cc', label=T('Contact form cc')),
+    Field('contact_form_bcc', label=T('Contact form cci')),
+    Field('booking_form_email', label=T('Booking form email')),
+    Field('booking_form_cc', label=T('Booking form cc')),
+    Field('booking_form_bcc', label=T('Booking form cci')),
     Field('mailserver_url', label=T('Mail server url')),
     Field('mailserver_port', 'integer', label=T('Mail server port')),
-    Field('mailserver_sender_mail', requires=IS_URL() ,label=T('Mail server sender email')),
+    Field('mailserver_sender_mail', label=T('Mail server sender email')),
     Field('mailserver_sender_login', label=T('Mail server sender login')),
     Field('mailserver_sender_pass', label=T('Mail server sender pass')),
     Field('google_analytics_id', label=T('Google analytics id')),
+    Field('banner_image_desktop', label=T('Banner image on desktop')),
+    Field('banner_image_tablet', label=T('Banner image on tablet')),
+    Field('banner_image_phone', label=T('Banner image on phone'))
 ) 
+db.website_parameters.website_url.requires = IS_EMPTY_OR(IS_URL())
+db.website_parameters.mailserver_sender_mail.requires = IS_EMPTY_OR(IS_URL())
+db.website_parameters.contact_form_email.requires = IS_EMPTY_OR(IS_EMAIL())
+db.website_parameters.contact_form_cc.requires = IS_EMPTY_OR(IS_EMAIL())
+db.website_parameters.contact_form_bcc.requires = IS_EMPTY_OR(IS_EMAIL())
+db.website_parameters.booking_form_email.requires = IS_EMPTY_OR(IS_EMAIL())
+db.website_parameters.booking_form_cc.requires = IS_EMPTY_OR(IS_EMAIL())
+db.website_parameters.booking_form_bcc.requires = IS_EMPTY_OR(IS_EMAIL())
 
 db.define_table('page_component',
     Field('controller', readable=False, writable=False, default='default', label=T('Component controller')),

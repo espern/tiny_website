@@ -108,10 +108,25 @@
                   }
                 </style>
               <![endif]-->
-              <img src="{{=URL('static', 'images/banner/banner.jpg')}}" alt="banner">
-              <div id="banner_description">
-                 {{=T('Welcome on %s',WEBSITE_PARAMETERS.website_name_long)}}
-              </div>
+              {{if WEBSITE_PARAMETERS:}}
+                {{if WEBSITE_PARAMETERS.banner_image_desktop:}}
+                  <img src="{{=URL('static', 'images/banner/%s' %WEBSITE_PARAMETERS.banner_image_desktop)}}" alt="banner" class="hidden-tablet hidden-phone">
+                {{pass}}
+                {{if WEBSITE_PARAMETERS.banner_image_tablet:}}
+                  <img src="{{=URL('static', 'images/banner/%s' %WEBSITE_PARAMETERS.banner_image_tablet)}}" alt="banner" class="hidden-desktop hidden-phone">
+                {{pass}}
+                {{if WEBSITE_PARAMETERS.banner_image_phone:}}
+                  <img src="{{=URL('static', 'images/banner/%s' %WEBSITE_PARAMETERS.banner_image_phone)}}" alt="banner" class="hidden-desktop hidden-tablet">
+                {{pass}}
+
+                <div id="banner_description">
+                  {{if WEBSITE_PARAMETERS.website_name_long:}}
+                    {{=T('Welcome on %s',WEBSITE_PARAMETERS.website_name_long)}}
+                  {{else:}}
+                    {{=T('Welcome on this website')}}
+                  {{pass}}
+                </div>
+              {{pass}}
             </div>
         </div>
         
