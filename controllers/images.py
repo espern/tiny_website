@@ -88,11 +88,12 @@ def nicedit_image_upload():
     Controller to upload images with nicedit
     """
     from gluon.contrib.simplejson import dumps
-    
+    from os import mkdir
+	
     page_id = request.args(0)
     pathname = path.join(request.folder,'static','images', 'pages_content', page_id)
     if not path.exists(pathname):
-        os.mkdir(pathname)
+        mkdir(pathname)
 
     pathfilename = path.join(pathname, request.vars.image.filename)
     dest_file = open(pathfilename, 'wb')
