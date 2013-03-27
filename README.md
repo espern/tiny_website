@@ -20,7 +20,7 @@ Tiny_website also includes :
 
 ... and some other features to come...
 
-
+You can have a look at the final result here : http://www.espern.net/tiny_website
 
 Requirements
 ============
