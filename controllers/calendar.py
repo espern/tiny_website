@@ -63,8 +63,8 @@ def calendar_booking():
         """) % (page_low_title, form.vars.name, form.vars.email, form.vars.phone_number, form.vars.address,
                 form.vars.start_date.strftime("%d/%m/%Y"), duration.name if duration else '')
         if mail.send(to=WEBSITE_PARAMETERS.booking_form_email,
-                  cc=[WEBSITE_PARAMETERS.booking_form_cc],
-                  bcc=[WEBSITE_PARAMETERS.booking_form_bcc],
+                  cc=[WEBSITE_PARAMETERS.booking_form_cc if WEBSITE_PARAMETERS.booking_form_cc else ''],
+                  bcc=[WEBSITE_PARAMETERS.booking_form_bcc if WEBSITE_PARAMETERS.booking_form_bcc else ''],
                   subject=T('Booking request for %s on %s website') % (page_low_title,WEBSITE_PARAMETERS.website_name),
                   reply_to = form.vars.email,
                   message = message):

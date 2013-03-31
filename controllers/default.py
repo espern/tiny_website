@@ -159,8 +159,8 @@ def contact_form():
         """) % (form.vars.your_name, form.vars.your_email, form.vars.subject, form.vars.message)
         if mail.send(
                     to=WEBSITE_PARAMETERS.contact_form_email,
-                    cc=WEBSITE_PARAMETERS.contact_form_cc,
-                    bcc=WEBSITE_PARAMETERS.contact_form_bcc,
+                    cc=WEBSITE_PARAMETERS.contact_form_cc if WEBSITE_PARAMETERS.contact_form_cc else '',
+                    bcc=WEBSITE_PARAMETERS.contact_form_bcc if WEBSITE_PARAMETERS.contact_form_bcc else '',
                     subject=T('Question from %s on %s website') % (form.vars.your_name,WEBSITE_PARAMETERS.website_name),
                     reply_to = form.vars.your_email,
                     message = message):
