@@ -79,6 +79,7 @@ db.page.right_sidebar_component.requires = IS_EMPTY_OR(IS_IN_DB(db, db.page_comp
 db.page.url.compute = lambda row: IS_SLUG()(row.title)[0]
 
 db.define_table('image',
+    Field('page', 'reference page', label=T('Page')),
     Field('name', notnull=True, label=T('Name')),
     Field('alt', label=T('Alt')),
     Field('comment', label=T('Comment')),
@@ -90,6 +91,7 @@ db.define_table('image',
     Field('show_in_banner', 'boolean', readable=False, writable=False, default=False, label=T('Show in banner')),
     format='%(name)s'
 )
+db.image.page.requires = IS_EMPTY_OR(IS_IN_DB(db, db.page.id, '%(title)s', zero=T('<Empty>')))
 db.image.alt.compute = lambda row: row.name.capitalize()
 
 db.define_table('registered_user',
