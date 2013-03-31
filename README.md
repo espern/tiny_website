@@ -1,8 +1,8 @@
 tiny_website
 ============
 
-tiny_website, a basic CMS that allows you to create, update, delete your website pages.
-tiny_website is powered by Web2py, python web framework (http://www.web2py.com/)
+TinyWebsite, a basic CMS that allows you to create, update, delete your website pages.
+TinyWebsite is powered by Web2py, python web framework (http://www.web2py.com/)
 
 When you create a page, you can choose
 - A parent page
