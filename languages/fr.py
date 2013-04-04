@@ -438,6 +438,7 @@
 'Videos': 'Vidéos',
 'View': 'Voir',
 'Website administration': 'Administration du site',
+'Website created with ': 'Site créé avec ',
 'Website name': 'Nom du site',
 'Website name long': 'Nom du site (long)',
 'Wed': 'Mer',
