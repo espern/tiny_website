@@ -38,9 +38,10 @@ db.define_table('website_parameters',
     Field('mailserver_sender_login', label=T('Mail server sender login')),
     Field('mailserver_sender_pass', label=T('Mail server sender pass')),
     Field('google_analytics_id', label=T('Google analytics id')),
-    Field('banner_image_desktop', label=T('Banner image on desktop')),
-    Field('banner_image_tablet', label=T('Banner image on tablet')),
-    Field('banner_image_phone', label=T('Banner image on phone'))
+    Field('banner_image_always', label=T('Banner image always shown')),
+    Field('banner_image_desktop', label=T('Banner image shown on desktop mode only')),
+    Field('banner_image_tablet', label=T('Banner image shown on tablet mode only')),
+    Field('banner_image_phone', label=T('Banner image shown on phone mode only'))
 ) 
 db.website_parameters.website_url.requires = IS_EMPTY_OR(IS_URL())
 db.website_parameters.mailserver_sender_mail.requires = IS_EMPTY_OR(IS_URL())

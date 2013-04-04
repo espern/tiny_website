@@ -109,6 +109,9 @@
                 </style>
               <![endif]-->
               {{if WEBSITE_PARAMETERS:}}
+                {{if WEBSITE_PARAMETERS.banner_image_always:}}
+                   <img src="{{=URL('static', 'images/banner/%s' %WEBSITE_PARAMETERS.banner_image_always)}}">
+                {{pass}}
                 {{if WEBSITE_PARAMETERS.banner_image_desktop:}}
                   <img src="{{=URL('static', 'images/banner/%s' %WEBSITE_PARAMETERS.banner_image_desktop)}}" alt="banner" class="banner_image hidden-tablet hidden-phone">
                 {{pass}}
