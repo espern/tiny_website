@@ -4,8 +4,17 @@
 {{ else: }}
 	<h1>{{=T('Add a new page')}}</h1>
 {{ pass }}
+<div>
+	<ul class="nav nav-pills">
+		<li id="simple_view" class="active">
+			<a href="#">{{=T('Simplified view')}}</a>
+		</li>
+		<li id="advanced_view" >
+			<a href="#">{{=T('Advanced view')}}</a>
+		</li>
+	</ul>
+</div>
 {{=form}}
-
 {{ if len(request.args) > 0: }}
 	<script type="text/javascript" src="{{=URL('static', 'nicEdit/nicEditComplete.js')}}"></script>
 		<script type="text/javascript">
@@ -21,3 +30,37 @@
 	</script>
 	<script>jQuery('textarea').css('width','600px').css('height','50px');</script>
 {{pass}}
+<script>
+	jQuery(document).ready(function(){
+		jQuery('#page_rank__row').hide();
+		jQuery('#page_url__row').hide();
+		jQuery('#page_is_index__row').hide();
+		jQuery('#page_is_enabled__row').hide();
+		if (!jQuery('#page_left_sidebar_enabled').attr('checked'))
+			jQuery('#page_left_sidebar_component__row').hide();
+		if (!jQuery('#page_right_sidebar_enabled').attr('checked'))
+			jQuery('#page_right_sidebar_component__row').hide();
+		jQuery('#page_left_sidebar_enabled').change(function(){
+			if(jQuery('#page_left_sidebar_enabled').attr('checked'))
+				jQuery('#page_left_sidebar_component__row').show();
+			else jQuery('#page_left_sidebar_component__row').hide();});
+		jQuery('#page_right_sidebar_enabled').change(function(){
+			if(jQuery('#page_right_sidebar_enabled').attr('checked'))
+				jQuery('#page_right_sidebar_component__row').show();
+			else jQuery('#page_right_sidebar_component__row').hide();});
+		jQuery('#simple_view').click(function(){
+			jQuery('#simple_view').attr('class','active');
+			jQuery('#advanced_view').attr('class','inactive');
+			jQuery('#page_rank__row').hide();
+			jQuery('#page_url__row').hide();
+			jQuery('#page_is_index__row').hide();
+			jQuery('#page_is_enabled__row').hide();});
+		jQuery('#advanced_view').click(function(){
+			jQuery('#advanced_view').attr('class','active');
+			jQuery('#simple_view').attr('class','inactive');
+			jQuery('#page_rank__row').show();
+			jQuery('#page_url__row').show();
+			jQuery('#page_is_index__row').show();
+			jQuery('#page_is_enabled__row').show();});
+	});
+</script>
