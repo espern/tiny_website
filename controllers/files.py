@@ -1,4 +1,4 @@
-def files_list():
+def files():
     """
     Allows to access the "files" component
     """
@@ -10,9 +10,23 @@ def files_list():
         return "%3.1f%s" % (num, T('TB'))
 
     manager_toolbar = ManagerToolbar('file')
-    files = db(db.file).select()
+    page = db.page(request.vars.container_id)
+    if page:
+        q=(db.file.page==page)
+    else:
+        q=(db.file)
+    if db(q).isempty(): #if there are no files related to the page, we select all available files
+        q=(db.file)
+    files = db(q).select()
     return dict(files=files,
                 sizeof_file=sizeof_file,
+                
+                manager_toolbar=manager_toolbar)
+
+def files_list():
+    manager_toolbar = ManagerToolbar('file')
+    files = db(db.file).select()
+    return dict(files=files,
                 left_sidebar_enabled=True,
                 right_sidebar_enabled=True,
                 manager_toolbar=manager_toolbar)

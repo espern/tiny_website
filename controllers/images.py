@@ -7,7 +7,10 @@ def photo_gallery():
     manager_toolbar = ManagerToolbar('image')
     MAX_IMAGES = 2
     page = db.page(request.vars.container_id)
-    q=(db.image.show_in_gallery==1) & (db.image.page==page)
+    if page:
+        q=(db.image.show_in_gallery==1) & (db.image.page==page)
+    else:
+        q=(db.image.show_in_gallery==1)
     if db(q).isempty(): #if there are no images related to the page, we select all available images
         q=(db.image.show_in_gallery==1)
     images = db(q).select(limitby=(0,MAX_IMAGES), orderby='<random>')

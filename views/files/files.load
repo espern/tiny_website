@@ -1,7 +1,7 @@
 {{if files or auth.has_membership('manager'):}}
 	<aside>
 		<h3>
-			{{ =T('Files to download') }}
+			{{=T('Files to download')}}
 			{{if auth.has_membership('manager'):}}
 				{{=manager_toolbar()}}
 			{{ pass }}

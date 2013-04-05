@@ -71,49 +71,6 @@ if manager_group:
 					group_id=manager_group.id
 				)
 
-if db(db.page_component.id > 0).count() == 0:
-	db.page_component.insert(
-		controller='images',
-		name='photo_gallery.load',
-		ajax=False,
-		ajax_trap=False
-	)
-	db.page_component.insert(
-		controller='news',
-		name='news.load',
-		ajax=False,
-		ajax_trap=False
-	)
-	db.page_component.insert(
-		controller='calendar',
-		name='calendar.load',
-		ajax=False,
-		ajax_trap=False
-	)
-
-#Create the default calendar durations
-if db(db.calendar_duration.id > 0).count() == 0:
-	db.calendar_duration.insert(
-		name = 'The morning',
-		start_hour = '00:00:00',
-		duration_in_minutes = 60*12-1
-		)
-	db.calendar_duration.insert(
-		name = "The afternoon",
-		start_hour = '12:00:00',
-		duration_in_minutes = 60*12-1
-		)
-	db.calendar_duration.insert(
-		name = 'The day',
-		start_hour = '00:00:00',
-		duration_in_minutes = 60*24-1
-		)
-	db.calendar_duration.insert(
-		name = 'The weekend',
-		start_hour = '00:00:00',
-		duration_in_minutes = 60*24*2-1
-		)
-
 #create a default index page if not exists
 tmpContent = """
 <p>

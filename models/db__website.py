@@ -54,7 +54,7 @@ db.website_parameters.booking_form_bcc.requires = IS_EMPTY_OR(IS_EMAIL())
 
 db.define_table('page_component',
     Field('controller', readable=False, writable=False, default='default', label=T('Component controller')),
-    Field('name', readable=False, writable=False, label=T('Component name')),
+    Field('name', unique=True, readable=False, writable=False, label=T('Component name')),
     Field('ajax', 'boolean', readable=False, writable=False, default=False, label=T('Component with Ajax')),
     Field('ajax_trap', 'boolean', readable=False, writable=False, default=False, label=T('Component with Ajax trap'))
 )
@@ -111,6 +111,7 @@ db.define_table('news',
    )
 
 db.define_table('file',
+   Field('page', 'reference page', label=T('Page')),
    Field('title', label=T('Title'), notnull=True),
    Field('comment', label=T('Comment')),
    Field('file', 'upload', uploadfolder=path.join(
@@ -119,6 +120,7 @@ db.define_table('file',
    Field('size', 'double', readable=False, writable=False, label=T('Size')),
    format='%(title)s'
    )
+db.file.page.requires = IS_EMPTY_OR(IS_IN_DB(db, db.page.id, '%(title)s', zero=T('<Empty>')))
 db.file.size.compute = lambda row: path.getsize(path.join(request.folder,'static','uploaded_files',row.file))
 
 ## after defining tables, uncomment below to enable auditing
