@@ -4,6 +4,8 @@ def show_page():
     """
         Show the requested page
     """
+    from gluon.tools import prettydate
+
     manager_toolbar = ManagerToolbar('page')
     if request.args(0).isdigit():
         page = db.page(request.args(0))
@@ -14,7 +16,8 @@ def show_page():
             redirect(URL('images'))
         else:
             page = db(db.page.is_index==True).select().first()
-
+        
+    pretty_date = prettydate(page.modified_on, T)
     left_sidebar_component = db.page_component(page.left_sidebar_component)
     right_sidebar_component = db.page_component(page.right_sidebar_component)
     return dict(page=page,
@@ -22,7 +25,8 @@ def show_page():
                 right_sidebar_enabled=page.right_sidebar_enabled,
                 left_sidebar_component=left_sidebar_component,
                 right_sidebar_component=right_sidebar_component,
-                manager_toolbar=manager_toolbar)
+                manager_toolbar=manager_toolbar,
+                pretty_date=pretty_date)
 
 @auth.requires_membership('manager')
 def delete_page():

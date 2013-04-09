@@ -26,6 +26,9 @@
 	{{ pass }}
 	<h3>{{=page.subtitle}}</h3>
 	<div>{{=XML(page.content, sanitize=False)}}</div>
+	{{if pretty_date:}}
+		<div class="muted"><small>{{=T("Updated %s",pretty_date)}}</small></div>
+	{{pass}}
 </article>
 {{pass}}
 
@@ -42,4 +45,3 @@
 		</div>
 	</div>
 {{end}}
-
