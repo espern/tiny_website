@@ -4,11 +4,11 @@ from os import path
 signature = db.Table(db,'auth_signature',
       Field('created_on','datetime',default=request.now,
             writable=False,readable=False, label=T('Created on')),
-        Field('created_by',auth.settings.table_user,default=auth.user_id,
+        Field('created_by','reference %s' % auth.settings.table_user_name,default=auth.user_id,
             writable=False,readable=False, label=T('Created by')),
         Field('modified_on','datetime',update=request.now,default=request.now,
             writable=False,readable=False, label=T('Modified on')),
-      Field('modified_by',auth.settings.table_user,
+      Field('modified_by','reference %s' % auth.settings.table_user_name,
             default=auth.user_id,update=auth.user_id,
             writable=False,readable=False, label=T('Modified by'))
       )

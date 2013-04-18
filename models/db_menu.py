@@ -1,5 +1,6 @@
 #Things to be initialized before menu.py
 
+
 WEBSITE_PARAMETERS = db(db.website_parameters).select().first()
 if WEBSITE_PARAMETERS:
     ## configure email
