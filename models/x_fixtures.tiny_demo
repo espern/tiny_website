@@ -79,11 +79,11 @@ tmpContent = """
 </p>
 """
 if db(db.page.is_index == True).count() == 0:
-	news_component = db(db.page_component.name == 'news.load').select().first()
+    news_component = db(db.page_component.name == 'news.load').select().first()
     gallery_component = db(db.page_component.name == 'photo_gallery.load').select().first()
     address_component = db(db.page_component.name == 'address.load').select().first()
-	newsletter_component = db(db.page_component.name == 'newsletter.load').select().first()
-	db.page.insert(
+    newsletter_component = db(db.page_component.name == 'newsletter.load').select().first()
+    db.page.insert(
         title='Index',
         subtitle='The index page',
         url='index',
