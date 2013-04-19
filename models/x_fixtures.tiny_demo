@@ -3,7 +3,9 @@
 #website parameters fixture
 if db(db.website_parameters.id > 0).count() == 0:
     db.website_parameters.insert(
-    website_name="Fork me, I'm famous",
+    website_name="My Tiny Website",
+    website_title="My tiny website",
+    website_subtitle="Fork me, I'm famous",
     website_name_long="my awesome website",
     website_url='http://www.my-awesome-website.com',
     contact_name='John doe',
@@ -31,6 +33,8 @@ if db(db.website_parameters.id > 0).count() == 0:
     mailserver_sender_login='user',
     mailserver_sender_pass='pass',
     google_analytics_id='UA-XXXXXXX-1',
+    with_banner=False,
+    navbar_inverse=True,
     banner_image_desktop='banner.jpg',
     banner_image_tablet='banner.jpg',
     banner_image_phone='banner.jpg'
