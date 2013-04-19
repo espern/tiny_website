@@ -90,7 +90,9 @@ tmpContent = """
 """
 if db(db.page.is_index == True).count() == 0:
 	news_component = db(db.page_component.name == 'news.load').select().first()
-	gallery_component = db(db.page_component.name == 'photo_gallery.load').select().first()
+    gallery_component = db(db.page_component.name == 'photo_gallery.load').select().first()
+    address_component = db(db.page_component.name == 'address.load').select().first()
+	newsletter_component = db(db.page_component.name == 'newsletter.load').select().first()
 	db.page.insert(
         title='Index',
         subtitle='The index page',
@@ -100,7 +102,9 @@ if db(db.page.is_index == True).count() == 0:
         left_sidebar_enabled=True,
         right_sidebar_enabled=True,
         left_sidebar_component=gallery_component,
-        right_sidebar_component=news_component
+        right_sidebar_component=news_component,
+        left_footer_component=address_component,
+        right_footer_component=newsletter_component
     )
 
 #create a default "root page"

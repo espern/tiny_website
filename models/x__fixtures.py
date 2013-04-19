@@ -30,6 +30,33 @@ if db(db.page_component.name == 'files.load').count() == 0:
 		ajax=False,
 		ajax_trap=False
 	)
+if db(db.page_component.name == 'address.load').count() == 0:
+	db.page_component.insert(
+		controller='default',
+		name='address.load',
+		ajax=False,
+		ajax_trap=False
+	)
+	#address comopnent didn't exist and was mandatory for all pages. We apply it to all existing pages at this moment
+	pages=db(db.page)
+	if pages:
+		address_component = db(db.page_component.name == 'address.load').select().first()
+		if address_component:
+			pages.update(left_footer_component=address_component)	
+
+if db(db.page_component.name == 'newsletter.load').count() == 0:
+	db.page_component.insert(
+		controller='default',
+		name='newsletter.load',
+		ajax=False,
+		ajax_trap=True
+	)
+	#newsletter comopnent didn't exist and was mandatorw for all pages. We apply it to all existing pages at this moment
+	pages=db(db.page)
+	if pages:
+		newsletter_component = db(db.page_component.name == 'newsletter.load').select().first()
+		if newsletter_component:
+			pages.update(right_footer_component=newsletter_component)
 
 #Create the default calendar durations
 if db(db.calendar_duration.id > 0).count() == 0:

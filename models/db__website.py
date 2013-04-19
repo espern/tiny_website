@@ -72,11 +72,17 @@ db.define_table('page',
     Field('right_sidebar_enabled', 'boolean', default=False, label=T('Right sidebar')),
     Field('left_sidebar_component', 'reference page_component', label=T('Left sidebar component')),
     Field('right_sidebar_component', 'reference page_component', label=T('Right sidebar component')),
+    Field('left_footer_component', 'reference page_component', label=T('Left footer component')),
+    Field('middle_footer_component', 'reference page_component', label=T('Middle footer component')),
+    Field('right_footer_component', 'reference page_component', label=T('Right footer component')),
     format='%(title)s'
 )
 db.page.parent.requires = IS_EMPTY_OR(IS_IN_DB(db, db.page.id, '%(title)s', zero=T('<Empty>')))
 db.page.left_sidebar_component.requires = IS_EMPTY_OR(IS_IN_DB(db, db.page_component.id, '%(name)s', zero=T('<Empty>')))
 db.page.right_sidebar_component.requires = IS_EMPTY_OR(IS_IN_DB(db, db.page_component.id, '%(name)s', zero=T('<Empty>')))
+db.page.left_footer_component.requires = IS_EMPTY_OR(IS_IN_DB(db, db.page_component.id, '%(name)s', zero=T('<Empty>')))
+db.page.right_footer_component.requires = IS_EMPTY_OR(IS_IN_DB(db, db.page_component.id, '%(name)s', zero=T('<Empty>')))
+db.page.middle_footer_component.requires = IS_EMPTY_OR(IS_IN_DB(db, db.page_component.id, '%(name)s', zero=T('<Empty>')))
 db.page.url.compute = lambda row: IS_SLUG()(row.title)[0]
 
 db.define_table('image',

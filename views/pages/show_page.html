@@ -25,7 +25,9 @@
 		{{=manager_toolbar(page.id)}}
 	{{ pass }}
 	<h3>{{=page.subtitle}}</h3>
-	<div>{{=XML(page.content, sanitize=False)}}</div>
+	{{if page.content:}}
+		<div>{{=XML(page.content, sanitize=False)}}</div>
+	{{pass}}
 	{{if pretty_date:}}
 		<div class="muted"><small>{{=T("Updated %s",pretty_date)}}</small></div>
 	{{pass}}
@@ -34,14 +36,24 @@
 
 {{block footer}}
 	<!-- Contact -->
-	<div class="container">
-		<div class="contact pull-left">
-			{{=LOAD('default', 'address.load', ajax=False)}}
+	<div class="row-fluid">
+		<div class="span4 column">
+			{{if left_footer_component:}}
+				{{=LOAD(left_footer_component.controller, left_footer_component.name, ajax=left_footer_component.ajax,
+				ajax_trap=left_footer_component.ajax_trap, vars={'container_id':page.id})}}
+			{{pass}}
 		</div>
-
-		<!-- Newsletter -->
-		<div class="newsletter pull-right">
-			{{=LOAD('default', 'newsletter.load', ajax_trap=True)}}
+		<div class="span4 column">
+			{{if middle_footer_component:}}
+				{{=LOAD(middle_footer_component.controller, middle_footer_component.name, ajax=middle_footer_component.ajax,
+				ajax_trap=middle_footer_component.ajax_trap, vars={'container_id':page.id})}}
+			{{pass}}
+		</div>
+		<div class="span4 column">
+			{{if right_footer_component:}}
+				{{=LOAD(right_footer_component.controller, right_footer_component.name, ajax=right_footer_component.ajax,
+				ajax_trap=right_footer_component.ajax_trap, vars={'container_id':page.id})}}
+			{{pass}}
 		</div>
 	</div>
 {{end}}
