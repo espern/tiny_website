@@ -41,7 +41,9 @@ for p in pages:
 		if not p.parent:
 			response.menu += [(p.title, False, URL('pages','show_page', args=p.url))]
 
-response.menu += [(T('Photo gallery'), False, URL('images','images'))]
+images = db(db.image).select()
+if images:
+	response.menu += [(T('Photo gallery'), False, URL('images','images'))]
 
 files = db(db.file.page==None).select()
 if files or auth.has_membership('manager'):

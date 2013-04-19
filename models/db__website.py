@@ -48,7 +48,7 @@ db.define_table('website_parameters',
     Field('banner_image_phone', label=T('Banner image shown on phone mode only'))
 ) 
 db.website_parameters.website_url.requires = IS_EMPTY_OR(IS_URL())
-db.website_parameters.mailserver_sender_mail.requires = IS_EMPTY_OR(IS_URL())
+db.website_parameters.mailserver_sender_mail.requires = IS_EMPTY_OR(IS_EMAIL())
 db.website_parameters.contact_form_email.requires = IS_EMPTY_OR(IS_EMAIL())
 db.website_parameters.contact_form_cc.requires = IS_EMPTY_OR(IS_EMAIL())
 db.website_parameters.contact_form_bcc.requires = IS_EMPTY_OR(IS_EMAIL())
