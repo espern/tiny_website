@@ -2,9 +2,11 @@
 <h1>{{=T('Contact us')}}</h1>
 <br />
 {{block left_sidebar}}
-	<div class="contact">
-	{{=LOAD('default', 'address.load', ajax=False)}}
-</div>
+	{{if WEBSITE_PARAMETERS.contact_address:}}
+		<div class="contact">
+			{{=LOAD('default', 'address.load', ajax=False)}}
+		</div>
+	{{pass}}
 {{end}}
 {{=form}}
 <script>jQuery('textarea').css('width','400px').css('height','200px');</script>
