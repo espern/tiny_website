@@ -15,8 +15,18 @@
 ## this is the main application menu add/remove items as required
 #########################################################################
 
-response.title = ' '.join(
-    word.capitalize() for word in request.application.split('_'))
+
+if WEBSITE_PARAMETERS:
+	#If we don't show the banner, we add the website name with a link to index page
+	if not WEBSITE_PARAMETERS.with_banner:
+		website_name=[XML(c) if c.islower() else B(c) for c in WEBSITE_PARAMETERS.website_name]
+		response.logo = A(website_name,_class="brand",_href=URL('default','index'))
+	if WEBSITE_PARAMETERS.website_title:
+		response.title = WEBSITE_PARAMETERS.website_title
+	if WEBSITE_PARAMETERS.website_subtitle:
+		response.subtitle = WEBSITE_PARAMETERS.website_subtitle
+
+
 
 pages = db(db.page.is_index==False).select(orderby=db.page.rank|db.page.title)
 

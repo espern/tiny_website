@@ -148,7 +148,16 @@ if db(db.calendar_duration.id > 0).count() == 0:
 		duration_in_minutes = 60*24*2-1
 		)
 
-#Correct the pages where is_index = None
+#Correct elements where I added default boolean fields (correct None values)
 pages = db(db.page.is_index==None)
 if pages:
 	pages.update(is_index=False)
+	pages = db(db.page.is_index==None)
+
+if WEBSITE_PARAMETERS:
+	if WEBSITE_PARAMETERS.with_banner==None:
+		WEBSITE_PARAMETERS.with_banner=True
+		WEBSITE_PARAMETERS.update_record()
+	if WEBSITE_PARAMETERS.navbar_inverse==None:
+		WEBSITE_PARAMETERS.navbar_inverse=True
+		WEBSITE_PARAMETERS.update_record()
