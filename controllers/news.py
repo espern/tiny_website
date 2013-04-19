@@ -3,7 +3,7 @@ def news():
     Allows to access the "news" component
     """
     manager_toolbar = ManagerToolbar('news')
-    newsS = db(db.news).select(limitby=(0,5),orderby=~db.news.date|~db.news.published_on)
+    newsS = db(db.news).select(limitby=(0,4),orderby=~db.news.date|~db.news.published_on)
     return dict(newsS=newsS,
                 manager_toolbar=manager_toolbar)
 
