@@ -18,7 +18,7 @@
 response.title = ' '.join(
     word.capitalize() for word in request.application.split('_'))
 
-pages = db(db.page).select(orderby=db.page.rank|db.page.title)
+pages = db(db.page.is_index==False).select(orderby=db.page.rank|db.page.title)
 
 for p in pages:
 	child_pages = db(db.page.parent==p.id).select(orderby=db.page.rank|db.page.title,)

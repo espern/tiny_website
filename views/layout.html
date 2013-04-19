@@ -100,37 +100,39 @@
     <!-- Masthead ================================================== -->
     <header class="mastheader row" id="header">
         <div class="container">
-            <div id="banner_image" class="gradient">
-              <!--[if gte IE 9]>
-                <style type="text/css">
-                  .gradient {
-                     filter: none;
-                  }
-                </style>
-              <![endif]-->
-              {{if WEBSITE_PARAMETERS:}}
-                {{if WEBSITE_PARAMETERS.banner_image_always:}}
-                   <img src="{{=URL('static', 'images/banner/%s' %WEBSITE_PARAMETERS.banner_image_always)}}">
-                {{pass}}
-                {{if WEBSITE_PARAMETERS.banner_image_desktop:}}
-                  <img src="{{=URL('static', 'images/banner/%s' %WEBSITE_PARAMETERS.banner_image_desktop)}}" alt="banner" class="banner_image hidden-tablet hidden-phone">
-                {{pass}}
-                {{if WEBSITE_PARAMETERS.banner_image_tablet:}}
-                  <img src="{{=URL('static', 'images/banner/%s' %WEBSITE_PARAMETERS.banner_image_tablet)}}" alt="banner" class="banner_image hidden-desktop hidden-phone">
-                {{pass}}
-                {{if WEBSITE_PARAMETERS.banner_image_phone:}}
-                  <img src="{{=URL('static', 'images/banner/%s' %WEBSITE_PARAMETERS.banner_image_phone)}}" alt="banner" class="banner_image hidden-desktop hidden-tablet">
-                {{pass}}
-
-                <div id="banner_description">
-                  {{if WEBSITE_PARAMETERS.website_name_long:}}
-                    {{=T('Welcome on %s',WEBSITE_PARAMETERS.website_name_long)}}
-                  {{else:}}
-                    {{=T('Welcome on this website')}}
+            <a href={{=URL('default','index')}}>
+              <div id="banner_image" class="gradient">
+                <!--[if gte IE 9]>
+                  <style type="text/css">
+                    .gradient {
+                       filter: none;
+                    }
+                  </style>
+                <![endif]-->
+                {{if WEBSITE_PARAMETERS:}}
+                  {{if WEBSITE_PARAMETERS.banner_image_always:}}
+                     <img src="{{=URL('static', 'images/banner/%s' %WEBSITE_PARAMETERS.banner_image_always)}}">
                   {{pass}}
-                </div>
-              {{pass}}
-            </div>
+                  {{if WEBSITE_PARAMETERS.banner_image_desktop:}}
+                    <img src="{{=URL('static', 'images/banner/%s' %WEBSITE_PARAMETERS.banner_image_desktop)}}" alt="banner" class="banner_image hidden-tablet hidden-phone">
+                  {{pass}}
+                  {{if WEBSITE_PARAMETERS.banner_image_tablet:}}
+                    <img src="{{=URL('static', 'images/banner/%s' %WEBSITE_PARAMETERS.banner_image_tablet)}}" alt="banner" class="banner_image hidden-desktop hidden-phone">
+                  {{pass}}
+                  {{if WEBSITE_PARAMETERS.banner_image_phone:}}
+                    <img src="{{=URL('static', 'images/banner/%s' %WEBSITE_PARAMETERS.banner_image_phone)}}" alt="banner" class="banner_image hidden-desktop hidden-tablet">
+                  {{pass}}
+
+                  <div id="banner_description">
+                    {{if WEBSITE_PARAMETERS.website_name_long:}}
+                      {{=T('Welcome on %s',WEBSITE_PARAMETERS.website_name_long)}}
+                    {{else:}}
+                      {{=T('Welcome on this website')}}
+                    {{pass}}
+                  </div>
+                {{pass}}
+              </div>
+            </a>
         </div>
         
         <div class="span12">

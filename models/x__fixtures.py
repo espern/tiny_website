@@ -133,3 +133,8 @@ if db(db.calendar_duration.id > 0).count() == 0:
 		start_hour = '00:00:00',
 		duration_in_minutes = 60*24*2-1
 		)
+
+#Correct the pages where is_index = None
+pages = db(db.page.is_index==None)
+if pages:
+	pages.update(is_index=False)
