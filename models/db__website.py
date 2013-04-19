@@ -55,6 +55,7 @@ db.website_parameters.booking_form_bcc.requires = IS_EMPTY_OR(IS_EMAIL())
 db.define_table('page_component',
     Field('controller', readable=False, writable=False, default='default', label=T('Component controller')),
     Field('name', unique=True, readable=False, writable=False, label=T('Component name')),
+    Field('description', readable=False, writable=False, label=T('Component description')),
     Field('ajax', 'boolean', readable=False, writable=False, default=False, label=T('Component with Ajax')),
     Field('ajax_trap', 'boolean', readable=False, writable=False, default=False, label=T('Component with Ajax trap'))
 )
@@ -78,11 +79,11 @@ db.define_table('page',
     format='%(title)s'
 )
 db.page.parent.requires = IS_EMPTY_OR(IS_IN_DB(db, db.page.id, '%(title)s', zero=T('<Empty>')))
-db.page.left_sidebar_component.requires = IS_EMPTY_OR(IS_IN_DB(db, db.page_component.id, '%(name)s', zero=T('<Empty>')))
-db.page.right_sidebar_component.requires = IS_EMPTY_OR(IS_IN_DB(db, db.page_component.id, '%(name)s', zero=T('<Empty>')))
-db.page.left_footer_component.requires = IS_EMPTY_OR(IS_IN_DB(db, db.page_component.id, '%(name)s', zero=T('<Empty>')))
-db.page.right_footer_component.requires = IS_EMPTY_OR(IS_IN_DB(db, db.page_component.id, '%(name)s', zero=T('<Empty>')))
-db.page.middle_footer_component.requires = IS_EMPTY_OR(IS_IN_DB(db, db.page_component.id, '%(name)s', zero=T('<Empty>')))
+db.page.left_sidebar_component.requires = IS_EMPTY_OR(IS_IN_DB(db, db.page_component.id, '%(name)s - %(description)s', zero=T('<Empty>')))
+db.page.right_sidebar_component.requires = IS_EMPTY_OR(IS_IN_DB(db, db.page_component.id, '%(name)s - %(description)s', zero=T('<Empty>')))
+db.page.left_footer_component.requires = IS_EMPTY_OR(IS_IN_DB(db, db.page_component.id, '%(name)s - %(description)s', zero=T('<Empty>')))
+db.page.right_footer_component.requires = IS_EMPTY_OR(IS_IN_DB(db, db.page_component.id, '%(name)s - %(description)s', zero=T('<Empty>')))
+db.page.middle_footer_component.requires = IS_EMPTY_OR(IS_IN_DB(db, db.page_component.id, '%(name)s - %(description)s', zero=T('<Empty>')))
 db.page.url.compute = lambda row: IS_SLUG()(row.title)[0]
 
 db.define_table('image',

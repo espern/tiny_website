@@ -51,7 +51,7 @@
             events: [
             {{for i,row in enumerate(rows):}}{{if i!=0:}},{{pass}}
                 {
-                    tip: "{{=T('booked during %s',row.duration.name.lower())}}",
+                    tip: "{{=T('booked during %s',T(row.duration.name.lower()))}}",
                     title: '',
                     allDay: false,
                     {{if row.start_datetime:}}
@@ -75,5 +75,7 @@
 <div id='calendar'></div>
 {{if page:}}
     <hr>
-    <div id="showform">{{=A(T('I would like to book %s',page.title.lower()), _href=URL('calendar', 'calendar_booking', extension=False, args=page.id), _class="btn btn-primary")}}</div>
+    <div id="showform">
+        {{=A(T('I would like to book %s',page.title.lower()), _href=URL('calendar', 'calendar_booking', extension=False, args=page.id), _class="btn btn-primary")}}
+    </div>
 {{pass}}
