@@ -1,5 +1,19 @@
 # coding: utf8
 
+#Create a "manager" group
+if db(db.auth_group.role == "manager").count() == 0:
+    db.auth_group.insert(
+        role='manager',
+        description='Those who can edit pages...'
+)
+
+#Create a "booking_manager" group
+if db(db.auth_group.role == "booking_manager").count() == 0:
+    db.auth_group.insert(
+        role='booking_manager',
+        description='Those who can edit the booking requests...'
+)
+
 #Fixtures for mandatory content
 component = db(db.page_component.name == 'photo_gallery.load').select().first()
 component_description = 'Show random images of the photo gallery'

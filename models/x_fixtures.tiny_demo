@@ -36,20 +36,6 @@ if db(db.website_parameters.id > 0).count() == 0:
     banner_image_phone='banner.jpg'
     )
 
-#Create a "manager" group
-if db(db.auth_group.role == "manager").count() == 0:
-    db.auth_group.insert(
-        role='manager',
-        description='Those who can edit pages...'
-)
-
-#Create a "booking_manager" group
-if db(db.auth_group.role == "booking_manager").count() == 0:
-    db.auth_group.insert(
-        role='booking_manager',
-        description='Those who can edit the booking requests...'
-)
-
 #Create a default user
 if db(db.auth_user.email == "user@test.com").count() == 0:
     db.auth_user.insert(
