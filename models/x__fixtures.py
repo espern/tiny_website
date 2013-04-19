@@ -1,6 +1,5 @@
 # coding: utf8
 
-
 #Create a "manager" group
 if db(db.auth_group.role == "manager").count() == 0:
     db.auth_group.insert(
