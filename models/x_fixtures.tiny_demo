@@ -3,7 +3,9 @@
 #website parameters fixture
 if db(db.website_parameters.id > 0).count() == 0:
     db.website_parameters.insert(
-    website_name="Fork me, I'm famous",
+    website_name="My Tiny Website",
+    website_title="My tiny website",
+    website_subtitle="Fork me, I'm famous",
     website_name_long="my awesome website",
     website_url='http://www.my-awesome-website.com',
     contact_name='John doe',
@@ -31,6 +33,8 @@ if db(db.website_parameters.id > 0).count() == 0:
     mailserver_sender_login='user',
     mailserver_sender_pass='pass',
     google_analytics_id='UA-XXXXXXX-1',
+    with_banner=False,
+    navbar_inverse=True,
     banner_image_desktop='banner.jpg',
     banner_image_tablet='banner.jpg',
     banner_image_phone='banner.jpg'
@@ -75,11 +79,11 @@ tmpContent = """
 </p>
 """
 if db(db.page.is_index == True).count() == 0:
-	news_component = db(db.page_component.name == 'news.load').select().first()
+    news_component = db(db.page_component.name == 'news.load').select().first()
     gallery_component = db(db.page_component.name == 'photo_gallery.load').select().first()
     address_component = db(db.page_component.name == 'address.load').select().first()
-	newsletter_component = db(db.page_component.name == 'newsletter.load').select().first()
-	db.page.insert(
+    newsletter_component = db(db.page_component.name == 'newsletter.load').select().first()
+    db.page.insert(
         title='Index',
         subtitle='The index page',
         url='index',
