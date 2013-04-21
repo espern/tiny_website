@@ -136,5 +136,3 @@ db.file.size.compute = lambda row: path.getsize(path.join(request.folder,'static
 
 ## after defining tables, uncomment below to enable auditing
 auth.enable_record_versioning(db)
-
-
