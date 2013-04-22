@@ -215,6 +215,7 @@
 'Hello World': 'Bonjour le monde',
 'Home': 'Accueil',
 'How did you get here?': 'Comment êtes-vous arrivé ici?',
+'How many old news (date < current date) shall we show?': "Combien d'anciennes news (date < date courante) doit-on afficher?",
 'HTML': 'HTML',
 'I want to start with an empty database': 'Je veux démarrer avec une base de données vide',
 'I want to try the example database': "Je veux tester la base de donnés d'exemple",

@@ -34,6 +34,7 @@ db.define_table('website_parameters',
     Field('booking_form_email', label=T('Booking form email')),
     Field('booking_form_cc', label=T('Booking form cc')),
     Field('booking_form_bcc', label=T('Booking form cci')),
+    Field('max_old_news_to_show', 'integer', label=T('How many old news (date < current date) shall we show?')),
     Field('mailserver_url', label=T('Mail server url')),
     Field('mailserver_port', 'integer', label=T('Mail server port')),
     Field('mailserver_sender_mail', label=T('Mail server sender email')),
@@ -136,5 +137,3 @@ db.file.size.compute = lambda row: path.getsize(path.join(request.folder,'static
 
 ## after defining tables, uncomment below to enable auditing
 auth.enable_record_versioning(db)
-
-
