@@ -157,7 +157,8 @@ if pages:
 if WEBSITE_PARAMETERS:
 	if WEBSITE_PARAMETERS.with_banner==None:
 		WEBSITE_PARAMETERS.with_banner=True
-		WEBSITE_PARAMETERS.update_record()
 	if WEBSITE_PARAMETERS.navbar_inverse==None:
 		WEBSITE_PARAMETERS.navbar_inverse=True
-		WEBSITE_PARAMETERS.update_record()
+	if WEBSITE_PARAMETERS.max_old_news_to_show==None:
+		WEBSITE_PARAMETERS.max_old_news_to_show=2
+	WEBSITE_PARAMETERS.update_record()

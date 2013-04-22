@@ -7,16 +7,8 @@
 				{{=manager_toolbar()}}
 			{{ pass }}
 		</h3>
-		{{passed_news = 0}}
-		{{MAX_OLD_NEWS = 1}}
 		{{for news in newsS:}}
-
 			{{if news.date < request.now.date():}}
-				{{
-					passed_news+=1
-					if passed_news > MAX_OLD_NEWS:
-						break
-				}}
 				<div class="greyText">
 			{{else:}}
 				<div>	

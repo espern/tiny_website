@@ -24,6 +24,7 @@ if db(db.website_parameters.id > 0).count() == 0:
     contact_form_email='user@test.com',
     contact_form_cc='',
     contact_form_bcc='',
+    max_old_news_to_show=2,
     booking_form_email='user@test.com',
     booking_form_cc='',
     booking_form_bcc='',
