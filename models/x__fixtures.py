@@ -152,13 +152,17 @@ if db(db.calendar_duration.id > 0).count() == 0:
 pages = db(db.page.is_index==None)
 if pages:
 	pages.update(is_index=False)
-	pages = db(db.page.is_index==None)
 
 if WEBSITE_PARAMETERS:
+	update_record = False
 	if WEBSITE_PARAMETERS.with_banner==None:
 		WEBSITE_PARAMETERS.with_banner=True
+		update_record=True
 	if WEBSITE_PARAMETERS.navbar_inverse==None:
 		WEBSITE_PARAMETERS.navbar_inverse=True
+		update_record=True
 	if WEBSITE_PARAMETERS.max_old_news_to_show==None:
 		WEBSITE_PARAMETERS.max_old_news_to_show=2
-	WEBSITE_PARAMETERS.update_record()
+		update_record=True
+	if update_record:
+		WEBSITE_PARAMETERS.update_record()
