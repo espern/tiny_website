@@ -27,8 +27,8 @@ else:
 # response.generic_patterns = ['*'] if request.is_local else ['*.rss']
 response.generic_patterns = ['*.rss']
 ## (optional) optimize handling of static files
-response.optimize_css = 'concat,minify,inline'
-response.optimize_js = 'concat,minify,inline'
+#response.optimize_css = 'concat,minify,inline'
+#response.optimize_js = 'concat,minify,inline'
 
 from gluon.tools import Auth, Crud, Service, PluginManager, prettydate
 
