@@ -4,12 +4,9 @@ def news():
     """
     manager_toolbar = ManagerToolbar('news')
     rows = db(db.news).select(limitby=(0,6),orderby=~db.news.date|~db.news.published_on)
-    newsS = []
+    newsS = [row for row in rows.find(lambda row: row.date >= request.now.date())]
     max_news = WEBSITE_PARAMETERS.max_old_news_to_show if WEBSITE_PARAMETERS.max_old_news_to_show is not None else 0
-    for row in rows.find(lambda row: row.date >= request.now.date()):
-        newsS.append(row)
-    for row in rows.find(lambda row: row.date < request.now.date())[:max_news]:
-        newsS.append(row)
+    newsS += [row for row in rows.find(lambda row: row.date < request.now.date())[:max_news]]
     return dict(newsS=newsS,
                 manager_toolbar=manager_toolbar)
 
