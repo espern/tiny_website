@@ -14,7 +14,7 @@
 #########################################################################
 ## this is the main application menu add/remove items as required
 #########################################################################
-
+from menu_tools import HierarchicalMenu
 
 if WEBSITE_PARAMETERS:
 	#If we don't show the banner, we add the website name with a link to index page
@@ -30,16 +30,8 @@ if WEBSITE_PARAMETERS:
 
 pages = db(db.page.is_index==False).select(orderby=db.page.rank|db.page.title)
 
-for p in pages:
-	child_pages = db(db.page.parent==p.id).select(orderby=db.page.rank|db.page.title,)
-	if child_pages:
-		child_list = []
-		for c in child_pages:
-			child_list.append([c.title, False, URL('pages','show_page', args=c.url)])
-		response.menu += [(p.title, False, URL('default','index'), child_list)]
-	else:
-		if not p.parent:
-			response.menu += [(p.title, False, URL('pages','show_page', args=p.url))]
+pages_menu = HierarchicalMenu()
+response.menu += pages_menu.create_menu(pages)
 
 images = db(db.image).select()
 if images:
