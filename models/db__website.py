@@ -83,6 +83,7 @@ db.define_table('page',
     Field('right_footer_component', 'reference page_component', label=T('Right footer component')),
     format='%(title)s'
 )
+
 db.page.parent.requires = IS_EMPTY_OR(IS_IN_DB(db, db.page.id, '%(title)s', zero=T('<Empty>')))
 db.page.left_sidebar_component.requires = IS_EMPTY_OR(IS_IN_DB(db, db.page_component.id, '%(name)s - %(description)s', zero=T('<Empty>')))
 db.page.right_sidebar_component.requires = IS_EMPTY_OR(IS_IN_DB(db, db.page_component.id, '%(name)s - %(description)s', zero=T('<Empty>')))
@@ -90,6 +91,9 @@ db.page.left_footer_component.requires = IS_EMPTY_OR(IS_IN_DB(db, db.page_compon
 db.page.right_footer_component.requires = IS_EMPTY_OR(IS_IN_DB(db, db.page_component.id, '%(name)s - %(description)s', zero=T('<Empty>')))
 db.page.middle_footer_component.requires = IS_EMPTY_OR(IS_IN_DB(db, db.page_component.id, '%(name)s - %(description)s', zero=T('<Empty>')))
 db.page.url.compute = lambda row: IS_SLUG()(row.title)[0]
+
+pageSelector = HierarchicalSelect(db,db.page.title)
+db.page.parent.widget = pageSelector.widget
 
 db.define_table('image',
     Field('page', 'reference page', label=T('Page')),
