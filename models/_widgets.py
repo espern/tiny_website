@@ -15,7 +15,6 @@ class HierarchicalSelect(object):
         [self._childs_list(child, (depth+1)) for child in self.rows.find(lambda row: row.parent == field.id)]   
 
     def widget(self, field, value):
-        print str(field)
         self.tablename = field._table
         self.fieldname = field.name
         self.type = field.type
