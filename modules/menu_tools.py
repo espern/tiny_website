@@ -2,7 +2,6 @@ from gluon.html import URL
 
 class HierarchicalMenu(object):
     def __init__(self):
-        print 'init'
         self.menu = None
         self.rows = None
     

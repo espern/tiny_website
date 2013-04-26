@@ -1,8 +1,8 @@
 class HierarchicalSelect(object):
-    def __init__(self, db, title_field):
+    def __init__(self, db, table_name, title_field):
         self.options=[]
         self.db = db
-        self.tablename = None
+        self.tablename = table_name
         self.fieldname = None
         self.title = title_field
         self.type = None
@@ -15,7 +15,6 @@ class HierarchicalSelect(object):
         [self._childs_list(child, (depth+1)) for child in self.rows.find(lambda row: row.parent == field.id)]   
 
     def widget(self, field, value):
-        self.tablename = field._table
         self.fieldname = field.name
         self.type = field.type
         self.rows = self.db(self.tablename).select()
