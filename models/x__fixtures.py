@@ -164,5 +164,11 @@ if WEBSITE_PARAMETERS:
 	if WEBSITE_PARAMETERS.max_old_news_to_show==None:
 		WEBSITE_PARAMETERS.max_old_news_to_show=2
 		update_record=True
+	if WEBSITE_PARAMETERS.banner_image_background_gradient_from==None:
+		WEBSITE_PARAMETERS.banner_image_background_gradient_from='rgb(124,203,216)'
+		update_record=True
+	if WEBSITE_PARAMETERS.banner_image_background_gradient_to==None:
+		WEBSITE_PARAMETERS.banner_image_background_gradient_to='rgb(83,156,175)'
+		update_record=True
 	if update_record:
 		WEBSITE_PARAMETERS.update_record()

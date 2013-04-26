@@ -1,4 +1,4 @@
-/* Fonts */
+	/* Fonts */
 
 @font-face {
     font-family: 'BlackJackRegular';
@@ -29,12 +29,6 @@
 	margin-top: 15px;
 	height: 225px;
 	border-radius: 5px;
-	background-image: -webkit-linear-gradient(bottom, rgb(124,203,216), rgb(83,156,175));
-	background-image: -moz-linear-gradient(bottom, rgb(124,203,216), rgb(83,156,175));
-	background-image: -ms-linear-gradient(bottom, rgb(124,203,216), rgb(83,156,175));
-	background-image: -o-linear-gradient(bottom, rgb(124,203,216), rgb(83,156,175));
-	background-image: linear-gradient(bottom, rgb(124,203,216), rgb(83,156,175));
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=rgb(83,156,175), endColorstr=rgb(124,203,216), GradientType=0); /* IE6-8*/
 	background-image: -webkit-gradient(
 		linear,
 		left bottom,

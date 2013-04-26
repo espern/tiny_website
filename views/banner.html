@@ -1,0 +1,47 @@
+{{if WEBSITE_PARAMETERS.specific_banner_name:}}
+  {{print '%s' %WEBSITE_PARAMETERS.specific_banner_name}}
+   {{#NOTE : templates are constuct first. We must specify a default empty template name to avoid "include None"}}
+   {{include '%s' %WEBSITE_PARAMETERS.specific_banner_name if WEBSITE_PARAMETERS.specific_banner_name else 'empty.html'}}
+{{else:}}
+  <a href={{=URL('default','index')}}>
+    <div id="banner_image" class="gradient">
+      <!--[if gte IE 9]>
+        <style type="text/css">
+          .gradient {
+             filter: none;
+          }
+        </style>
+      <![endif]-->
+      
+        {{if WEBSITE_PARAMETERS.banner_image_always:}}
+           <img src="{{=URL('static', 'images/banner/%s' %WEBSITE_PARAMETERS.banner_image_always)}}">
+        {{pass}}
+        {{if WEBSITE_PARAMETERS.banner_image_desktop:}}
+          <img src="{{=URL('static', 'images/banner/%s' %WEBSITE_PARAMETERS.banner_image_desktop)}}" alt="banner" class="banner_image hidden-tablet hidden-phone">
+        {{pass}}
+        {{if WEBSITE_PARAMETERS.banner_image_tablet:}}
+          <img src="{{=URL('static', 'images/banner/%s' %WEBSITE_PARAMETERS.banner_image_tablet)}}" alt="banner" class="banner_image hidden-desktop hidden-phone">
+        {{pass}}
+        {{if WEBSITE_PARAMETERS.banner_image_phone:}}
+          <img src="{{=URL('static', 'images/banner/%s' %WEBSITE_PARAMETERS.banner_image_phone)}}" alt="banner" class="banner_image hidden-desktop hidden-tablet">
+        {{pass}}
+
+        <div id="banner_description">
+          {{if WEBSITE_PARAMETERS.website_name_long:}}
+            {{=T('Welcome on %s',WEBSITE_PARAMETERS.website_name_long)}}
+          {{else:}}
+            {{=T('Welcome on this website')}}
+          {{pass}}
+        </div>
+    </div>
+  </a>
+{{pass}}
+
+<script>
+  $('#banner_image').css('background-image', '-webkit-linear-gradient(bottom, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_from}}, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_to}})')
+  $('#banner_image').css('background-image', '-moz-linear-gradient(bottom, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_from}}, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_to}})')
+  $('#banner_image').css('background-image', '-ms-linear-gradient(bottom, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_from}}, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_to}})')
+  $('#banner_image').css('background-image', '-o-linear-gradient(bottom, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_from}}, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_to}})')
+  $('#banner_image').css('background-image', 'linear-gradient(bottom, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_from}}, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_to}})')
+  $('#banner_image').css('filter', 'progid:DXImageTransform.Microsoft.gradient(bottom, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_to}}, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_from}})') /* IE6-8*/
+</script>
