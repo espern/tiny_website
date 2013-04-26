@@ -17,7 +17,7 @@ def files():
         q=(db.file)
     if db(q).isempty(): #if there are no files related to the page, we select all available files
         q=(db.file)
-    files = db(q).select()
+    files = db(q).select(orderby=~db.file.id)
     return dict(files=files,
                 sizeof_file=sizeof_file,
                 
@@ -25,7 +25,7 @@ def files():
 
 def files_list():
     manager_toolbar = ManagerToolbar('file')
-    files = db(db.file).select()
+    files = db(db.file).select(orderby=~db.file.id)
     return dict(files=files,
                 left_sidebar_enabled=True,
                 right_sidebar_enabled=True,
