@@ -106,16 +106,16 @@
         <div class="container">
           {{if WEBSITE_PARAMETERS:}}
               {{if WEBSITE_PARAMETERS.with_banner:}}
-                      {{ include 'banner.html'}}
-                  {{else:}}
-                      <div class="page-header">
-                          <h1>
-                              {{=WEBSITE_PARAMETERS.website_title}}
-                              <br />
-                              <small>{{=WEBSITE_PARAMETERS.website_subtitle}}</small>
-                          </h1>
-                      </div>
-                  {{pass}}
+                  {{include 'banner.html'}}
+              {{else:}}
+                    <div class="page-header">
+                        <h1>
+                            {{=WEBSITE_PARAMETERS.website_title}}
+                            <br />
+                            <small>{{=WEBSITE_PARAMETERS.website_subtitle}}</small>
+                        </h1>
+                    </div>
+                {{pass}}
             {{else:}}
                 <div class="page-header">
                     <h1>

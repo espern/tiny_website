@@ -303,6 +303,7 @@
 'My Sites': 'Mes sites',
 'name': 'nom',
 'Name': 'Nom',
+'Name of the specific banner file (overrides banner_image_* parameters)': 'Nom du fichier bannière spécifique (écrase les paramètres Image bannière.*)',
 'New': 'Nouveau',
 'New password': 'Nouveau mot de passe',
 'New Record': 'Nouvel enregistrement',
