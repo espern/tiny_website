@@ -22,7 +22,7 @@ db.define_table('calendar_event',
    Field('title', readable=False, writable=False, label=T('Title')),
    Field('start_date','date',label=T('Start date'), notnull=True),
    Field('duration','reference calendar_duration',label=T('Duration')),
-   Field('is_confirmed', 'boolean',label=T('Is confirmed (visible in calendar)'), readable=False, writable=False),
+   Field('is_confirmed', 'boolean',label=T('Is confirmed (visible in calendar)'), readable=False, writable=False, default=False),
    Field.Method('start_datetime', start_datetime),
    Field.Method('end_datetime', end_datetime),
    format='%(title)s'

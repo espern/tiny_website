@@ -41,8 +41,9 @@ files = db(db.file.page==None).select()
 if files or auth.has_membership('manager'):
 	response.menu += [(T('Files to download'), False, URL('files','files_list'))]
 
-if auth.has_membership('booking_manager'):
-	response.menu += [(T('Booking requests'), False, URL('calendar','edit_booking_requests'))]
+nb_booking_requests = db(db.calendar_event.is_confirmed==False).count()
+if nb_booking_requests and auth.has_membership('booking_manager'):
+	response.menu += [(T('Booking requests (%d)', nb_booking_requests), False, URL('calendar','edit_booking_requests'))]
 response.menu += [(T('Contact us'), False, URL('default','contact_form'))]
 
 # if auth.has_membership('manager'):

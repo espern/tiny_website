@@ -78,6 +78,7 @@
 'Booking request': 'Demande de réservation',
 'Booking request for %s on %s website': 'Demande de réservation pour %s sur le site %s',
 'Booking requests': 'Demandes de réservation',
+'Booking requests (%d)': 'Demandes de réservation (%d)',
 'Buy this book': 'Acheter ce livre',
 'bytes': 'octet',
 'cache': 'cache',
