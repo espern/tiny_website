@@ -44,6 +44,9 @@ def edit_image():
         Allows to add images in the library
     """
     thumb=""
+    page = db.page(request.vars.container_id)
+    if page:
+        db.image.page.default = page.id
     if len(request.args):
         image = db(db.image.id==request.args(0)).select().first()
     if len(request.args) and image:

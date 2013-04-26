@@ -3,7 +3,7 @@
 		<h3>
 			{{=T('Files to download')}}
 			{{if auth.has_membership('manager'):}}
-				{{=manager_toolbar()}}
+				{{=manager_toolbar(container_id=request.vars.container_id)}}
 			{{ pass }}
 		</h3>
 		{{for file in files:}}
