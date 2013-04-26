@@ -36,3 +36,12 @@
     </div>
   </a>
 {{pass}}
+
+<script>
+  $('#banner_image').css('background-image', '-webkit-linear-gradient(bottom, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_from}}, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_to}})')
+  $('#banner_image').css('background-image', '-moz-linear-gradient(bottom, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_from}}, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_to}})')
+  $('#banner_image').css('background-image', '-ms-linear-gradient(bottom, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_from}}, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_to}})')
+  $('#banner_image').css('background-image', '-o-linear-gradient(bottom, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_from}}, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_to}})')
+  $('#banner_image').css('background-image', 'linear-gradient(bottom, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_from}}, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_to}})')
+  $('#banner_image').css('filter', 'progid:DXImageTransform.Microsoft.gradient(bottom, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_to}}, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_from}})') /* IE6-8*/
+</script>

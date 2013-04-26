@@ -38,7 +38,9 @@ if db(db.website_parameters.id > 0).count() == 0:
     navbar_inverse=True,
     banner_image_desktop='banner.jpg',
     banner_image_tablet='banner.jpg',
-    banner_image_phone='banner.jpg'
+    banner_image_phone='banner.jpg',
+    banner_image_background_gradient_from='rgb(124,203,216)',
+    banner_image_background_gradient_to='rgb(83,156,175)'
     )
 
 #Create a default user
