@@ -92,7 +92,7 @@ db.page.right_footer_component.requires = IS_EMPTY_OR(IS_IN_DB(db, db.page_compo
 db.page.middle_footer_component.requires = IS_EMPTY_OR(IS_IN_DB(db, db.page_component.id, '%(name)s - %(description)s', zero=T('<Empty>')))
 db.page.url.compute = lambda row: IS_SLUG()(row.title)[0]
 
-pageSelector = HierarchicalSelect(db,db.page.title)
+pageSelector = HierarchicalSelect(db, db.page, db.page.title)
 db.page.parent.widget = pageSelector.widget
 
 db.define_table('image',
@@ -110,6 +110,7 @@ db.define_table('image',
 )
 db.image.page.requires = IS_EMPTY_OR(IS_IN_DB(db, db.page.id, '%(title)s', zero=T('<Empty>')))
 db.image.alt.compute = lambda row: row.name.capitalize()
+db.image.page.widget = pageSelector.widget
 
 db.define_table('registered_user',
     Field('first_name', label=T('First name')),
@@ -138,6 +139,7 @@ db.define_table('file',
    )
 db.file.page.requires = IS_EMPTY_OR(IS_IN_DB(db, db.page.id, '%(title)s', zero=T('<Empty>')))
 db.file.size.compute = lambda row: path.getsize(path.join(request.folder,'static','uploaded_files',row.file))
+db.file.page.widget = pageSelector.widget
 
 ## after defining tables, uncomment below to enable auditing
 auth.enable_record_versioning(db)
