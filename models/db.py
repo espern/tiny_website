@@ -55,7 +55,7 @@ class ManagerToolbar():
         self.update_label=T('Update current %(object)s', dict(object=self.object_name))
         self.delete_label=T('Delete current %(object)s', dict(object=self.object_name))
 
-    def __call__(self, _id=0):
+    def __call__(self, _id=0, container_id=0):
         if _id > 0:
             self.update_url=URL('edit_'+self.object_name, args=_id, extension=False) #extension=False to avoid having a .load extension from inside a controller
             self.delete_url=URL('delete_'+self.object_name, args=_id, extension=False)
@@ -64,7 +64,7 @@ class ManagerToolbar():
             self.toolbar+=A(IMG(_src=URL('static/images','delete-icon.png'), _alt=self.delete_label,
                 _title=self.delete_label),_href=self.delete_url)
         else:
-            self.add_url=URL('edit_'+self.object_name, extension=False) #extension=False to avoid having a .load extension from inside a controller
+            self.add_url=URL('edit_'+self.object_name, vars=dict(container_id=container_id), extension=False) #extension=False to avoid having a .load extension from inside a controller
             self.toolbar=A(IMG(_src=URL('static/images','add-icon.png'),
                 _alt=self.add_label, _title=self.add_label),_href=self.add_url)
         return self.toolbar

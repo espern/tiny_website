@@ -34,7 +34,10 @@ def files_list():
 @auth.requires_membership('manager')
 def edit_file():
     a_file = db.file(request.args(0))
+    page = db.page(request.vars.container_id)
     crud.settings.update_deletable=False
+    if page:
+        db.file.page.default = page.id
     if len(request.args) and a_file:
         crud.settings.update_deletable = False
         form = crud.update(db.file,a_file,next='files_list')
