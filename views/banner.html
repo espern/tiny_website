@@ -37,11 +37,20 @@
   </a>
 {{pass}}
 
+
 <script>
-  $('#banner_image').css('background-image', '-webkit-linear-gradient(bottom, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_from}}, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_to}})')
-  $('#banner_image').css('background-image', '-moz-linear-gradient(bottom, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_from}}, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_to}})')
-  $('#banner_image').css('background-image', '-ms-linear-gradient(bottom, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_from}}, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_to}})')
-  $('#banner_image').css('background-image', '-o-linear-gradient(bottom, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_from}}, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_to}})')
-  $('#banner_image').css('background-image', 'linear-gradient(bottom, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_from}}, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_to}})')
-  $('#banner_image').css('filter', 'progid:DXImageTransform.Microsoft.gradient(bottom, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_to}}, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_from}})') /* IE6-8*/
+/* Webkit (Chrome 11+) */
+  $('#banner_image').css('background-image', '-webkit-linear-gradient(top, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_from}} 0%, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_to}} 100%)')
+/* Webkit (Safari/Chrome 10) */ 
+  $('#banner_image').css('background-image', '-webkit-gradient(linear, left top, left bottom, color-stop(0, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_from}}), color-stop(1, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_to}}))')
+/* Mozilla Firefox */ 
+  $('#banner_image').css('background-image', '-moz-linear-gradient(top, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_from}} 0%, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_to}} 100%)')
+/* IE10 Consumer Preview */
+  $('#banner_image').css('background-image', '-ms-linear-gradient(top, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_from}} 0%, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_to}} 100%)')
+/* Opera */ 
+  $('#banner_image').css('background-image', '-o-linear-gradient(top, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_from}} 0%, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_to}} 100%)')
+/* W3C Markup, IE10 Release Preview */
+  $('#banner_image').css('background-image', 'linear-gradient(to bottom, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_from}} 0%, {{=WEBSITE_PARAMETERS.banner_image_background_gradient_to}} 100%)')
+/* IE6-8*/
+  $('#banner_image').css('filter', 'progid:DXImageTransform.Microsoft.gradient(startColorstr="{{=WEBSITE_PARAMETERS.banner_image_background_gradient_from}}", endColorstr="{{=WEBSITE_PARAMETERS.banner_image_background_gradient_to}}")') 
 </script>
