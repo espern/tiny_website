@@ -21,7 +21,6 @@ class HierarchicalSelect(object):
         self.rows = self.db(self.tablename).select(orderby=self.order)
         self.parent = field
 
-        root_fields = self.db(self.parent==None).select()
         [self._childs_list(field,0) for field in self.rows.find(lambda row: row.parent == None)] 
 
         opt=[OPTION(name, _value=key) for key,name in self.options]

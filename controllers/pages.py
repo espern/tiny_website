@@ -11,11 +11,17 @@ def show_page():
         page = db.page(request.args(0))
     else:
         page = db(db.page.url==request.args(0)).select().first()
+    #if the page has no content, we select the fisrt child (len < 8 to avoid having a page with just "<br />")
+    if len(page.content) < 8:
+        child = db(db.page.parent==page).select(orderby=db.page.rank|db.page.title).first()
+        if child:
+            page=child
     if not page:
         if request.args(0).lower() == 'images':
             redirect(URL('images'))
         else:
             page = db(db.page.is_index==True).select().first()
+    
     pretty_date = prettydate(page.modified_on, T)
     left_sidebar_component = db.page_component(page.left_sidebar_component)
     right_sidebar_component = db.page_component(page.right_sidebar_component)

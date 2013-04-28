@@ -39,8 +39,8 @@ if db(db.website_parameters.id > 0).count() == 0:
     banner_image_desktop='banner.jpg',
     banner_image_tablet='banner.jpg',
     banner_image_phone='banner.jpg',
-    banner_image_background_gradient_from='rgb(124,203,216)',
-    banner_image_background_gradient_to='rgb(83,156,175)'
+    banner_image_background_gradient_from='#519CAF',
+    banner_image_background_gradient_to='#7DCBD8'
     )
 
 #Create a default user

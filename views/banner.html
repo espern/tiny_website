@@ -1,7 +1,5 @@
-{{if WEBSITE_PARAMETERS.specific_banner_name:}}
-  {{print '%s' %WEBSITE_PARAMETERS.specific_banner_name}}
-   {{#NOTE : templates are constuct first. We must specify a default empty template name to avoid "include None"}}
-   {{include '%s' %WEBSITE_PARAMETERS.specific_banner_name if WEBSITE_PARAMETERS.specific_banner_name else 'empty.html'}}
+{{if WEBSITE_PARAMETERS.with_specific_banner:}}
+   {{include 'specificbanner.html'}}
 {{else:}}
   <a href={{=URL('default','index')}}>
     <div id="banner_image" class="gradient">
