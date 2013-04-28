@@ -1,5 +1,4 @@
 {{if WEBSITE_PARAMETERS.with_specific_banner:}}
-  {{print '%s' %WEBSITE_PARAMETERS.with_specific_banner}}
    {{include 'specificbanner.html'}}
 {{else:}}
   <a href={{=URL('default','index')}}>
