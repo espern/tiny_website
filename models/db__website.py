@@ -16,6 +16,7 @@ signature = db.Table(db,'auth_signature',
 db._common_fields.append(signature) #db._common_fields is a list of fields that should belong to all the tables
 
 db.define_table('website_parameters',
+    Field('last_fixture_date', 'date', label=T('Last fixture date')),
     Field('website_name_long', label=T('Website name long')),
     Field('website_name', label=T('Website name')),
     Field('website_title', label=T('Website title')),
