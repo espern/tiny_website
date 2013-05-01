@@ -11,5 +11,5 @@ class HierarchicalMenu(object):
 
     def create_menu(self, rows):
         self.rows = rows
-        self.menu = [self._childs_list(field) for field in self.rows.find(lambda row: row.parent == None)] 
+        self.menu = [self._childs_list(field) for field in self.rows.find(lambda row: row.parent < 1)] 
         return self.menu
