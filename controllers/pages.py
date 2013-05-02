@@ -7,17 +7,17 @@ def show_page():
     from gluon.tools import prettydate
 
     manager_toolbar = ManagerToolbar('page')
-    if request.args(0).isdigit():
+    if request.args(0) and request.args(0).isdigit():
         page = db.page(request.args(0))
     else:
         page = db(db.page.url==request.args(0)).select().first()
     #if the page has no content, we select the fisrt child (len < 8 to avoid having a page with just "<br />")
-    if len(page.content) < 8:
+    if page and len(page.content) < 8:
         child = db(db.page.parent==page).select(orderby=db.page.rank|db.page.title).first()
         if child:
             page=child
     if not page:
-        if request.args(0).lower() == 'images':
+        if request.args(0) and request.args(0).lower() == 'images':
             redirect(URL('images'))
         else:
             page = db(db.page.is_index==True).select().first()
@@ -41,7 +41,7 @@ def show_page():
 
 @auth.requires_membership('manager')
 def delete_page():
-    if request.args(0).isdigit():
+    if request.args(0) and request.args(0).isdigit():
         page = db.page(request.args(0))
     else:
         page = db(db.page.url==request.args(0)).select().first()
