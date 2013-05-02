@@ -281,6 +281,7 @@
 'May': 'Mai',
 'MB': 'Mo',
 'Menu Model': 'Menu modèle',
+'Message': 'Message',
 'Middle footer component': 'Composant pied de page droit',
 'Miscellaneous': 'Divers',
 'Mobile': 'Mobile',
