@@ -1,13 +1,2 @@
 {{extend 'layout.html'}}
-{{block left_sidebar}}
-<!-- Photo gallery -->
-	<div class="hidden-phone">
-		{{=LOAD('images', 'photo_gallery.load', ajax=False)}}
-	</div>
-{{end}}
-
-{{block right_sidebar}}
-	<!-- latest news -->
-	{{=LOAD('news', 'news.load', ajax=False)}}
-{{end}}
 {{=LOAD('files', 'files.load', ajax=False)}}

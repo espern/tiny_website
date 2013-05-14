@@ -37,7 +37,7 @@ images = db(db.image).select()
 if images:
 	response.menu += [(T('Photo gallery'), False, URL('images','images'))]
 
-files = db(db.file.page==None).select()
+files = db(db.file.page<1).select()
 if files or auth.has_membership('manager'):
 	response.menu += [(T('Files to download'), False, URL('files','files_list'))]
 

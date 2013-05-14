@@ -1,7 +1,6 @@
 {{extend 'layout.html'}}
 
 {{block left_sidebar}}
-<!-- Photo gallery -->
 	<div class="hidden-phone">
 		{{if left_sidebar_component:}}
 			{{=LOAD(left_sidebar_component.controller, left_sidebar_component.name, ajax=left_sidebar_component.ajax,
@@ -11,7 +10,6 @@
 {{end}}
 
 {{block right_sidebar}}
-	<!-- latest news -->
 	{{if right_sidebar_component:}}
 		{{=LOAD(right_sidebar_component.controller, right_sidebar_component.name, ajax=right_sidebar_component.ajax,
 		ajax_trap=right_sidebar_component.ajax_trap, vars={'container_id':page.id})}}
