@@ -12,17 +12,16 @@ class HierarchicalSelect(object):
 
     def _childs_list(self, field, depth):
         path = self.hierarchyseparator*depth
-        if field.is_index:
-            self.options.append((None, T('<Empty>')))
-        else:
-            path += self.hierarchyseparator
-            self.options.append((field['id'], path+field[self.title]))
+       
+        path += self.hierarchyseparator
+        self.options.append((field['id'], path+field[self.title]))
         [self._childs_list(child, (depth+1)) for child in self.rows.find(lambda row: row.parent == field.id)]   
 
     def widget(self, field, value):
         self.fieldname = field.name
         self.type = field.type
         self.rows = self.db(self.tablename).select(orderby=self.order)
+        self.options.append((None, T('<Empty>'))) #add root node
 
         [self._childs_list(field,0) for field in self.rows.find(lambda row: row.parent < 1)] 
 
