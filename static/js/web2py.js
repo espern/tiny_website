@@ -34,7 +34,7 @@ function web2py_ajax_fields(target) {
 function web2py_ajax_init(target) {
   jQuery('.hidden', target).hide();
   jQuery('.error', target).hide().slideDown('slow');
-  web2py_ajax_fields(target);
+  //web2py_ajax_fields(target);
 };
 
 function web2py_event_handlers() {
