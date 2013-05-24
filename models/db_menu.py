@@ -2,7 +2,11 @@
 
 
 WEBSITE_PARAMETERS = db(db.website_parameters).select().first()
-if WEBSITE_PARAMETERS:
+
+if not WEBSITE_PARAMETERS:
+	WEBSITE_PARAMETERS = db.website_parameters(db(db.website_parameters).insert()) #insert raw with default values
+
+if WEBSITE_PARAMETERS.mailserver_url and WEBSITE_PARAMETERS.mailserver_port:
     ## configure email
     mail = auth.settings.mailer
     mail.settings.server = '%s:%s' %(WEBSITE_PARAMETERS.mailserver_url, WEBSITE_PARAMETERS.mailserver_port)

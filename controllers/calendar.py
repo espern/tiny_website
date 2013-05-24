@@ -12,21 +12,8 @@ def calendar():
     page = db.page(request.vars.container_id)
     rows = db(db.calendar_event.page==page)(db.calendar_event.is_confirmed==True).select()
 
-    form = SQLFORM.factory(db.calendar_contact, db.calendar_event)
-    if form.process().accepted:
-        _id = db.calendar_contact.insert(**db.calendar_contact._filter_fields(form.vars))
-        form.vars.contact=_id
-        form.vars.page=request.args(0)
-        _id = db.calendar_event.insert(**db.calendar_event._filter_fields(form.vars))
-
-
-        response.flash = T('Thanks for filling the form')
-    elif form.errors:
-       response.flash = T('form has errors')
-
     #dbg.set_trace()
     return dict(rows=rows,
-                form=form,
                 page=page,
                 month_list=month_list,
                 shortmonth_list=shortmonth_list,

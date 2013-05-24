@@ -16,15 +16,14 @@
 #########################################################################
 from menu_tools import HierarchicalMenu
 
-if WEBSITE_PARAMETERS:
-	#If we don't show the banner, we add the website name with a link to index page
-	if not WEBSITE_PARAMETERS.with_banner:
-		website_name=[XML(c) if c.islower() else B(c) for c in WEBSITE_PARAMETERS.website_name]
-		response.logo = A(website_name,_class="brand",_href=URL('default','index'))
-	if WEBSITE_PARAMETERS.website_title:
-		response.title = WEBSITE_PARAMETERS.website_title
-	if WEBSITE_PARAMETERS.website_subtitle:
-		response.subtitle = WEBSITE_PARAMETERS.website_subtitle
+#If we don't show the banner, we add the website name with a link to index page
+if not WEBSITE_PARAMETERS.with_banner:
+	website_name=[XML(c) if c.islower() else B(c) for c in WEBSITE_PARAMETERS.website_name]
+	response.logo = A(website_name,_class="brand",_href=URL('default','index'))
+if WEBSITE_PARAMETERS.website_title:
+	response.title = WEBSITE_PARAMETERS.website_title
+if WEBSITE_PARAMETERS.website_subtitle:
+	response.subtitle = WEBSITE_PARAMETERS.website_subtitle
 
 
 
@@ -41,9 +40,13 @@ files = db(db.file.page<1).select()
 if files or auth.has_membership('manager'):
 	response.menu += [(T('Files to download'), False, URL('files','files_list'))]
 
+
 nb_booking_requests = db(db.calendar_event.is_confirmed==False).count()
+booking_menu = []
 if nb_booking_requests and auth.has_membership('booking_manager'):
-	response.menu += [(T('Booking requests (%d)', nb_booking_requests), False, URL('calendar','edit_booking_requests'))]
+	booking_menu = [(T('Booking requests (%d)', nb_booking_requests), False, URL('calendar','edit_booking_requests'))]
+if booking_menu :
+	response.menu += [(T('Website management'), False, None, booking_menu)]
 response.menu += [(T('Contact'), False, URL('default','contact_form'))]
 
 # if auth.has_membership('manager'):
