@@ -16,16 +16,14 @@
 	{{pass}}
 {{end}}
 
-{{if page:}}
+{{if page and page.content:}}
 <article>
 	{{if auth.has_membership('manager'):}}
 		{{=manager_toolbar()}}
 		{{=manager_toolbar(page.id)}}
 	{{ pass }}
 	<h3>{{=page.subtitle}}</h3>
-	{{if page.content:}}
-		<div>{{=XML(page.content, sanitize=False)}}</div>
-	{{pass}}
+	<div>{{=XML(page.content, sanitize=False)}}</div>
 	{{if pretty_date:}}
 		<div class="muted"><small>{{=T("Updated %s",pretty_date)}}</small></div>
 	{{pass}}
