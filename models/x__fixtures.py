@@ -49,7 +49,11 @@ if not WEBSITE_PARAMETERS.last_fixture_date or WEBSITE_PARAMETERS.last_fixture_d
 			ajax_trap=False
 		)
 
-	component = db(db.page_component.name == 'calendar.load').select().first()
+	component = db(db.page_component.name == 'calendar.load').select().first() #rename old calendar.load
+	if component:
+		component.name='calendar_booking.load'
+		component.update_record()
+	component = db(db.page_component.name == 'calendar_booking.load').select().first()
 	component_description = 'Allow booking requests for the page and show availability on a calendar'
 	if component:
 		#add component description
@@ -59,7 +63,7 @@ if not WEBSITE_PARAMETERS.last_fixture_date or WEBSITE_PARAMETERS.last_fixture_d
 	else:
 		db.page_component.insert(
 			controller='calendar',
-			name='calendar.load',
+			name='calendar_booking.load',
 			description=component_description,
 			ajax=False,
 			ajax_trap=False

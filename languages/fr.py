@@ -199,6 +199,7 @@
 'First name': 'Prénom',
 'first name': 'prénom',
 'Follow our news with RSS feed': 'Suivre nos actualités avec le flux RSS',
+'Force a language (en, it, es, fr, ...)': 'Forcer une langue (en, it, es, fr, ...)',
 'Forgot username?': "Vous avez perdu votre nom d'utilisateur?",
 'Form accepted': 'Formulaire accepté',
 'form accepted': 'formulaire accepté',

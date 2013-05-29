@@ -17,3 +17,6 @@ if WEBSITE_PARAMETERS.mailserver_url and WEBSITE_PARAMETERS.mailserver_port:
     response.google_analytics_id = None if request.is_local else WEBSITE_PARAMETERS.google_analytics_id
 
     response.subtitle = WEBSITE_PARAMETERS.website_name
+
+if WEBSITE_PARAMETERS.force_language:
+	 T.force(WEBSITE_PARAMETERS.force_language)
