@@ -14,8 +14,10 @@
   <!--[if IE]>
       <meta http-equiv="X-UA-Compatible" content="IE=edge{{=not request.is_local and ',chrome=1' or ''}}">
       <![endif]-->
-
-  <title>{{=response.title or request.application}}</title>
+  {{block title}}
+    <title>{{=response.title or request.application}}</title>
+  {{end}}
+  
 
   <!-- http://dev.w3.org/html5/markup/meta.name.html -->
   <meta name="application-name" content="{{=request.application}}" />

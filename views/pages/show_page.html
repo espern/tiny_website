@@ -1,5 +1,15 @@
 {{extend 'layout.html'}}
 
+{{block title}}
+    <title>
+    	{{if response.title:}}
+    		{{=" ".join(t for t in [response.title, page.title if not page.is_index else None, page.subtitle] if t)}}
+    	{{else:}}
+    		{{=request.application}}
+    	{{pass}}
+    </title>
+{{end}}
+
 {{block left_sidebar}}
 	<div class="hidden-phone">
 		{{if left_sidebar_component:}}

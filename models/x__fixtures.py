@@ -1,4 +1,5 @@
 # coding: utf8
+#from gluon.debug import dbg
 
 if not WEBSITE_PARAMETERS.last_fixture_date or WEBSITE_PARAMETERS.last_fixture_date < request.now.date():
 
@@ -170,4 +171,6 @@ if not WEBSITE_PARAMETERS.last_fixture_date or WEBSITE_PARAMETERS.last_fixture_d
 		WEBSITE_PARAMETERS.banner_image_background_gradient_from='#519CAF'
 	if WEBSITE_PARAMETERS.banner_image_background_gradient_to==None:
 		WEBSITE_PARAMETERS.banner_image_background_gradient_to='#7DCBD8'
+	if WEBSITE_PARAMETERS.website_title and not WEBSITE_PARAMETERS.seo_website_title:
+		WEBSITE_PARAMETERS.seo_website_title = WEBSITE_PARAMETERS.website_title
 	WEBSITE_PARAMETERS.update_record()

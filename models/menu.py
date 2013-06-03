@@ -6,10 +6,6 @@
 #########################################################################
 
 ## read more at http://dev.w3.org/html5/markup/meta.name.html
-# response.meta.author = 'Your Name <you@example.com>'
-# response.meta.description = 'a cool new app'
-# response.meta.keywords = 'web2py, python, framework'
-# response.meta.generator = 'Web2py Web Framework'
 
 #########################################################################
 ## this is the main application menu add/remove items as required
@@ -21,11 +17,19 @@ if not WEBSITE_PARAMETERS.with_banner:
 	website_name=[XML(c) if c.islower() else B(c) for c in WEBSITE_PARAMETERS.website_name]
 	response.logo = A(website_name,_class="brand",_href=URL('default','index'))
 if WEBSITE_PARAMETERS.website_title:
-	response.title = WEBSITE_PARAMETERS.website_title
+	response.title = WEBSITE_PARAMETERS.seo_website_title
+	print WEBSITE_PARAMETERS.seo_website_title
 if WEBSITE_PARAMETERS.website_subtitle:
 	response.subtitle = WEBSITE_PARAMETERS.website_subtitle
 
-
+if WEBSITE_PARAMETERS.seo_meta_author:
+	response.meta.author = WEBSITE_PARAMETERS.seo_meta_author
+if WEBSITE_PARAMETERS.seo_meta_description:
+	response.meta.description = WEBSITE_PARAMETERS.seo_meta_description
+if WEBSITE_PARAMETERS.seo_meta_keywords:
+	response.meta.keywords = WEBSITE_PARAMETERS.seo_meta_keywords
+if WEBSITE_PARAMETERS.seo_meta_generator:
+	response.meta.generator = WEBSITE_PARAMETERS.seo_meta_generator
 
 pages = db(db.page.is_index==False).select(orderby=db.page.rank|db.page.title)
 
