@@ -1,8 +1,8 @@
 #from gluon.debug import dbg
 
-def calendar():
+def calendar_booking():
     """
-    Allows to access the "calendar" component
+    Allows to access the "calendar_boking" component
     """
     month_list = [T('January'),T('February'),T('March'),T('April'),T('May'),T('June'),T('July'),T('August'),T('September'),T('October'),T('November'),T('December')]
     shortmonth_list = [T('Jan'),T('Feb'),T('Mar'),T('Apr'),T('May'),T('Jun'),T('Jul'),T('Aug'),T('Sep'),T('Oct'),T('Nov'),T('Dec')]
@@ -20,7 +20,7 @@ def calendar():
                 day_list=day_list,
                 shortday_list=shortday_list)
 
-def calendar_booking():
+def add_booking_request():
     """
     Add a booking request to a calendar event
     """
