@@ -18,7 +18,6 @@ if not WEBSITE_PARAMETERS.with_banner:
 	response.logo = A(website_name,_class="brand",_href=URL('default','index'))
 if WEBSITE_PARAMETERS.website_title:
 	response.title = WEBSITE_PARAMETERS.seo_website_title
-	print WEBSITE_PARAMETERS.seo_website_title
 if WEBSITE_PARAMETERS.website_subtitle:
 	response.subtitle = WEBSITE_PARAMETERS.website_subtitle
 
