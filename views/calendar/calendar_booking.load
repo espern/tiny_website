@@ -76,6 +76,6 @@
 {{if page:}}
     <hr>
     <div id="showform">
-        {{=A(T('I would like to book %s',page.title.lower()), _href=URL('calendar', 'calendar_booking', extension=False, args=page.id), _class="btn btn-primary")}}
+        {{=A(T('I would like to book %s',page.title.lower()), _href=URL('calendar', 'add_booking_request', extension=False, args=page.id), _class="btn btn-primary")}}
     </div>
 {{pass}}
