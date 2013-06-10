@@ -33,13 +33,15 @@ def delete_news():
     return dict(news=news, form=form)
 
 def rss_news():
+    import unicodedata
+
     newsS = db(db.news).select(orderby=~db.news.date|~db.news.published_on)
     return dict(title=T('%s latest news',WEBSITE_PARAMETERS.website_name),
                 link=WEBSITE_PARAMETERS.website_url,
                 description=T('%s latest news',WEBSITE_PARAMETERS.website_name),
                 entries=[
-                  dict(title=news.title,
+                  dict(title=news.title.decode("utf-8", "replace" ),
                   link=WEBSITE_PARAMETERS.website_url,
                   created_on = news.published_on,
-                  description=XML(news.text)) for news in newsS
+                  description=news.text.decode("utf-8", "replace" )) for news in newsS
                 ])
