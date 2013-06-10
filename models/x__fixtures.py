@@ -1,7 +1,7 @@
 # coding: utf8
 #from gluon.debug import dbg
 
-if not WEBSITE_PARAMETERS.last_fixture_date or WEBSITE_PARAMETERS.last_fixture_date < request.now.date():
+if not WEBSITE_PARAMETERS or not WEBSITE_PARAMETERS.last_fixture_date or WEBSITE_PARAMETERS.last_fixture_date < request.now.date():
 
 	#Create a "manager" group
 	if db(db.auth_group.role == "manager").count() == 0:
@@ -160,17 +160,18 @@ if not WEBSITE_PARAMETERS.last_fixture_date or WEBSITE_PARAMETERS.last_fixture_d
 	if pages:
 		pages.update(is_index=False)
 	
-	WEBSITE_PARAMETERS.last_fixture_date = request.now
-	if WEBSITE_PARAMETERS.with_banner==None:
-		WEBSITE_PARAMETERS.with_banner=True
-	if WEBSITE_PARAMETERS.navbar_inverse==None:
-		WEBSITE_PARAMETERS.navbar_inverse=True
-	if WEBSITE_PARAMETERS.max_old_news_to_show==None:
-		WEBSITE_PARAMETERS.max_old_news_to_show=2
-	if WEBSITE_PARAMETERS.banner_image_background_gradient_from==None:
-		WEBSITE_PARAMETERS.banner_image_background_gradient_from='#519CAF'
-	if WEBSITE_PARAMETERS.banner_image_background_gradient_to==None:
-		WEBSITE_PARAMETERS.banner_image_background_gradient_to='#7DCBD8'
-	if WEBSITE_PARAMETERS.website_title and not WEBSITE_PARAMETERS.seo_website_title:
-		WEBSITE_PARAMETERS.seo_website_title = WEBSITE_PARAMETERS.website_title
-	WEBSITE_PARAMETERS.update_record()
+	if WEBSITE_PARAMETERS:
+		WEBSITE_PARAMETERS.last_fixture_date = request.now
+		if WEBSITE_PARAMETERS.with_banner==None:
+			WEBSITE_PARAMETERS.with_banner=True
+		if WEBSITE_PARAMETERS.navbar_inverse==None:
+			WEBSITE_PARAMETERS.navbar_inverse=True
+		if WEBSITE_PARAMETERS.max_old_news_to_show==None:
+			WEBSITE_PARAMETERS.max_old_news_to_show=2
+		if WEBSITE_PARAMETERS.banner_image_background_gradient_from==None:
+			WEBSITE_PARAMETERS.banner_image_background_gradient_from='#519CAF'
+		if WEBSITE_PARAMETERS.banner_image_background_gradient_to==None:
+			WEBSITE_PARAMETERS.banner_image_background_gradient_to='#7DCBD8'
+		if WEBSITE_PARAMETERS.website_title and not WEBSITE_PARAMETERS.seo_website_title:
+			WEBSITE_PARAMETERS.seo_website_title = WEBSITE_PARAMETERS.website_title
+		WEBSITE_PARAMETERS.update_record()
