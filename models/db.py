@@ -20,7 +20,7 @@ else:
     ## from gluon.contrib.memdb import MEMDB
     ## from google.appengine.api.memcache import Client
     ## session.connect(request, response, db = MEMDB(Client()))   
-    session.connect(request, response, db=db)
+session.connect(request, response, db=db)
     
 ## by default give a view/generic.extension to all actions from localhost
 ## none otherwise. a pattern can be 'controller/function.extension'
