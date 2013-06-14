@@ -73,7 +73,6 @@ def __makeThumbnail(dbtable,ImageID,image_size=(600,600), thumbnail_size=(260,26
     #dbg.set_trace() # stop here!
     try:    
         thisImage=db(dbtable.id==ImageID).select()[0]
-        import uuid
         from PIL import Image
     except: return
 
