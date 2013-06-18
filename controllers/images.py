@@ -65,7 +65,7 @@ def edit_image():
 
 def images():
     manager_toolbar = ManagerToolbar('image')
-    images = db(db.image).select(orderby=~db.image.page)
+    images = db(db.image).select(orderby=db.image.page)
     return dict(images=images,
                 manager_toolbar=manager_toolbar)
 

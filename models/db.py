@@ -9,6 +9,10 @@
 ## be redirected to HTTPS, uncomment the line below:
 # request.requires_https()
 
+from gluon.custom_import import track_changes
+#turn on the auto-reload feature for modules
+track_changes(True)
+
 if not request.env.web2py_runtime_gae:
     ## if NOT running on Google App Engine use SQLite or other DB
     db = DAL('sqlite://storage.sqlite', pool_size=1, lazy_tables=True, migrate=True)
