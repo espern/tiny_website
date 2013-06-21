@@ -13,7 +13,6 @@
 from menu_tools import HierarchicalMenu
 
 #If we don't show the banner, we add the website name with a link to index page
-<<<<<<< HEAD
 if WEBSITE_PARAMETERS.add_website_name_as_logo:
 	website_name=[XML(c) if c.islower() else B(c) for c in WEBSITE_PARAMETERS.website_name]
 	response.logo = A(website_name,_class="brand",_href=URL('default','index'))
@@ -30,25 +29,6 @@ if WEBSITE_PARAMETERS.seo_meta_keywords:
 	response.meta.keywords = WEBSITE_PARAMETERS.seo_meta_keywords
 if WEBSITE_PARAMETERS.seo_meta_generator:
 	response.meta.generator = WEBSITE_PARAMETERS.seo_meta_generator
-=======
-if WEBSITE_PARAMETERS:
-	if not WEBSITE_PARAMETERS.with_banner:
-		website_name=[XML(c) if c.islower() else B(c) for c in WEBSITE_PARAMETERS.website_name]
-		response.logo = A(website_name,_class="brand",_href=URL('default','index'))
-	if WEBSITE_PARAMETERS.website_title:
-		response.title = WEBSITE_PARAMETERS.seo_website_title
-	if WEBSITE_PARAMETERS.website_subtitle:
-		response.subtitle = WEBSITE_PARAMETERS.website_subtitle
-
-	if WEBSITE_PARAMETERS.seo_meta_author:
-		response.meta.author = WEBSITE_PARAMETERS.seo_meta_author
-	if WEBSITE_PARAMETERS.seo_meta_description:
-		response.meta.description = WEBSITE_PARAMETERS.seo_meta_description
-	if WEBSITE_PARAMETERS.seo_meta_keywords:
-		response.meta.keywords = WEBSITE_PARAMETERS.seo_meta_keywords
-	if WEBSITE_PARAMETERS.seo_meta_generator:
-		response.meta.generator = WEBSITE_PARAMETERS.seo_meta_generator
->>>>>>> 0c7ae8db016db8aee9f7852f0a287d0a1005c500
 
 pages = db(db.page.is_index==False).select(orderby=db.page.rank|db.page.title)
 
