@@ -71,6 +71,19 @@ def edit_page():
     if len(request.args) and page:  
         crud.settings.update_deletable = False
         form = crud.update(db.page,page,next=URL('show_page', args=page.id))
+        my_extra_element = XML("""
+            <div id="wysiwyg_management">
+                <ul class="nav nav-pills">
+                    <li id="activate_wysiwyg" class="active">
+                        <a href="#">%s</a>
+                    </li>
+                    <li id="remove_wysiwyg" >
+                        <a href="#">%s</a>
+                    </li>
+                </ul>
+            </div>
+        """ %(T('WYSIWYG view'),T('HTML view')))
+        form[0][4].append( my_extra_element)
     else:
         #Hide the "content" of the page : the page has no title
         #and this is impossible to initialise the upload field with page.url
