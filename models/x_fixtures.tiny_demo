@@ -78,7 +78,7 @@ tmpContent = """
 	Once connected, try to add images in the photo gallery (<em>need to have python PIL installed</em>)
 </p
 <p>
-	You can edit the website parameters in models/db_menu.py
+	You can edit the website parameters in website_parameters table
 </p>
 """
 if db(db.page.is_index == True).count() == 0:

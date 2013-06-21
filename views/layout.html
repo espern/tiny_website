@@ -106,19 +106,21 @@
   <div class="container">
     <!-- Masthead ================================================== -->
     <header class="mastheader row" id="header">
-        <div class="span12">
-          {{if WEBSITE_PARAMETERS.with_banner:}}
-              {{include 'banner.html'}}
-          {{else:}}
-                <div class="page-header">
-                    <h1>
-                        {{=WEBSITE_PARAMETERS.website_title}}
-                        <br />
-                        <small>{{=WEBSITE_PARAMETERS.website_subtitle}}</small>
-                    </h1>
-                </div>
-            {{pass}}
-        </div>
+        {{if WEBSITE_PARAMETERS:}}
+          <div class="span12">
+            {{if WEBSITE_PARAMETERS.with_banner:}}
+                {{include 'banner.html'}}
+            {{else:}}
+                  <div class="page-header">
+                      <h1>
+                          {{=WEBSITE_PARAMETERS.website_title}}
+                          <br />
+                          <small>{{=WEBSITE_PARAMETERS.website_subtitle}}</small>
+                      </h1>
+                  </div>
+              {{pass}}
+          </div>
+        {{pass}}
     </header>
 
     <section id="main" class="main row">
