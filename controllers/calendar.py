@@ -4,17 +4,39 @@ def calendar_booking():
     """
     Allows to access the "calendar_boking" component
     """
-    month_list = [T('January'),T('February'),T('March'),T('April'),T('May'),T('June'),T('July'),T('August'),T('September'),T('October'),T('November'),T('December')]
-    shortmonth_list = [T('Jan'),T('Feb'),T('Mar'),T('Apr'),T('May'),T('Jun'),T('Jul'),T('Aug'),T('Sep'),T('Oct'),T('Nov'),T('Dec')]
-    day_list = [T('Sunday'),T('Monday'),T('Tuesday'),T('Wednesday'),T('Thursday'),T('Friday'),T('Saturday')]
-    shortday_list = [T('Sun'),T('Mon'),T('Tue'),T('Wed'),T('Thu'),T('Fri'),T('Sat')]
+    from calendar_tools import month_list, shortmonth_list, day_list, shortday_list
 
     page = db.page(request.vars.container_id)
-    rows = db(db.calendar_event.page==page)(db.calendar_event.is_confirmed==True).select()
+    rows = db(db.calendar_booking_request.page==page)(db.calendar_booking_request.is_confirmed==True).select()
 
     #dbg.set_trace()
     return dict(rows=rows,
                 page=page,
+                month_list=month_list,
+                shortmonth_list=shortmonth_list,
+                day_list=day_list,
+                shortday_list=shortday_list)
+
+def calendar_event():
+    """
+    Allows to access the "calendar_event" component
+    """
+    from calendar_tools import month_list, shortmonth_list, day_list, shortday_list
+
+    def get_available_positions(event_id, event_nb_positions_available):
+        """
+            Number of available positions for this event (None = illimited)
+        """
+        if event_nb_positions_available == None:
+            return None
+        return event_nb_positions_available - db(db.calendar_contact.event==event_id).count()
+
+    page = db.page(request.vars.container_id)
+    rows = db(db.calendar_event.page==page).select()
+    events_available_positions = dict((event.id, get_available_positions(event.id, event.nb_positions_available)) for event in rows)
+    return dict(rows=rows,
+                page=page,
+                events_available_positions=events_available_positions,
                 month_list=month_list,
                 shortmonth_list=shortmonth_list,
                 day_list=day_list,
@@ -27,13 +49,13 @@ def add_booking_request():
     page = db.page(request.args(0))
     if not page:
         redirect(URL('index'))
-    form = SQLFORM.factory(db.calendar_contact, db.calendar_event)
+    form = SQLFORM.factory(db.calendar_contact, db.calendar_booking_request)
     page_low_title = page.title.lower()
     if form.process().accepted:
         _id = db.calendar_contact.insert(**db.calendar_contact._filter_fields(form.vars))
         form.vars.contact=_id
         form.vars.page=page.id
-        _id = db.calendar_event.insert(**db.calendar_event._filter_fields(form.vars))
+        _id = db.calendar_booking_request.insert(**db.calendar_booking_request._filter_fields(form.vars))
         
         duration = db.calendar_duration(form.vars.duration)
 
@@ -65,13 +87,13 @@ def add_booking_request():
 
 @auth.requires_membership('booking_manager')
 def edit_booking_requests():
-    db.calendar_event.is_confirmed.readable = db.calendar_event.is_confirmed.writable = True
-    db.calendar_event.page.readable = db.calendar_event.page.writable = True
-    db.calendar_event.contact.readable = db.calendar_event.contact.writable = True
+    db.calendar_booking_request.is_confirmed.readable = db.calendar_booking_request.is_confirmed.writable = True
+    db.calendar_booking_request.page.readable = db.calendar_booking_request.page.writable = True
+    db.calendar_booking_request.contact.readable = db.calendar_booking_request.contact.writable = True
 
     linked_tables=['page, contact']
-    fields=[db.calendar_event.page,db.calendar_event.contact, db.calendar_event.start_date, db.calendar_event.duration, db.calendar_event.is_confirmed]
-    orderby = db.calendar_event.is_confirmed | ~db.calendar_event.start_date
+    fields=[db.calendar_booking_request.page,db.calendar_booking_request.contact, db.calendar_booking_request.start_date, db.calendar_booking_request.duration, db.calendar_booking_request.is_confirmed]
+    orderby = db.calendar_booking_request.is_confirmed | ~db.calendar_booking_request.start_date
     exportclasses=dict(
             csv_with_hidden_cols=False,
             xml=False,
@@ -80,7 +102,7 @@ def edit_booking_requests():
             json=False,
             tsv_with_hidden_cols=False,
             tsv=False)
-    grid = SQLFORM.smartgrid(db.calendar_event,
+    grid = SQLFORM.smartgrid(db.calendar_booking_request,
                             linked_tables=linked_tables,
                             exportclasses=exportclasses,
                             orderby=orderby,

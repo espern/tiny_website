@@ -13,10 +13,12 @@ db.define_table('calendar_contact',
     Field('email', requires=IS_EMAIL(), label=T('Email')),
     Field('phone_number', requires=IS_MATCH('[\d\-\+\(\)\.\ ]+'), label=T('Phone number')),
     Field('address', 'text', label=T('Address')),
+    Field('event', 'reference calendar_event', label=T('Event')),
     format='%(name)s'
     )
 
-db.define_table('calendar_event',
+
+db.define_table('calendar_booking_request',
    Field('page', 'reference page', readable=False, writable=False, label=T('Page')),
    Field('contact', 'reference calendar_contact', readable=False, writable=False, label=T('Contact')),
    Field('title', readable=False, writable=False, label=T('Title')),
@@ -27,6 +29,20 @@ db.define_table('calendar_event',
    Field.Method('end_datetime', end_datetime),
    format='%(title)s'
    )
+db.calendar_booking_request.page.requires = IS_IN_DB(db,db.page.id, '%(title)s', zero=T('<Empty>'))
+db.calendar_booking_request.contact.requires = IS_IN_DB(db,db.calendar_contact.id, '%(name)s', zero=T('<Empty>'))
+db.calendar_booking_request.duration.requires = IS_IN_DB(db,db.calendar_duration.id, '%(name)s', zero=T('<Empty>'))
+
+db.define_table('calendar_event',
+   Field('page', 'reference page', readable=False, writable=False, label=T('Page')),
+   Field('title', readable=False, writable=False, label=T('Title')),
+   Field('start_date','date',label=T('Start date'), notnull=True),
+   Field('duration','reference calendar_duration',label=T('Duration')),
+   Field('nb_positions_available', 'integer',label=T('Number of positions available for this event (None=illimited)')),
+   Field.Method('start_datetime', start_datetime),
+   Field.Method('end_datetime', end_datetime),
+   format='%(title)s'
+   )
 db.calendar_event.page.requires = IS_IN_DB(db,db.page.id, '%(title)s', zero=T('<Empty>'))
-db.calendar_event.contact.requires = IS_IN_DB(db,db.calendar_contact.id, '%(name)s', zero=T('<Empty>'))
 db.calendar_event.duration.requires = IS_IN_DB(db,db.calendar_duration.id, '%(name)s', zero=T('<Empty>'))
+db.calendar_contact.event.requires = IS_IN_DB(db,db.calendar_event.id, '%(title)s', zero=T('<Empty>'))

@@ -17,6 +17,13 @@ if not WEBSITE_PARAMETERS.last_fixture_date or WEBSITE_PARAMETERS.last_fixture_d
 	        description='Those who can edit the booking requests...'
 	)
 
+	#Create a "event_manager" group
+	if db(db.auth_group.role == "event_manager").count() == 0:
+	    db.auth_group.insert(
+	        role='event_manager',
+	        description='Those who can edit the events participation...'
+	)
+
 	#Fixtures for mandatory content
 	component = db(db.page_component.name == 'photo_gallery.load').select().first()
 	component_description = 'Show random images of the photo gallery'
@@ -65,6 +72,22 @@ if not WEBSITE_PARAMETERS.last_fixture_date or WEBSITE_PARAMETERS.last_fixture_d
 		db.page_component.insert(
 			controller='calendar',
 			name='calendar_booking.load',
+			description=component_description,
+			ajax=False,
+			ajax_trap=False
+		)
+
+	component = db(db.page_component.name == 'calendar_event.load').select().first()
+	component_description = 'Allow admin to create events. Visitor can ask to participate to the event.'
+	if component:
+		#add component description
+		if not component.description:
+			component.description = component_description
+			component.update_record()
+	else:
+		db.page_component.insert(
+			controller='calendar',
+			name='calendar_event.load',
 			description=component_description,
 			ajax=False,
 			ajax_trap=False
