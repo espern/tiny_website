@@ -13,10 +13,9 @@ db.define_table('calendar_contact',
     Field('email', requires=IS_EMAIL(), label=T('Email')),
     Field('phone_number', requires=IS_MATCH('[\d\-\+\(\)\.\ ]+'), label=T('Phone number')),
     Field('address', 'text', label=T('Address')),
-    Field('event', 'reference calendar_event', label=T('Event')),
+    Field('event', 'reference calendar_event', label=T('Event'), readable=False, writable=False),
     format='%(name)s'
     )
-
 
 db.define_table('calendar_booking_request',
    Field('page', 'reference page', readable=False, writable=False, label=T('Page')),

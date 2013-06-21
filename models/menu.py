@@ -11,7 +11,7 @@
 ## this is the main application menu add/remove items as required
 #########################################################################
 from menu_tools import HierarchicalMenu
-
+	
 #If we don't show the banner, we add the website name with a link to index page
 if WEBSITE_PARAMETERS.add_website_name_as_logo:
 	website_name=[XML(c) if c.islower() else B(c) for c in WEBSITE_PARAMETERS.website_name]
