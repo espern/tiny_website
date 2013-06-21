@@ -11,25 +11,24 @@
 ## this is the main application menu add/remove items as required
 #########################################################################
 from menu_tools import HierarchicalMenu
-
+	
 #If we don't show the banner, we add the website name with a link to index page
-if WEBSITE_PARAMETERS:
-	if not WEBSITE_PARAMETERS.with_banner:
-		website_name=[XML(c) if c.islower() else B(c) for c in WEBSITE_PARAMETERS.website_name]
-		response.logo = A(website_name,_class="brand",_href=URL('default','index'))
-	if WEBSITE_PARAMETERS.website_title:
-		response.title = WEBSITE_PARAMETERS.seo_website_title
-	if WEBSITE_PARAMETERS.website_subtitle:
-		response.subtitle = WEBSITE_PARAMETERS.website_subtitle
+if WEBSITE_PARAMETERS.add_website_name_as_logo:
+	website_name=[XML(c) if c.islower() else B(c) for c in WEBSITE_PARAMETERS.website_name]
+	response.logo = A(website_name,_class="brand",_href=URL('default','index'))
+if WEBSITE_PARAMETERS.website_title:
+	response.title = WEBSITE_PARAMETERS.seo_website_title
+if WEBSITE_PARAMETERS.website_subtitle:
+	response.subtitle = WEBSITE_PARAMETERS.website_subtitle
 
-	if WEBSITE_PARAMETERS.seo_meta_author:
-		response.meta.author = WEBSITE_PARAMETERS.seo_meta_author
-	if WEBSITE_PARAMETERS.seo_meta_description:
-		response.meta.description = WEBSITE_PARAMETERS.seo_meta_description
-	if WEBSITE_PARAMETERS.seo_meta_keywords:
-		response.meta.keywords = WEBSITE_PARAMETERS.seo_meta_keywords
-	if WEBSITE_PARAMETERS.seo_meta_generator:
-		response.meta.generator = WEBSITE_PARAMETERS.seo_meta_generator
+if WEBSITE_PARAMETERS.seo_meta_author:
+	response.meta.author = WEBSITE_PARAMETERS.seo_meta_author
+if WEBSITE_PARAMETERS.seo_meta_description:
+	response.meta.description = WEBSITE_PARAMETERS.seo_meta_description
+if WEBSITE_PARAMETERS.seo_meta_keywords:
+	response.meta.keywords = WEBSITE_PARAMETERS.seo_meta_keywords
+if WEBSITE_PARAMETERS.seo_meta_generator:
+	response.meta.generator = WEBSITE_PARAMETERS.seo_meta_generator
 
 pages = db(db.page.is_index==False).select(orderby=db.page.rank|db.page.title)
 
@@ -45,7 +44,7 @@ if files or auth.has_membership('manager'):
 	response.menu += [(T('Files to download'), False, URL('files','files_list'))]
 
 
-nb_booking_requests = db(db.calendar_event.is_confirmed==False).count()
+nb_booking_requests = db(db.calendar_booking_request.is_confirmed==False).count()
 booking_menu = []
 if nb_booking_requests and auth.has_membership('booking_manager'):
 	booking_menu = [(T('Booking requests (%d)', nb_booking_requests), False, URL('calendar','edit_booking_requests'))]
