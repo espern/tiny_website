@@ -11,7 +11,7 @@ client.get('')
 assert('Welcome on' in client.text)
 
 #test each page
-db = DAL('mysql://dommartin25:do2mart1n@vps20356.ovh.net/dommartin25')
+db = DAL('mysql://user:pass@vhost/dbName')
 
 for tablename in db.tables:
 	print tablename
