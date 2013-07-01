@@ -31,21 +31,21 @@ if WEBSITE_PARAMETERS:
 	if WEBSITE_PARAMETERS.seo_meta_generator:
 		response.meta.generator = WEBSITE_PARAMETERS.seo_meta_generator
 
-pages = db(db.page.is_index==False).select(orderby=db.page.rank|db.page.title)
+pages = db(db.page.is_index==False).select(orderby=db.page.rank|db.page.title, cache=(cache.ram,30),cacheable=True)
 
 pages_menu = HierarchicalMenu()
 response.menu += pages_menu.create_menu(pages)
 
-images = db(db.image).select()
-if images:
+nb_images = db(db.image).count(cache=(cache.ram,60))
+if nb_images:
 	response.menu += [(T('Photo gallery'), False, URL('images','images'))]
 
-files = db(db.file.page<1).select()
-if files or auth.has_membership('manager'):
+nb_files = db(db.file.page<1).count(cache=(cache.ram,60))
+if nb_files or auth.has_membership('manager'):
 	response.menu += [(T('Files to download'), False, URL('files','files_list'))]
 
 
-nb_booking_requests = db(db.calendar_booking_request.is_confirmed==False).count()
+nb_booking_requests = db(db.calendar_booking_request.is_confirmed==False).count(cache=(cache.ram,60))
 booking_menu = []
 if nb_booking_requests and auth.has_membership('booking_manager'):
 	booking_menu = [(T('Booking requests (%d)', nb_booking_requests), False, URL('calendar','edit_booking_requests'))]
