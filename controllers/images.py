@@ -4,6 +4,7 @@ def photo_gallery():
     """
     Allows to access the "photo_gallery" component
     """
+    import random
     manager_toolbar = ManagerToolbar('image')
     MAX_IMAGES = 2
     page = db.page(request.vars.container_id)
@@ -13,7 +14,7 @@ def photo_gallery():
         q=(db.image.show_in_gallery==1)
     if db(q).isempty(): #if there are no images related to the page, we select all available images
         q=(db.image.show_in_gallery==1)
-    images = db(q).select(limitby=(0,MAX_IMAGES), orderby='<random>')
+    images = sorted(db(q).select(cache=(cache.ram, 60), cacheable=True), key=lambda *args: random.random())[:MAX_IMAGES]
     return dict(enum_images=enumerate(images),
                 MAX_IMAGES=MAX_IMAGES,
                 manager_toolbar=manager_toolbar)
