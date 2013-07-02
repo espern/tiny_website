@@ -93,7 +93,8 @@ def address():
     """
     Allows to access the "address" component
     """
-    return dict()
+    contacts = db(db.contact).select()
+    return dict(contacts=contacts)
 
 def newsletter():
     """
@@ -147,30 +148,51 @@ def contact_form():
         Field('your_name',requires=IS_NOT_EMPTY(), label=T('Your name')),
         Field('your_email',requires=IS_EMAIL(), label=T('Your email')),
         Field('subject',requires=IS_NOT_EMPTY(), label=T('Subject')),
+        Field('send_to', requires=IS_IN_DB(db, db.contact.id, '%(name)s', zero=T('<Please choose a value>')), label=T('Send to')),
         Field('message', 'text',requires=IS_NOT_EMPTY(), label=T('Message'))
         )
+    nb_contact = db(db.contact).count()
+    if nb_contact == 1:
+        a_contact = db(db.contact).select().first()
+        form.vars.send_to = a_contact
+        form.vars.send_to.readable = False
+
+    ## Uncomment here to add the captcha...
     #form.element('table').insert(-1,(T('Confirm that you are not a machine'),Recaptcha(request, public_key, private_key),''))
+
     if form.process().accepted:
-        message=T("""
-            Name : %s
-            Email : %s
-            Subject : %s
-            Message : %s
-        """) % (form.vars.your_name, form.vars.your_email, form.vars.subject, form.vars.message)
-        if mail.send(
-                    to=WEBSITE_PARAMETERS.contact_form_email,
-                    cc=WEBSITE_PARAMETERS.contact_form_cc if WEBSITE_PARAMETERS.contact_form_cc else '',
-                    bcc=WEBSITE_PARAMETERS.contact_form_bcc if WEBSITE_PARAMETERS.contact_form_bcc else '',
-                    subject=T('Question from %s on %s website') % (form.vars.your_name,WEBSITE_PARAMETERS.website_name),
-                    reply_to = form.vars.your_email,
-                    message = message):
-            response.flash = T('Your message has been sent. Thank you')
-            response.js = "jQuery('#%s').hide()" % request.cid
+        a_contact = db.contact(form.vars.send_to)
+        if nb_contact > 1:
+            mail_subject = T('Question from %s for %s on %s website') % (form.vars.your_name,a_contact.name,WEBSITE_PARAMETERS.website_name)
         else:
-            form.errors.your_email = T('Unable to send the email')
+            mail_subject = T('Question from %s on %s website') % (form.vars.your_name,WEBSITE_PARAMETERS.website_name)
+        if a_contact:
+            message=T("""
+                Name : %s
+                Email : %s
+                Subject : %s
+                Message : %s
+            """) % (form.vars.your_name, form.vars.your_email, form.vars.subject, form.vars.message)
+            if mail:
+                if mail.send(
+                            to=a_contact.contact_form_email,
+                            cc=a_contact.contact_form_cc if a_contact.contact_form_cc else '',
+                            bcc=a_contact.contact_form_bcc if a_contact.contact_form_bcc else '',
+                            subject=mail_subject,
+                            reply_to = form.vars.your_email,
+                            message = message):
+                    response.flash = T('Your message has been sent. Thank you')
+                    response.js = "jQuery('#%s').hide()" % request.cid
+                else:
+                    response.flash = T('Unable to send the email')
+            else:
+                response.flash = T('Unable to send the email : email parameters not defined')
+        else:
+            response.flash = T('Unable to send the email : no contact selected')
     return dict(form=form,
                 left_sidebar_enabled=True,
-                right_sidebar_enabled=True)
+                right_sidebar_enabled=True,
+                nb_contact=nb_contact)
 
 # def sitemap():
 #     # Import Regex

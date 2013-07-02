@@ -161,7 +161,7 @@ if not WEBSITE_PARAMETERS or not WEBSITE_PARAMETERS.last_fixture_date or WEBSITE
 			ajax=False,
 			ajax_trap=True
 		)
-		#newsletter comopnent didn't exist and was mandatorw for all pages. We apply it to all existing pages at this moment
+		#newsletter comopnent didn't exist and was mandatory for all pages. We apply it to all existing pages at this moment
 		pages=db(db.page)
 		if pages:
 			newsletter_component = db(db.page_component.name == 'newsletter.load').select().first()

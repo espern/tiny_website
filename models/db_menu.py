@@ -1,6 +1,6 @@
 #Things to be initialized before menu.py
 
-
+mail = None
 WEBSITE_PARAMETERS = db(db.website_parameters).select().first()
 
 if WEBSITE_PARAMETERS:

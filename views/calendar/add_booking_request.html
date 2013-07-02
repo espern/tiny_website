@@ -2,11 +2,9 @@
 <h1>{{=T('Calendar booking')}}</h1>
 <br />
 {{block left_sidebar}}
-	{{if WEBSITE_PARAMETERS.contact_address:}}
-		<div class="contact">
-			{{=LOAD('default', 'address.load', ajax=False)}}
-		</div>
-	{{pass}}
+	<div class="contact">
+		{{=LOAD('default', 'address.load', ajax=False)}}
+	</div>
 {{end}}
 
 {{=form}}
