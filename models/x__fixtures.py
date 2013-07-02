@@ -24,6 +24,13 @@ if not WEBSITE_PARAMETERS or not WEBSITE_PARAMETERS.last_fixture_date or WEBSITE
 	        description='Those who can edit the events participation...'
 	)
 
+	#Create a "news_manager" group
+	if db(db.auth_group.role == "news_manager").count() == 0:
+	    db.auth_group.insert(
+	        role='news_manager',
+	        description='Those who can edit the news...'
+	)
+
 	#Fixtures for mandatory content
 	component = db(db.page_component.name == 'photo_gallery.load').select().first()
 	component_description = 'Show random images of the photo gallery'

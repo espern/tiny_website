@@ -10,7 +10,7 @@ def news():
     return dict(newsS=newsS,
                 manager_toolbar=manager_toolbar)
 
-@auth.requires_membership('manager')
+@auth.requires(auth.has_membership('manager') or auth.has_membership('news_manager'))
 def edit_news():
     news = db.news(request.args(0))
     crud.settings.update_deletable=False
@@ -20,7 +20,7 @@ def edit_news():
         form = crud.create(db.news,URL('default','index'))
     return dict(news=news, form=form)
 
-@auth.requires_membership('manager')
+@auth.requires(auth.has_membership('manager') or auth.has_membership('news_manager'))
 def delete_news():
     news = db.news(request.args(0))
     if len(request.args) and news:  
