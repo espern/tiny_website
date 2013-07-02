@@ -15,6 +15,23 @@ signature = db.Table(db,'auth_signature',
 
 db._common_fields.append(signature) #db._common_fields is a list of fields that should belong to all the tables
 
+db.define_table('contact',
+    Field('name', label=T('Contact name')),
+    Field('trade_register_number', label=T('Trade register number')),
+    Field('description', 'text', label=T('Description')),
+    Field('address', 'text', label=T('Address')),
+    Field('google_maps_plan_url', 'text', label=T('Google maps plan url')),
+    Field('telephone', label=T('Telephone')),
+    Field('fax', label=T('Fax')),
+    Field('mobile', label=T('Mobile')),
+    Field('contact_form_email', label=T('Contact form email')),
+    Field('contact_form_cc', label=T('Contact form cc')),
+    Field('contact_form_bcc', label=T('Contact form cci'))
+)
+db.contact.contact_form_email.requires = IS_EMPTY_OR(IS_EMAIL())
+db.contact.contact_form_cc.requires = IS_EMPTY_OR(IS_EMAIL())
+db.contact.contact_form_bcc.requires = IS_EMPTY_OR(IS_EMAIL())
+
 db.define_table('website_parameters',
     Field('last_fixture_date', 'date', label=T('Last fixture date')),
     Field('website_name_long', label=T('Website name long')),
@@ -23,16 +40,6 @@ db.define_table('website_parameters',
     Field('website_subtitle', label=T('Website subtitle')),
     Field('website_url', label=T('Url')),
     Field('force_language', label=T('Force a language (en, it, es, fr, ...)')),
-    Field('contact_name', label=T('Contact name')),
-    Field('contact_trade_register_number', label=T('Trade register number')),
-    Field('contact_address', 'text', label=T('Address')),
-    Field('contact_google_maps_plan_url', 'text', label=T('Google maps plan url')),
-    Field('contact_telephone', label=T('Telephone')),
-    Field('contact_fax', label=T('Fax')),
-    Field('contact_mobile', label=T('Mobile')),
-    Field('contact_form_email', label=T('Contact form email')),
-    Field('contact_form_cc', label=T('Contact form cc')),
-    Field('contact_form_bcc', label=T('Contact form cci')),
     Field('booking_form_email', label=T('Booking form email')),
     Field('booking_form_cc', label=T('Booking form cc')),
     Field('booking_form_bcc', label=T('Booking form cci')),
@@ -61,9 +68,6 @@ db.define_table('website_parameters',
 ) 
 db.website_parameters.website_url.requires = IS_EMPTY_OR(IS_URL())
 db.website_parameters.mailserver_sender_mail.requires = IS_EMPTY_OR(IS_EMAIL())
-db.website_parameters.contact_form_email.requires = IS_EMPTY_OR(IS_EMAIL())
-db.website_parameters.contact_form_cc.requires = IS_EMPTY_OR(IS_EMAIL())
-db.website_parameters.contact_form_bcc.requires = IS_EMPTY_OR(IS_EMAIL())
 db.website_parameters.booking_form_email.requires = IS_EMPTY_OR(IS_EMAIL())
 db.website_parameters.booking_form_cc.requires = IS_EMPTY_OR(IS_EMAIL())
 db.website_parameters.booking_form_bcc.requires = IS_EMPTY_OR(IS_EMAIL())
