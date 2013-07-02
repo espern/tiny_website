@@ -47,7 +47,7 @@ if nb_files or auth.has_membership('manager'):
 
 nb_booking_requests = db(db.calendar_booking_request.is_confirmed==False).count(cache=(cache.ram,60))
 booking_menu = []
-if nb_booking_requests and auth.has_membership('booking_manager'):
+if nb_booking_requests and (auth.has_membership('manager') or auth.has_membership('booking_manager')):
 	booking_menu = [(T('Booking requests (%d)', nb_booking_requests), False, URL('calendar','edit_booking_requests'))]
 if booking_menu :
 	response.menu += [(T('Website management'), False, None, booking_menu)]

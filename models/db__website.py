@@ -145,6 +145,7 @@ db.define_table('file',
    Field('file', 'upload', uploadfolder=path.join(
         request.folder,'static','uploaded_files'
         ), notnull=True, autodelete=True, label=T('File')),
+   Field('protected', 'boolean', readable=True, writable=True, default=False, label=T('Protected (visible only for authorized users)')),
    Field('size', 'double', readable=False, writable=False, label=T('Size')),
    format='%(title)s'
    )

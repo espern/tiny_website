@@ -1,5 +1,3 @@
-#from gluon.debug import dbg
-
 def start_datetime(row):
     from datetime import datetime
 
