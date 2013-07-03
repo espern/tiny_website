@@ -20,7 +20,8 @@
 				<h3>{{=T('Miscellaneous')}}</h3>
 			{{pass}}	
 		{{pass}}
-			<div class="span3">
+			<div class="span">
+				<hr>
 				<p>
 					{{if auth.has_membership('manager'):}}
 						{{=manager_toolbar(file.id)}}
