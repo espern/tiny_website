@@ -93,7 +93,7 @@ def address():
     """
     Allows to access the "address" component
     """
-    contacts = db(db.contact).select()
+    contacts = db(db.contact.show_in_address_component == True).select()
     return dict(contacts=contacts)
 
 def newsletter():
@@ -148,12 +148,21 @@ def contact_form():
         Field('your_name',requires=IS_NOT_EMPTY(), label=T('Your name')),
         Field('your_email',requires=IS_EMAIL(), label=T('Your email')),
         Field('subject',requires=IS_NOT_EMPTY(), label=T('Subject')),
-        Field('send_to', requires=IS_IN_DB(db, db.contact.id, '%(name)s', zero=T('<Please choose a value>')), label=T('Send to')),
         Field('message', 'text',requires=IS_NOT_EMPTY(), label=T('Message'))
         )
-    nb_contact = db(db.contact).count()
+
+    contacts = db(db.contact.show_in_contact_form == True).select()
+    opt=[OPTION(contact.name, _value=contact.id) for contact in contacts]
+    sel = SELECT(opt,_id="%s_%s" % ('no_table', 'send_to'),
+                            _class='generic-widget', 
+                            _name='send_to'
+                        )
+    my_extra_element = TR(TD(LABEL(T('Send to')),_class='w2p_fl'),TD(sel,_class='w2p_fw'))
+    form[0].insert(-2,my_extra_element)
+    
+    nb_contact = len(contacts)
     if nb_contact == 1:
-        a_contact = db(db.contact).select().first()
+        a_contact = contacts[0]
         form.vars.send_to = a_contact
         form.vars.send_to.readable = False
 
@@ -191,8 +200,7 @@ def contact_form():
             response.flash = T('Unable to send the email : no contact selected')
     return dict(form=form,
                 left_sidebar_enabled=True,
-                right_sidebar_enabled=True,
-                nb_contact=nb_contact)
+                right_sidebar_enabled=True)
 
 # def sitemap():
 #     # Import Regex

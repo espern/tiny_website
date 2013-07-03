@@ -26,7 +26,9 @@ db.define_table('contact',
     Field('mobile', label=T('Mobile')),
     Field('contact_form_email', label=T('Contact form email')),
     Field('contact_form_cc', label=T('Contact form cc')),
-    Field('contact_form_bcc', label=T('Contact form cci'))
+    Field('contact_form_bcc', label=T('Contact form cci')),
+    Field('show_in_address_component', 'boolean', default=True, label=T('Show in address component')),
+    Field('show_in_contact_form', 'boolean', default=True, label=T('Show in contact form'))
 )
 db.contact.contact_form_email.requires = IS_EMPTY_OR(IS_EMAIL())
 db.contact.contact_form_cc.requires = IS_EMPTY_OR(IS_EMAIL())
