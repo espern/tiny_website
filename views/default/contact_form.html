@@ -2,11 +2,9 @@
 <h1>{{=T('Contact')}}</h1>
 <br />
 {{block left_sidebar}}
-	{{if nb_contact:}}
-		<div class="contact">
-			{{=LOAD('default', 'address.load', ajax=False)}}
-		</div>
-	{{pass}}
+	<div class="contact">
+		{{=LOAD('default', 'address.load', ajax=False)}}
+	</div>
 {{end}}
 {{=form}}
 <script>jQuery('textarea').css('width','400px').css('height','200px');</script>
