@@ -32,8 +32,10 @@
 		{{=manager_toolbar()}}
 		{{=manager_toolbar(page.id)}}
 	{{ pass }}
-	<h3>{{=page.subtitle}}</h3>
-	<hr>
+	{{if page.subtitle:}}
+		<h3>{{=page.subtitle}}</h3>
+		<hr>
+	{{pass}}
 	<div>{{=XML(page.content, sanitize=False)}}</div>
 	{{if pretty_date:}}
 		<hr>
