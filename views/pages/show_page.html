@@ -33,8 +33,10 @@
 		{{=manager_toolbar(page.id)}}
 	{{ pass }}
 	<h3>{{=page.subtitle}}</h3>
+	<hr>
 	<div>{{=XML(page.content, sanitize=False)}}</div>
 	{{if pretty_date:}}
+		<hr>
 		<div class="muted"><small>{{=T("Updated %s",pretty_date)}}</small></div>
 	{{pass}}
 </article>
