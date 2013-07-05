@@ -55,21 +55,19 @@
                     {{try:}}
                         {{if events_available_positions[row.id] != None:}}
                             {{if events_available_positions[row.id] > 0:}}
-                                tip: "{{=T('%d position(s) available', events_available_positions[row.id])}}",
-
+                                tip: "{{=row.title}}\n{{=T('%d position(s) available', events_available_positions[row.id])}}",
                             {{else:}}
-                                tip: "{{=T('No positions available')}}",
+                                tip: "{{=row.title}}\n{{=T('No positions available')}}",
                                 backgroundColor: "#FF0000",
                             {{pass}}
                         {{else:}}
-                            tip: "{{=T('Positions available')}}",
+                            tip: "{{=row.title}}\n{{=T('Positions available')}}",
                             backgroundColor: "#008000",
                         {{pass}}
                     {{except KeyError:}}
-                        tip: "{{=T('No informations available for this event')}}",
+                        tip: "{{=row.title}}\n{{=T('No informations available for this event')}}",
                         backgroundColor: "#FFFF00",
                     {{pass}}
-
                     title: '',
                     allDay: false,
                     {{if row.start_datetime:}}

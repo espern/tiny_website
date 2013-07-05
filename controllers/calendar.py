@@ -85,7 +85,7 @@ def add_booking_request():
        response.flash = T('form has errors')
     return dict(form=form,left_sidebar_enabled=True,right_sidebar_enabled=True)
 
-@auth.requires_membership('booking_manager')
+@auth.requires(auth.has_membership('manager') or auth.has_membership('booking_manager'))
 def edit_booking_requests():
     db.calendar_booking_request.is_confirmed.readable = db.calendar_booking_request.is_confirmed.writable = True
     db.calendar_booking_request.page.readable = db.calendar_booking_request.page.writable = True
@@ -103,6 +103,49 @@ def edit_booking_requests():
             tsv_with_hidden_cols=False,
             tsv=False)
     grid = SQLFORM.smartgrid(db.calendar_booking_request,
+                            linked_tables=linked_tables,
+                            exportclasses=exportclasses,
+                            orderby=orderby,
+                            fields=fields)
+    return dict(grid=grid)
+
+@auth.requires(auth.has_membership('manager') or auth.has_membership('event_manager'))
+def edit_events_calendar():
+    db.calendar_event.page.readable = db.calendar_event.page.writable = True
+    db.calendar_event.title.readable = db.calendar_event.title.writable = True
+    linked_tables=['page']
+    fields=[db.calendar_event.page,db.calendar_event.title,db.calendar_event.start_date, db.calendar_event.duration, db.calendar_event.nb_positions_available]
+    orderby = ~db.calendar_event.start_date
+    exportclasses=dict(
+            csv_with_hidden_cols=False,
+            xml=False,
+            html=False,
+            csv=False,
+            json=False,
+            tsv_with_hidden_cols=False,
+            tsv=False)
+    grid = SQLFORM.smartgrid(db.calendar_event,
+                            linked_tables=linked_tables,
+                            exportclasses=exportclasses,
+                            orderby=orderby,
+                            fields=fields)
+    return dict(grid=grid)
+
+@auth.requires(auth.has_membership('manager') or auth.has_membership('event_manager'))
+def edit_contacts_calendar():
+    db.calendar_contact.event.readable = db.calendar_contact.event.writable = True
+    linked_tables=['calendar_event']
+    fields=[db.calendar_contact.name,db.calendar_contact.email, db.calendar_contact.phone_number, db.calendar_contact.address, db.calendar_contact.event]
+    orderby = db.calendar_contact.name
+    exportclasses=dict(
+            csv_with_hidden_cols=False,
+            xml=False,
+            html=False,
+            csv=False,
+            json=False,
+            tsv_with_hidden_cols=False,
+            tsv=False)
+    grid = SQLFORM.smartgrid(db.calendar_contact,
                             linked_tables=linked_tables,
                             exportclasses=exportclasses,
                             orderby=orderby,
