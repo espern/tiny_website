@@ -17,7 +17,7 @@
 {{=form}}
 {{ if len(request.args) > 0: }}
 	<script type="text/javascript" src="{{=URL('static', 'nicEdit/nicEditComplete.js')}}"></script>
-	<script>jQuery('textarea').css('width','600px').css('height','50px');</script>
+	<script>jQuery('#page_content').css('width','600px').css('height','50px');</script>
 {{pass}}
 <script>
 	jQuery(document).ready(function(){
@@ -84,5 +84,7 @@
 			jQuery('#activate_wysiwyg').attr('class','inactive');
 			jQuery('#remove_wysiwyg').attr('class','active');
 			wysiwygfield.removeInstance("page_content");});
+		jQuery('input[type=submit]').click(function(){
+			wysiwygfield.panelInstance("page_content");});
 	});
 </script>
