@@ -30,19 +30,19 @@ if db(db.website_parameters.id > 0).count() == 0:
 #Create a default contact
 if db(db.contact.id > 0).count() == 0:
     db.contact.insert(
-    contact_name='John doe',
-    contact_trade_register_number='243 849 247 22 98',
-    contact_address="""
+    name='John doe',
+    trade_register_number='243 849 247 22 98',
+    address="""
     Route de l'aéroport 15
     1215 Geneva
     Switzerland
     """,
-    contact_google_maps_plan_url=r"""
+    google_maps_plan_url=r"""
     http://maps.google.fr/maps?q=Geneva+International+Airport,+Meyrin,+Suisse&hl=fr&ll=46.237328,6.10857&spn=0.038054,0.104628&sll=46.230084,6.126595&sspn=0.038059,0.104628&oq=geneva+ai&t=h&hq=Geneva+International+Airport,+Meyrin,+Suisse&z=14&iwloc=A                                                                                         
     """,
-    contact_telephone='123 456 789',                                                                                        
-    contact_fax='987 654 321',
-    contact_mobile='',                                                                        
+    telephone='123 456 789',                                                                                        
+    fax='987 654 321',
+    mobile='',                                                                        
     contact_form_email='user@test.com',
     contact_form_cc='',
     contact_form_bcc=''
