@@ -7,17 +7,25 @@
 	{{ pass }}
 </h3>
 
-{{prev_page=-1}}
+{{prev_page=None}}
 {{for file in files:}}
 		{{if file.page != prev_page:}}
-			{{if prev_page <> -1:}}
+			{{if prev_page <> None:}}
 				</div>
 			{{pass}}
 			<div class="span10 file-box">
 			{{if file.page:}}
-				<h3>{{=file.page.title}}</h3>
+				{{if file.protected:}}
+					<h3>{{=T('%s - Protected',file.page.title)}}</h3>
+				{{else:}}
+					<h3>{{=file.page.title}}</h3>
+				{{pass}}
 			{{else:}}
-				<h3>{{=T('Miscellaneous')}}</h3>
+				{{if file.protected:}}
+					<h3>{{=T('Protected')}}</h3>
+				{{else:}}
+					<h3>{{=T('Miscellaneous')}}</h3>
+				{{pass}}
 			{{pass}}	
 		{{pass}}
 			<div class="span">
@@ -45,7 +53,11 @@
 					</a>
 				</p>
 			</div>
-	{{prev_page = file.page}}
+	{{if file.protected:}}
+		{{prev_page = -1}}
+	{{else:}}
+		{{prev_page = file.page}}
+	{{pass}}
 {{pass}}
 {{if files:}}
 	</div>
