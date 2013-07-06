@@ -12,7 +12,7 @@ def files():
         q=(db.file)
     if db(q).isempty(): #if there are no files related to the page, we select all available files
         q=(db.file)
-    files = db(q).select(orderby=~db.file.id)
+    files = db(q).select(orderby=~db.file.protected|~db.file.id)
 
     if not (auth.has_membership('manager') or auth.has_membership('protected_files_access')):
         #restrict protected files for allowed users only
@@ -23,7 +23,7 @@ def files():
 
 def files_list():
     manager_toolbar = ManagerToolbar('file')
-    files = db(db.file).select(orderby=~db.file.id)
+    files = db(db.file).select(orderby=~db.file.protected|~db.file.id)
     
     if not (auth.has_membership('manager') or auth.has_membership('protected_files_access')):
         #restrict protected files for allowed users only
