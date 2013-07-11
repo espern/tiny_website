@@ -502,6 +502,8 @@
 'User %(id)s Profile updated': 'Utilisateur %(id)s profil mis à jour',
 'User %(id)s Registered': 'Utilisateur %(id)s enregistré',
 'User %(id)s Username retrieved': "Utilisateur %(id)s nom d'utilisateur retrouvé",
+'User can edit his password': "L'utilisateur peut moficier son mot de passe",
+'User can edit his profile': "L'utilisateur peut modifier son profil",
 'User ID': 'ID utilisateur',
 'User Voice': "Voix de l'utilisateur",
 'Username': "Nom d'utilisateur",

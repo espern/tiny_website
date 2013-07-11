@@ -39,6 +39,12 @@ from gluon.tools import Auth, Crud, Service, PluginManager, prettydate
 auth = Auth(db)
 crud, service, plugins = Crud(db), Service(), PluginManager()
 
+# Custom fields in auth
+auth.settings.extra_fields['auth_user']= [
+    Field('can_edit_password', 'boolean', default=True, label=T('User can edit his password')),
+    Field('can_edit_profile', 'boolean', default=True, label=T('User can edit his profile'))
+    ]
+
 ## create all tables needed by auth if not custom tables
 auth.define_tables(username=True, signature=False)
 
@@ -46,6 +52,11 @@ auth.define_tables(username=True, signature=False)
 auth.settings.registration_requires_verification = False
 auth.settings.registration_requires_approval = False
 auth.settings.reset_password_requires_verification = True
+if auth.user:
+    if not auth.user.can_edit_password:
+        auth.settings.actions_disabled.append('change_password')
+    if not auth.user.can_edit_profile:
+        auth.settings.actions_disabled.append('profile')
 
 ## if you need to use OpenID, Facebook, MySpace, Twitter, Linkedin, etc.
 ## register with janrain.com, write your domain:api_key in private/janrain.key
