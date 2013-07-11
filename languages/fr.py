@@ -237,6 +237,7 @@
 'Hello World': 'Bonjour le monde',
 'Home': 'Accueil',
 'How did you get here?': 'Comment êtes-vous arrivé ici?',
+'How many images shall we show in photo gallery?': "Combien d'images doit-on afficher dans la gallerie photo?",
 'How many old news (date < current date) shall we show?': "Combien d'anciennes news (date < date courante) doit-on afficher?",
 'HTML': 'HTML',
 'HTML view': 'Vue HTML',
