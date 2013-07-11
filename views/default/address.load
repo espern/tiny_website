@@ -17,7 +17,7 @@
 				{{pass}}
 				</p>
 			{{pass}}
-			{{if contact.address or contact.telephone or contact.fax:}}
+			{{if contact.address or contact.telephone or contact.fax or contact.website or contact.email:}}
 				<address>
 					{{if contact.address:}}
 						<p>
@@ -31,6 +31,12 @@
 					{{pass}}
 					{{if contact.fax:}}
 						<div class="blueText">{{=T('Fax : ')}}{{=contact.fax}}</div>
+					{{pass}}
+					{{if contact.website:}}
+						<div>{{=A(contact.website, _href=contact.website)}}</div>
+					{{pass}}
+					{{if contact.email:}}
+						<div>{{=A(contact.email, _href='mailto:'+contact.email)}}</div>
 					{{pass}}
 				</address>
 			{{pass}}

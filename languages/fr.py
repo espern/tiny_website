@@ -512,6 +512,7 @@
 'Verify Password': 'Vérifiez le mot de passe',
 'Videos': 'Vidéos',
 'View': 'Voir',
+'Website': 'Site Internet',
 'Website administration': 'Administration du site',
 'Website created with ': 'Site créé avec ',
 'Website management': 'Gestion du site Internet',
