@@ -7,7 +7,12 @@ def calendar_booking():
     from calendar_tools import month_list, shortmonth_list, day_list, shortday_list
 
     page = db.page(request.vars.container_id)
-    rows = db(db.calendar_booking_request.page==page)(db.calendar_booking_request.is_confirmed==True).select()
+    if page.is_index:
+        #Index page : we show all booking requests
+        r=db.calendar_booking_request.id > 0
+    else:
+        r=db.calendar_booking_request.page==page
+    rows = db()(db.calendar_booking_request.is_confirmed==True).select()
 
     #dbg.set_trace()
     return dict(rows=rows,
@@ -32,7 +37,12 @@ def calendar_event():
         return event_nb_positions_available - db(db.calendar_contact.event==event_id).count()
 
     page = db.page(request.vars.container_id)
-    rows = db(db.calendar_event.page==page).select()
+    if page.is_index:
+        #Index page : we show all booking requests
+        r=db.calendar_event.id > 0
+    else:
+        r=db.calendar_event.page==page
+    rows = db(r).select()
     events_available_positions = dict((event.id, get_available_positions(event.id, event.nb_positions_available)) for event in rows)
     return dict(rows=rows,
                 page=page,
