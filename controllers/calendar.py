@@ -124,6 +124,7 @@ def edit_events_calendar():
     db.calendar_event.page.readable = db.calendar_event.page.writable = True
     db.calendar_event.title.readable = db.calendar_event.title.writable = True
     db.calendar_event.description.readable = db.calendar_event.description.writable = True
+    db.calendar_event.duration.readable = db.calendar_event.duration.writable = False
     linked_tables=['page']
     fields=[db.calendar_event.page,db.calendar_event.title,db.calendar_event.start_date, db.calendar_event.duration, db.calendar_event.nb_positions_available]
     orderby = ~db.calendar_event.start_date

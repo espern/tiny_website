@@ -20,7 +20,7 @@ db.define_table('calendar_event',
    format=lambda r: T('%s on %s') %(r.title, r.start_date.strftime('%d/%m/%Y'))
    )
 db.calendar_event.page.requires = IS_IN_DB(db,db.page.id, '%(title)s', zero=T('<Empty>'))
-db.calendar_event.duration.requires = IS_IN_DB(db,db.calendar_duration.id, '%(name)s', zero=T('<Empty>'))
+db.calendar_event.duration.requires = IS_NULL_OR(IS_IN_DB(db,db.calendar_duration.id, '%(name)s', zero=T('<Empty>')))
 
 
 db.define_table('calendar_contact',

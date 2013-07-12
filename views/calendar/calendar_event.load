@@ -89,3 +89,9 @@
     });
 </script>
 <div id='calendar'></div>
+{{if len(rows):}}
+    <div id="showform">
+        {{=A(T('I am interested%s','' if page.is_index else T(' in : %s', page.title)), _href=URL('default', 'contact_form', extension=False), _class="btn btn-primary")}}
+    </div>
+    <hr>
+{{pass}}
