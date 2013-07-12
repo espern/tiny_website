@@ -6,7 +6,7 @@ def photo_gallery():
     """
     import random
     manager_toolbar = ManagerToolbar('image')
-    MAX_IMAGES = 2
+    MAX_IMAGES = WEBSITE_PARAMETERS.max_gallery_images_to_show if WEBSITE_PARAMETERS.max_gallery_images_to_show is not None else 5
     page = db.page(request.vars.container_id)
     if page:
         q=(db.image.show_in_gallery==1) & (db.image.page==page)
@@ -15,8 +15,8 @@ def photo_gallery():
     if db(q).isempty(): #if there are no images related to the page, we select all available images
         q=(db.image.show_in_gallery==1)
     images = sorted(db(q).select(cache=(cache.ram, 60), cacheable=True), key=lambda *args: random.random())[:MAX_IMAGES]
-    return dict(enum_images=enumerate(images),
-                MAX_IMAGES=MAX_IMAGES,
+    
+    return dict(images=images,
                 manager_toolbar=manager_toolbar)
 
 
@@ -66,8 +66,10 @@ def edit_image():
 
 def images():
     manager_toolbar = ManagerToolbar('image')
-    images = db(db.image).select(orderby=db.image.page)
+    images = db(db.image).select(cache=(cache.ram, 60), cacheable=True, orderby=db.image.page)
+    pages = list(set([i.page for i in images]))
     return dict(images=images,
+                pages=pages,
                 manager_toolbar=manager_toolbar)
 
 def __makeThumbnail(dbtable,ImageID,image_size=(600,600), thumbnail_size=(260,260)):
