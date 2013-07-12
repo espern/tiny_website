@@ -28,6 +28,11 @@ def files_list():
     if not (auth.has_membership('manager') or auth.has_membership('protected_files_access')):
         #restrict protected files for allowed users only
         files = [f for f in files if not f.protected]
+    else:
+        #Group all protected files on the same "virtual" page
+        for index, f in enumerate(files):
+            if f.protected:
+                files[index].page = -1
     return dict(files=files,
                 sizeof_file=sizeof_file,
                 manager_toolbar=manager_toolbar)

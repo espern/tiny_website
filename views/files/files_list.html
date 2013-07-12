@@ -14,7 +14,7 @@
 				</div>
 			{{pass}}
 			<div class="span10 file-box">
-			{{if file.page:}}
+			{{if file.page > 0:}}
 				{{if file.protected:}}
 					<h3>{{=T('%s - Protected',file.page.title)}}</h3>
 				{{else:}}
@@ -53,11 +53,7 @@
 					</a>
 				</p>
 			</div>
-	{{if file.protected:}}
-		{{prev_page = -1}}
-	{{else:}}
-		{{prev_page = file.page}}
-	{{pass}}
+	{{prev_page = file.page}}
 {{pass}}
 {{if files:}}
 	</div>
