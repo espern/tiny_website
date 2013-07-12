@@ -3,23 +3,54 @@
 		{{ =T('Photo gallery') }}
 		{{if auth.has_membership('manager'):}}
 			{{=manager_toolbar(container_id=request.vars.container_id)}}
-		{{ pass }}
+		{{pass}}
 	</h3>
-
-	<div id="myCarousel" class="carousel slide">
+	<div id="myCarousel{{=request.vars.container_id}}" class="carousel slide">
 		<!--<ol class="carousel-indicators">
-			{{for carousel_indicator in carousel_indicators:}}
-				{{=XML(carousel_indicator)}}
+			{{for index,image in enumerate(images):}}
+				<li data-target="#myCarousel{{=request.vars.container_id}}" data-slide-to="{{=index}}"{{if index==0:}} class="active"{{pass}}></li>
 			{{pass}}
 		</ol>-->
 		<!-- Carousel items -->
 		<div class="carousel-inner">
-			{{for carousel_inner in carousel_inners:}}
-				{{=XML(carousel_inner)}}
+			{{for index,image in enumerate(images):}}
+				{{if index==0:}}
+					<div class="item active">
+				{{else:}}	
+					<div class="item">
+				{{pass}}
+						<div class="modal hide" id="image{{=index}}">
+							<div class="modal-header"> <a class="close" data-dismiss="modal">×</a>
+								<h2>{{=image.name}}</h2>
+								<p>
+									<h5>{{=image.comment}}</h5>
+								</p>
+							</div>
+								<div class="modal-body">
+									<img src="{{=URL('static','images/photo_gallery/%s' %(image.file))}}">
+								</div>
+								<div class="modal-footer"> <a class="btn btn-info" data-dismiss="modal">{{=T('Close')}}</a></div>
+						</div>
+						<div>
+							{{if auth.has_membership('manager'):}}
+								{{=manager_toolbar(image.id)}}
+							{{pass}}
+							<p>
+								<a data-toggle="modal" href="#image{{=index}}">
+									<img src="{{=URL('static','images/photo_gallery/thumbs/%s' %(image.thumb))}}">
+								</a>
+							</p>
+						</div>
+						{{if image.name:}}
+							<div class="carousel-caption">
+								<h4>{{=image.name}}</h4>
+							</div>
+						{{pass}}
+					</div>
 			{{pass}}
 		</div>
 		<!-- Carousel nav -->
-		<a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-		<a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+		<a class="left carousel-control" href="#myCarousel{{=request.vars.container_id}}" data-slide="prev">&lsaquo;</a>
+		<a class="right carousel-control" href="#myCarousel{{=request.vars.container_id}}" data-slide="next">&rsaquo;</a>
 	</div>
 </aside>

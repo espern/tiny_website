@@ -15,54 +15,8 @@ def photo_gallery():
     if db(q).isempty(): #if there are no images related to the page, we select all available images
         q=(db.image.show_in_gallery==1)
     images = sorted(db(q).select(cache=(cache.ram, 60), cacheable=True), key=lambda *args: random.random())[:MAX_IMAGES]
-    indicator_html = '<li data-target="#myCarousel" data-slide-to="%d" %s></li>'
-    carousel_indicators=[indicator_html %(index,'class="active"' if index==0 else '') 
-                            for index,image in enumerate(images)
-                        ]
-    inner_html = """
-    <div class="item%s">
-        <div class="modal hide" id="image%d">
-            <div class="modal-header"> <a class="close" data-dismiss="modal">×</a>
-                <h2>%s</h2>
-                <p>
-                    <h5>%s</h5>
-                </p>
-            </div>
-                <div class="modal-body">
-                    <img src="%s">
-            </div>
-            <div class="modal-footer"> <a class="btn btn-info" data-dismiss="modal">%s</a></div>
-        </div>
-        <div>
-            %s
-            <p>
-                <a data-toggle="modal" href="#image%d">
-                    <img src="%s">
-                </a>
-            </p>
-        </div>
-        <div class="carousel-caption">
-            <h4>%s</h4>
-            <p>%s</p>
-        </div>
-    </div>
-    """
-    carousel_inners=[inner_html %(' active' if index==0 else '',
-                        index,
-                        image.name,
-                        image.comment,
-                        URL('static','images/photo_gallery/%s' %(image.file)),
-                        T('Close'),
-                        manager_toolbar(image.id) if auth.has_membership('manager') else '',
-                        index,
-                        URL('static','images/photo_gallery/thumbs/%s' %(image.thumb)),
-                        image.name,
-                        image.comment
-                    )
-                    for index,image in enumerate(images)   
-                ]
-    return dict(carousel_indicators=carousel_indicators,
-                carousel_inners=carousel_inners,
+    
+    return dict(images=images,
                 manager_toolbar=manager_toolbar)
 
 
@@ -112,7 +66,7 @@ def edit_image():
 
 def images():
     manager_toolbar = ManagerToolbar('image')
-    images = db(db.image).select(orderby=db.image.page)
+    images = db(db.image).select(cache=(cache.ram, 60), cacheable=True, orderby=db.image.page)
     return dict(images=images,
                 manager_toolbar=manager_toolbar)
 
