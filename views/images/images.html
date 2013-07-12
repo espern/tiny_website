@@ -1,49 +1,55 @@
 {{extend 'layout.html'}}
-
-<div class="container">
-    <div class="row">
-		<div class="span8 offset2">
-			<h3>
-				{{ =T('Photo gallery') }}
-				{{if auth.has_membership('manager'):}}
-					{{=manager_toolbar()}}
-				{{ pass }}
-			</h3>
-			<div id="myCarousel{{=request.vars.container_id}}" class="carousel slide">
-				<!--<ol class="carousel-indicators">
-					{{for index,image in enumerate(images):}}
-						<li data-target="#myCarousel{{=request.vars.container_id}}" data-slide-to="{{=index}}"{{if index==0:}} class="active"{{pass}}></li>
-					{{pass}}
-				</ol>-->
-				<!-- Carousel items -->
-				<div class="carousel-inner">
-					{{for index,image in enumerate(images):}}
-						{{if index==0:}}
-							<div class="item active">
-						{{else:}}	
-							<div class="item">
+<h3>
+	{{ =T('Photo gallery') }}
+	{{if auth.has_membership('manager'):}}
+		{{=manager_toolbar()}}
+	{{ pass }}
+</h3>
+{{for page in pages:}}
+	<div class="container">
+	    <div class="row">
+			<div class="span8 offset2 image-box">
+				{{if page:}}
+					<h3>{{=page.title}}</h3>
+				{{else:}}
+					<h3>{{=T('Miscellaneous')}}</h3>
+				{{pass}}
+				<div id="myCarousel{{=request.vars.container_id}}" class="carousel slide">
+					<!--<ol class="carousel-indicators">
+						{{for index,image in enumerate(images):}}
+							<li data-target="#myCarousel{{=request.vars.container_id}}" data-slide-to="{{=index}}"{{if index==0:}} class="active"{{pass}}></li>
 						{{pass}}
-							{{if auth.has_membership('manager'):}}
-								{{=manager_toolbar(image.id)}}
+					</ol>-->
+					<!-- Carousel items -->
+					<div class="carousel-inner">
+						{{for index,image in enumerate(images):}}
+							{{if index==0:}}
+								<div class="item active">
+							{{else:}}	
+								<div class="item">
 							{{pass}}
-								<img src="{{=URL('static','images/photo_gallery/%s' %(image.file))}}">
-								{{if image.name or image.comment:}}
-									<div class="carousel-caption">
-										{{if image.name:}}
-											<h4>{{=image.name}}</h4>
-										{{pass}}
-										{{if image.comment:}}
-											<p>{{=image.comment}}</p>
-										{{pass}}
-									</div>
+								{{if auth.has_membership('manager'):}}
+									{{=manager_toolbar(image.id)}}
 								{{pass}}
-							</div>
-					{{pass}}
+									<img src="{{=URL('static','images/photo_gallery/%s' %(image.file))}}">
+									{{if image.name or image.comment:}}
+										<div class="carousel-caption">
+											{{if image.name:}}
+												<h4>{{=image.name}}</h4>
+											{{pass}}
+											{{if image.comment:}}
+												<p>{{=image.comment}}</p>
+											{{pass}}
+										</div>
+									{{pass}}
+								</div>
+						{{pass}}
+					</div>
+					<!-- Carousel nav -->
+					<a class="left carousel-control" href="#myCarousel{{=request.vars.container_id}}" data-slide="prev">&lsaquo;</a>
+					<a class="right carousel-control" href="#myCarousel{{=request.vars.container_id}}" data-slide="next">&rsaquo;</a>
 				</div>
-				<!-- Carousel nav -->
-				<a class="left carousel-control" href="#myCarousel{{=request.vars.container_id}}" data-slide="prev">&lsaquo;</a>
-				<a class="right carousel-control" href="#myCarousel{{=request.vars.container_id}}" data-slide="next">&rsaquo;</a>
 			</div>
 		</div>
 	</div>
-</div>
+{{pass}}

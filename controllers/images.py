@@ -67,7 +67,9 @@ def edit_image():
 def images():
     manager_toolbar = ManagerToolbar('image')
     images = db(db.image).select(cache=(cache.ram, 60), cacheable=True, orderby=db.image.page)
+    pages = list(set([i.page for i in images]))
     return dict(images=images,
+                pages=pages,
                 manager_toolbar=manager_toolbar)
 
 def __makeThumbnail(dbtable,ImageID,image_size=(600,600), thumbnail_size=(260,260)):
