@@ -157,19 +157,15 @@ def contact_form():
                             _class='generic-widget', 
                             _name='send_to'
                         )
-    my_extra_element = TR(TD(LABEL(T('Send to')),_class='w2p_fl'),TD(sel,_class='w2p_fw'))
+    my_extra_element = TR(TD(LABEL(T('Send to')),_class='w2p_fl'),TD(sel,_class='w2p_fw'), _id="no_table_send_to__row")
     form[0].insert(-2,my_extra_element)
-    
-    nb_contact = len(contacts)
-    if nb_contact == 1:
-        a_contact = contacts[0]
-        form.vars.send_to = a_contact
-        form.vars.send_to.readable = False
-
+    nb_contact=len(contacts)
     ## Uncomment here to add the captcha...
     #form.element('table').insert(-1,(T('Confirm that you are not a machine'),Recaptcha(request, public_key, private_key),''))
 
     if form.process().accepted:
+        from gluon.debug import dbg
+        dbg.set_trace()
         a_contact = db.contact(form.vars.send_to)
         if nb_contact > 1:
             mail_subject = T('Question from %s for %s on %s website') % (form.vars.your_name,a_contact.name,WEBSITE_PARAMETERS.website_name)
@@ -199,6 +195,7 @@ def contact_form():
         else:
             response.flash = T('Unable to send the email : no contact selected')
     return dict(form=form,
+                nb_contact=nb_contact,
                 left_sidebar_enabled=True,
                 right_sidebar_enabled=True)
 

@@ -491,6 +491,7 @@
 'Tuesday': 'Mardi',
 'unable to parse csv file': "incapable d'analyser le fichier cvs",
 'Unable to send the email : email parameters not defined': "Impossible d'envoyer l'e-mail : paramètres mail non définis",
+'Unable to send the email : no contact selected': "Impossible d'envoyer l'e-mail : aucun contact sélectionné",
 'Update current %(object)s': "Modifiler l'objet %(object)s",
 'Update current file': 'Modifier le fichier',
 'Update current image': "Modifier l'image",

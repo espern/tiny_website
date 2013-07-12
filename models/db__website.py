@@ -24,14 +24,16 @@ db.define_table('contact',
     Field('telephone', label=T('Telephone')),
     Field('fax', label=T('Fax')),
     Field('mobile', label=T('Mobile')),
-    Field('website', label=T('Website'), requires=IS_URL()),
-    Field('email', label=T('Email'), requires=IS_EMAIL()),
+    Field('website', label=T('Website')),
+    Field('email', label=T('Email')),
     Field('contact_form_email', label=T('Contact form email')),
     Field('contact_form_cc', label=T('Contact form cc')),
     Field('contact_form_bcc', label=T('Contact form cci')),
     Field('show_in_address_component', 'boolean', default=True, label=T('Show in address component')),
     Field('show_in_contact_form', 'boolean', default=True, label=T('Show in contact form'))
 )
+db.contact.website.requires = IS_EMPTY_OR(IS_URL())
+db.contact.email.requires = IS_EMPTY_OR(IS_EMAIL())
 db.contact.contact_form_email.requires = IS_EMPTY_OR(IS_EMAIL())
 db.contact.contact_form_cc.requires = IS_EMPTY_OR(IS_EMAIL())
 db.contact.contact_form_bcc.requires = IS_EMPTY_OR(IS_EMAIL())

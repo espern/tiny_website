@@ -8,3 +8,6 @@
 {{end}}
 {{=form}}
 <script>jQuery('textarea').css('width','400px').css('height','200px');</script>
+{{if nb_contact==1:}}
+	<script>$("#no_table_send_to__row").hide();</script>
+{{pass}}
