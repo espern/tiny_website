@@ -164,8 +164,6 @@ def contact_form():
     #form.element('table').insert(-1,(T('Confirm that you are not a machine'),Recaptcha(request, public_key, private_key),''))
 
     if form.process().accepted:
-        from gluon.debug import dbg
-        dbg.set_trace()
         a_contact = db.contact(form.vars.send_to)
         if nb_contact > 1:
             mail_subject = T('Question from %s for %s on %s website') % (form.vars.your_name,a_contact.name,WEBSITE_PARAMETERS.website_name)

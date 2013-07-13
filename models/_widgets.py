@@ -24,7 +24,6 @@ class HierarchicalSelect(object):
         self.options.append((None, T('<Empty>'))) #add root node
 
         [self._childs_list(field,0) for field in self.rows.find(lambda row: row.parent < 1)] 
-
         opt=[OPTION(name, _value=key) for key,name in self.options]
         sel = SELECT(opt,_id="%s_%s" % (self.tablename, self.fieldname),
                         _class=self.type, 

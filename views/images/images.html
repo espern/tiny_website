@@ -14,10 +14,10 @@
 				{{else:}}
 					<h3>{{=T('Miscellaneous')}}</h3>
 				{{pass}}
-				<div id="myCarousel{{=page.id}}" class="carousel slide">
+				<div id="myCarousel{{=page.id if page else 0}}" class="carousel slide">
 					<!--<ol class="carousel-indicators">
 						{{for index,image in enumerate(images):}}
-							<li data-target="#myCarousel{{=page.id}}" data-slide-to="{{=index}}"{{if index==0:}} class="active"{{pass}}></li>
+							<li data-target="#myCarousel{{=page.id if page else 0}}" data-slide-to="{{=index}}"{{if index==0:}} class="active"{{pass}}></li>
 						{{pass}}
 					</ol>-->
 					<!-- Carousel items -->
@@ -46,8 +46,8 @@
 						{{pass}}
 					</div>
 					<!-- Carousel nav -->
-					<a class="left carousel-control" href="#myCarousel{{=page.id}}" data-slide="prev">&lsaquo;</a>
-					<a class="right carousel-control" href="#myCarousel{{=page.id}}" data-slide="next">&rsaquo;</a>
+					<a class="left carousel-control" href="#myCarousel{{=page.id if page else 0}}" data-slide="prev">&lsaquo;</a>
+					<a class="right carousel-control" href="#myCarousel{{=page.id if page else 0}}" data-slide="next">&rsaquo;</a>
 				</div>
 			</div>
 		</div>
