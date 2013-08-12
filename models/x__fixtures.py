@@ -51,7 +51,7 @@ if not WEBSITE_PARAMETERS or not WEBSITE_PARAMETERS.last_fixture_date or WEBSITE
 			controller='images',
 			name='photo_gallery.load',
 			description=component_description,
-			ajax=False,
+			ajax=True,
 			ajax_trap=False
 		)
 
