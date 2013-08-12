@@ -43,7 +43,7 @@
   <!-- include stylesheets -->
   {{  
   response.files.append(URL('static','css/web2py.css'))
-  if WEBSITE_PARAMETERS.custom_bootstrap_css_file:
+  if WEBSITE_PARAMETERS and WEBSITE_PARAMETERS.custom_bootstrap_css_file:
     response.files.append(URL('static','css/%s' %WEBSITE_PARAMETERS.custom_bootstrap_css_file))
   else:
     response.files.append(URL('static','css/bootstrap.min.css'))
