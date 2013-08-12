@@ -1,5 +1,5 @@
 {{if len(contacts) > 0:}}
-	<aside>
+	<div>
 		{{if len(contacts) == 1:}}
 			<p><h3>{{=T('Address')}}</h3></p>
 		{{else:}}
@@ -48,5 +48,5 @@
 			{{pass}}
 		</div>
 		{{pass}}
-	</aside>
+	</div>
 {{pass}}
