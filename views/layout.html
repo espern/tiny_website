@@ -43,7 +43,11 @@
   <!-- include stylesheets -->
   {{  
   response.files.append(URL('static','css/web2py.css'))
-  response.files.append(URL('static','css/bootstrap.min.css'))
+  if WEBSITE_PARAMETERS.custom_bootstrap_css_file:
+    response.files.append(URL('static','css/%s' %WEBSITE_PARAMETERS.custom_bootstrap_css_file))
+  else:
+    response.files.append(URL('static','css/bootstrap.min.css'))
+  pass
   response.files.append(URL('static','css/bootstrap-responsive.min.css'))
   response.files.append(URL('static','css/web2py_bootstrap.css'))
   response.files.append(URL('static','css/x_application.css'))
