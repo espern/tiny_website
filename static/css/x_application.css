@@ -107,7 +107,7 @@ You can override these rules in x_application_custom.css*/
 }
 
 article, aside, .image-box, .file-box{
-	background-color: rgb(255,255,255);
+	/*background-color: rgb(255,255,255);*/
 	box-shadow: 0px 2px 5px #1c1a19;
 	border-radius: 5px;
 	padding: 15px;
@@ -125,7 +125,7 @@ article, aside, .image-box, .file-box{
 
 #footer-content{
 	width: 25%;
-	background-color: rgb(255,255,255);
+	/*background-color: rgb(255,255,255);*/
 	position: relative;
 	padding: 0px;
 	box-shadow: 0px 0px 1px #1c1a19;
@@ -133,7 +133,7 @@ article, aside, .image-box, .file-box{
 }
 #contact{
 	width: 25%;
-	background-color: rgb(255,255,255);
+	/*background-color: rgb(255,255,255);*/
 	position: relative;
 	padding: 5px;
 	box-shadow: 0px 0px 1px #1c1a19;
@@ -141,7 +141,7 @@ article, aside, .image-box, .file-box{
 }
 #newsletter{
 	width: 25%;
-	background-color: rgb(255,255,255);
+	/*background-color: rgb(255,255,255);*/
 	position: relative;
 	padding: 5px;
 	box-shadow: 0px 0px 1px #1c1a19;
@@ -149,7 +149,7 @@ article, aside, .image-box, .file-box{
 }
 #miscellaneous{
 	width: 25%;
-	background-color: rgb(255,255,255);
+	/*background-color: rgb(255,255,255);*/
 	position: relative;
 	padding: 5px;
 	box-shadow: 0px 0px 1px #1c1a19;
