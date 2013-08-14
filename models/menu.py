@@ -16,7 +16,7 @@ from menu_tools import HierarchicalMenu
 if WEBSITE_PARAMETERS:
 	if WEBSITE_PARAMETERS.add_website_name_as_logo:
 		website_name=[XML(c) if c.islower() else B(c) for c in WEBSITE_PARAMETERS.website_name]
-		response.logo = A(website_name,_class="brand",_href=URL('default','index'))
+		response.logo = A(website_name,_class="brand",_href=URL('pages','show_page'))
 	if WEBSITE_PARAMETERS.website_title:
 		response.title = WEBSITE_PARAMETERS.seo_website_title
 	if WEBSITE_PARAMETERS.website_subtitle:
