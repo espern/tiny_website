@@ -28,7 +28,7 @@
 
 {{if page and page.content:}}
 <article>
-	{{if page.subtitle:}}
+	{{if page.subtitle or auth.has_membership('manager'):}}
 		<h3>
 			{{=page.subtitle}}
 			{{if auth.has_membership('manager'):}}
