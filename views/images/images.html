@@ -1,9 +1,9 @@
 {{extend 'layout.html'}}
 <h3>
-	{{ =T('Photo gallery') }}
+	{{=T('Photo gallery')}}
 	{{if auth.has_membership('manager'):}}
 		{{=manager_toolbar()}}
-	{{ pass }}
+	{{pass}}
 </h3>
 {{for page in pages:}}
 	<div class="container">

@@ -1,10 +1,11 @@
 <aside>
 	<h3>
-		{{ =T('Photo gallery') }}
+		{{=T('Photo gallery')}}
 		{{if auth.has_membership('manager'):}}
 			{{=manager_toolbar(container_id=request.vars.container_id)}}
 		{{pass}}
 	</h3>
+	<hr>
 	<div id="myCarousel{{=request.vars.container_id}}" class="carousel slide">
 		<!--<ol class="carousel-indicators">
 			{{for index,image in enumerate(images):}}

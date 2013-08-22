@@ -1,10 +1,10 @@
 {{extend 'layout.html'}}
 
 <h3>
-	{{ =T('Files to download') }}
+	{{=T('Files to download')}}
 	{{if auth.has_membership('manager'):}}
 		{{=manager_toolbar()}}
-	{{ pass }}
+	{{pass}}
 </h3>
 
 {{prev_page=None}}
@@ -31,9 +31,6 @@
 			<div class="span">
 				<hr>
 				<p>
-					{{if auth.has_membership('manager'):}}
-						{{=manager_toolbar(file.id)}}
-					{{ pass }}
 					<a href={{=URL('default', 'download', args=file.file)}}>
 						{{if file.protected:}}
 							<div class="protected">
@@ -47,6 +44,9 @@
 									{{if file.size:}}
 										({{=sizeof_file(file.size)}})
 									{{pass}}
+									{{if auth.has_membership('manager'):}}
+										{{=manager_toolbar(file.id)}}
+									{{ pass }}
 								</h4>
 							<h5>{{=file.comment}}</h5>
 						</div>

@@ -74,12 +74,14 @@ class ManagerToolbar():
         if _id > 0:
             self.update_url=URL('edit_'+self.object_name, args=_id, extension=False) #extension=False to avoid having a .load extension from inside a controller
             self.delete_url=URL('delete_'+self.object_name, args=_id, extension=False)
-            self.toolbar=A(IMG(_src=URL('static/images','edit-icon.png'),
-                _alt=self.update_label, _title=self.update_label),_href= self.update_url)
-            self.toolbar+=A(IMG(_src=URL('static/images','delete-icon.png'), _alt=self.delete_label,
+            self.toolbar=A(I('',_class='icon-edit icon-large icon-border',
+                _title=self.update_label),_href= self.update_url)
+            self.toolbar+=A(I('',_class='icon-remove icon-large icon-border',
                 _title=self.delete_label),_href=self.delete_url)
+            
+            
         else:
             self.add_url=URL('edit_'+self.object_name, vars=dict(container_id=container_id), extension=False) #extension=False to avoid having a .load extension from inside a controller
-            self.toolbar=A(IMG(_src=URL('static/images','add-icon.png'),
-                _alt=self.add_label, _title=self.add_label),_href=self.add_url)
+            self.toolbar=A(I('',_class='icon-plus icon-large icon-border',
+                _title=self.add_label),_href=self.add_url)
         return self.toolbar

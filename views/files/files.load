@@ -14,9 +14,6 @@
 			{{pass}}
 				<hr>
 				<p>
-					{{if auth.has_membership('manager'):}}
-						{{=manager_toolbar(file.id)}}
-					{{ pass }}
 					<a href={{=URL('default', 'download', args=file.file)}}>
 						<div>
 							<h4>
@@ -28,6 +25,9 @@
 								{{if file.size:}}
 									({{=sizeof_file(file.size)}})
 								{{pass}}
+								{{if auth.has_membership('manager'):}}
+									{{=manager_toolbar(file.id)}}
+								{{ pass }}
 							</h4>
 							<h5>{{=file.comment}}</h5>
 						</div>
