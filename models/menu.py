@@ -47,10 +47,9 @@ if nb_files or auth.has_membership('manager'):
 
 nb_booking_requests = db(db.calendar_booking_request.is_confirmed==False).count(cache=(cache.ram,60))
 management_menu = []
-if nb_booking_requests and (auth.has_membership('manager') or auth.has_membership('booking_manager')):
+if WEBSITE_PARAMETERS.show_booking_menu and nb_booking_requests and (auth.has_membership('manager') or auth.has_membership('booking_manager')):
 	management_menu += [(T('Booking requests (%d)', nb_booking_requests), False, URL('calendar','edit_booking_requests'))]
-page_with_event_calendar = 1
-if page_with_event_calendar and (auth.has_membership('manager') or auth.has_membership('event_manager')):
+if WEBSITE_PARAMETERS.show_event_menu and (auth.has_membership('manager') or auth.has_membership('event_manager')):
 	management_menu += [(T('Events calendar'), False, URL('calendar','edit_events_calendar'))]
 	management_menu += [(T('Contacts calendar'), False, URL('calendar','edit_contacts_calendar'))]
 if management_menu :

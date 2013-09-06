@@ -440,6 +440,8 @@
 'Sep': 'Sept',
 'September': 'Septembre',
 'Show a banner': 'Afficher une bannière',
+'Show booking menu': 'Afficher le menu réservation',
+'Show event menu': 'Afficher le menu évènement',
 'Show in address component': 'Afficher dans le composant Adresse',
 'Show in banner': 'Afficher dans la bannière',
 'Show in contact form': 'Afficher dans le formulaire de contact',
