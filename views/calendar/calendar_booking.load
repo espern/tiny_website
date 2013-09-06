@@ -42,6 +42,11 @@
                    "{{=shortday}}"
                 {{pass}}
             ],
+			header: {
+                left: 'prev,title,next',
+                 center: '',
+                 right: ''
+            },
             buttonText: {
                 today: "{{=T('today')}}",
                 month: "{{=T('month')}}",
