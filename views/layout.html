@@ -51,9 +51,10 @@
   response.files.append(URL('static','css/bootstrap-responsive.min.css'))
   response.files.append(URL('static','css/web2py_bootstrap.css'))
   response.files.append(URL('static','css/x_application.css'))
-  if WITH_CUSTOM_CSS_FILE:
+  try:
     response.files.append(URL('static','css/x_application_custom.css'))
-  pass
+  except IOError:
+    pass
   }}
 
   {{include 'web2py_ajax.html'}}
