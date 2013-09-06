@@ -7,7 +7,7 @@
 }}
 
 {{include 'web2py_ajax.html'}}
-
+{{from controllers_tools import strip_accents}}
 <script type='text/javascript'>
   jQuery(document).ready(function() {
 
@@ -60,13 +60,13 @@
                     {{try:}}
                         {{if events_available_positions[row.id] != None:}}
                             {{if events_available_positions[row.id] > 0:}}
-                                tip: "{{=row.title}} : {{=T('%d position(s) available', events_available_positions[row.id])}}",
+                                tip: "{{=row.title}} : {{=T('%d position(s) available', events_available_positions[row.id])}}\n\n{{=strip_accents(row.description).replace("\r\n", "")}}",
                             {{else:}}
-                                tip: "{{=row.title}} : {{=T('No positions available')}}",
+                                tip: "{{=row.title}} : {{=T('No positions available')}}\n\n{{=strip_accents(row.description).replace("\r\n", "")}}",
                                 backgroundColor: "#FF0000",
                             {{pass}}
                         {{else:}}
-                            tip: "{{=row.title}} : {{=T('Positions available')}}",
+                            tip: "{{=row.title}} : {{=T('Positions available')}}\n\n{{=strip_accents(row.description).replace("\r\n", "")}}",
                             backgroundColor: "#008000",
                         {{pass}}
                     {{except KeyError:}}
@@ -84,7 +84,12 @@
                 }
             {{pass}}
             ],
-
+            eventClick: function(event) {
+                if (event.tip) {
+                    alert(event.tip);
+                    return false;
+                }
+            },
             eventRender: function(event, element) {
                 element.attr('title', event.tip);
             }
