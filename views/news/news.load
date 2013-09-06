@@ -23,9 +23,12 @@
 					</h4>
 					<p>
 						{{=XML(news.text)}}
+						<br />
 						<em>
-							{{=T('Published on ')}}
-							{{=news.published_on.strftime("%d/%m/%Y %H:%M") }}
+							<small class="muted pull-right">
+								{{=T('Published on ')}}
+								{{=news.published_on.strftime("%d/%m/%Y %H:%M") }}
+							</small>
 						</em>
 					</p>
 				</p>
