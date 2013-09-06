@@ -72,7 +72,9 @@ db.define_table('website_parameters',
     Field('seo_meta_author', label=T('SEO : Meta "author"')),
     Field('seo_meta_description', label=T('SEO : Meta "description"')),
     Field('seo_meta_keywords', label=T('SEO : Meta "keywords"')),
-    Field('seo_meta_generator', label=T('SEO : Meta "generator"'))
+    Field('seo_meta_generator', label=T('SEO : Meta "generator"')),
+    Field('show_booking_menu', 'boolean', default=True, label=T('Show booking menu')),
+    Field('show_event_menu', 'boolean', default=True, label=T('Show event menu'))
 ) 
 db.website_parameters.website_url.requires = IS_EMPTY_OR(IS_URL())
 db.website_parameters.mailserver_sender_mail.requires = IS_EMPTY_OR(IS_EMAIL())

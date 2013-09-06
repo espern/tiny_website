@@ -79,8 +79,9 @@ def add_booking_request():
             Address : %s
             From : %s
             During : %s
+            Remark : %s
         """) % (page_low_title, form.vars.name, form.vars.email, form.vars.phone_number, form.vars.address,
-                form.vars.start_date.strftime("%d/%m/%Y"), duration.name if duration else '')
+                form.vars.start_date.strftime("%d/%m/%Y"), duration.name if duration else '', form.vars.remark)
         if mail.send(to=WEBSITE_PARAMETERS.booking_form_email,
                   cc=[WEBSITE_PARAMETERS.booking_form_cc if WEBSITE_PARAMETERS.booking_form_cc else ''],
                   bcc=[WEBSITE_PARAMETERS.booking_form_bcc if WEBSITE_PARAMETERS.booking_form_bcc else ''],
@@ -102,7 +103,8 @@ def edit_booking_requests():
     db.calendar_booking_request.contact.readable = db.calendar_booking_request.contact.writable = True
 
     linked_tables=['page, contact']
-    fields=[db.calendar_booking_request.page,db.calendar_booking_request.contact, db.calendar_booking_request.start_date, db.calendar_booking_request.duration, db.calendar_booking_request.is_confirmed]
+    fields=[db.calendar_booking_request.page,db.calendar_booking_request.contact, db.calendar_booking_request.start_date,
+            db.calendar_booking_request.duration, db.calendar_booking_request.is_confirmed, db.calendar_booking_request.remark]
     orderby = db.calendar_booking_request.is_confirmed | ~db.calendar_booking_request.start_date
     exportclasses=dict(
             csv_with_hidden_cols=False,
