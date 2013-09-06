@@ -43,7 +43,7 @@
                 {{pass}}
             ],
 			header: {
-                left: 'prev,title,next',
+                left: 'prev,next,title',
                  center: '',
                  right: ''
             },
