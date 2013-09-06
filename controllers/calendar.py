@@ -38,7 +38,7 @@ def calendar_event():
 
     page = db.page(request.vars.container_id)
     if page and page.is_index:
-        #Index page : we show all booking requests
+        #Index page : we show all events
         r=db.calendar_event.id > 0
     else:
         r=db.calendar_event.page==page

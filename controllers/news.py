@@ -33,19 +33,18 @@ def delete_news():
     return dict(news=news, form=form)
 
 
-def _strip_accents(s):
-   import unicodedata
-   return ''.join(c for c in unicodedata.normalize('NFD', s.decode('utf-8'))
-                  if unicodedata.category(c) != 'Mn')
+
 
 def rss_news():
+    from controllers_tools import strip_accents
+    
     newsS = db(db.news).select(orderby=~db.news.date|~db.news.published_on)
-    return dict(title=_strip_accents(T('%s latest news',WEBSITE_PARAMETERS.website_name)),
+    return dict(title=strip_accents(T('%s latest news',WEBSITE_PARAMETERS.website_name)),
                 link=WEBSITE_PARAMETERS.website_url if WEBSITE_PARAMETERS.website_url else '',
-                description=_strip_accents(T('%s latest news',WEBSITE_PARAMETERS.website_name)),
+                description=strip_accents(T('%s latest news',WEBSITE_PARAMETERS.website_name)),
                 entries=[
-                  dict(title=_strip_accents(news.title),
+                  dict(title=strip_accents(news.title),
                   link=WEBSITE_PARAMETERS.website_url if WEBSITE_PARAMETERS.website_url else '',
                   created_on = news.published_on,
-                  description=_strip_accents(news.text)) for news in newsS
+                  description=strip_accents(news.text)) for news in newsS
                 ])

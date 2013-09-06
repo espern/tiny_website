@@ -42,6 +42,11 @@
                    "{{=shortday}}"
                 {{pass}}
             ],
+            header: {
+                left: 'prev,next,title',
+                 center: '',
+                 right: ''
+            },
             buttonText: {
                 today: "{{=T('today')}}",
                 month: "{{=T('month')}}",
@@ -55,17 +60,17 @@
                     {{try:}}
                         {{if events_available_positions[row.id] != None:}}
                             {{if events_available_positions[row.id] > 0:}}
-                                tip: "{{=row.title}} : {{=T('%d position(s) available', events_available_positions[row.id])}}\n\n{{=row.description}}",
+                                tip: "{{=row.title}} : {{=T('%d position(s) available', events_available_positions[row.id])}}",
                             {{else:}}
-                                tip: "{{=row.title}} : {{=T('No positions available')}}\n\n{{=row.description}}",
+                                tip: "{{=row.title}} : {{=T('No positions available')}}",
                                 backgroundColor: "#FF0000",
                             {{pass}}
                         {{else:}}
-                            tip: "{{=row.title}} : {{=T('Positions available')}}\n\n{{=row.description}}",
+                            tip: "{{=row.title}} : {{=T('Positions available')}}",
                             backgroundColor: "#008000",
                         {{pass}}
                     {{except KeyError:}}
-                        tip: "{{=row.title}} : {{=T('No informations available for this event')}}\n\n{{=row.description}}",
+                        tip: "{{=row.title}} : {{=T('No informations available for this event')}}",
                         backgroundColor: "#FFFF00",
                     {{pass}}
                     title: '',
