@@ -11,12 +11,10 @@
 {{end}}
 
 {{block left_sidebar}}
-	<div class="hidden-phone">
-		{{if left_sidebar_component:}}
-			{{=LOAD(left_sidebar_component.controller, left_sidebar_component.name, ajax=left_sidebar_component.ajax,
-			ajax_trap=left_sidebar_component.ajax_trap, vars={'container_id':page.id})}}
-		{{pass}}
-	</div>
+	{{if left_sidebar_component:}}
+		{{=LOAD(left_sidebar_component.controller, left_sidebar_component.name, ajax=left_sidebar_component.ajax,
+		ajax_trap=left_sidebar_component.ajax_trap, vars={'container_id':page.id})}}
+	{{pass}}
 {{end}}
 
 {{block right_sidebar}}
