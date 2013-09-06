@@ -1,7 +1,10 @@
 #Things to be initialized before menu.py
+from os import path
 
 mail = None
 WEBSITE_PARAMETERS = db(db.website_parameters).select().first()
+WITH_CUSTOM_CSS_FILE = path.exists(URL('static','css/x_application_custom.css'))
+
 
 if WEBSITE_PARAMETERS:
     if WEBSITE_PARAMETERS.mailserver_url and WEBSITE_PARAMETERS.mailserver_port:
@@ -16,4 +19,4 @@ if WEBSITE_PARAMETERS:
     response.subtitle = WEBSITE_PARAMETERS.website_name
 
     if WEBSITE_PARAMETERS.force_language:
-    	 T.force(WEBSITE_PARAMETERS.force_language)
+         T.force(WEBSITE_PARAMETERS.force_language)

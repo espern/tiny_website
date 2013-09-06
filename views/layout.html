@@ -51,7 +51,9 @@
   response.files.append(URL('static','css/bootstrap-responsive.min.css'))
   response.files.append(URL('static','css/web2py_bootstrap.css'))
   response.files.append(URL('static','css/x_application.css'))
-  response.files.append(URL('static','css/x_application_custom.css'))
+  if WITH_CUSTOM_CSS_FILE:
+    response.files.append(URL('static','css/x_application_custom.css'))
+  pass
   }}
 
   {{include 'web2py_ajax.html'}}
@@ -89,7 +91,7 @@
     {{pass}}
     <div class="flash">{{=response.flash or ''}}</div>
     <div class="navbar-inner">
-		<div class="container">
+    <div class="container">
         <!-- the next tag is necessary for bootstrap menus, do not remove -->
         <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
           <span class="icon-bar"></span>
@@ -136,9 +138,9 @@
             {{end}}
         </div>
         {{pass}}
-		
+    
         <div class="{{=middle_columns}}">
-         	{{include}}  
+          {{include}}  
         </div>
 
         {{if right_sidebar_enabled:}}
@@ -188,4 +190,3 @@
   <script src="{{=URL('static','js/share.js',vars=dict(static=URL('static','images')))}}"></script>
 </body>
 </html>
-
