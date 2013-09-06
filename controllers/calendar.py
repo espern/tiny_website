@@ -7,7 +7,7 @@ def calendar_booking():
     from calendar_tools import month_list, shortmonth_list, day_list, shortday_list
 
     page = db.page(request.vars.container_id)
-    if page.is_index:
+    if page and page.is_index:
         #Index page : we show all booking requests
         r=db.calendar_booking_request.id > 0
     else:
@@ -37,7 +37,7 @@ def calendar_event():
         return event_nb_positions_available - db(db.calendar_contact.event==event_id).count()
 
     page = db.page(request.vars.container_id)
-    if page.is_index:
+    if page and page.is_index:
         #Index page : we show all booking requests
         r=db.calendar_event.id > 0
     else:
