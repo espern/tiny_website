@@ -130,13 +130,12 @@ def edit_events_calendar():
     db.calendar_event.description.readable = db.calendar_event.description.writable = True
     db.calendar_event.duration.readable = db.calendar_event.duration.writable = False
     linked_tables=['page']
-    fields=[db.calendar_event.page,db.calendar_event.title,db.calendar_event.start_date, db.calendar_event.duration, db.calendar_event.nb_positions_available]
+    fields=[db.calendar_event.page,db.calendar_event.title,db.calendar_event.start_date, db.calendar_event.duration,
+             db.calendar_event.nb_positions_available, db.calendar_event.is_enabled]
     orderby = ~db.calendar_event.start_date
     exportclasses=dict(
             csv_with_hidden_cols=False,
             xml=False,
-            html=False,
-            csv=False,
             json=False,
             tsv_with_hidden_cols=False,
             tsv=False)
@@ -156,8 +155,6 @@ def edit_contacts_calendar():
     exportclasses=dict(
             csv_with_hidden_cols=False,
             xml=False,
-            html=False,
-            csv=False,
             json=False,
             tsv_with_hidden_cols=False,
             tsv=False)

@@ -15,6 +15,7 @@ db.define_table('calendar_event',
    Field('start_date','date',label=T('Start date'), notnull=True),
    Field('duration','reference calendar_duration',label=T('Duration')),
    Field('nb_positions_available', 'integer',label=T('Number of positions available (empty=illimited)')),
+   Field('is_enabled', 'boolean', readable=True, writable=True, default=True, label=T('Is enabled')),
    Field.Method('start_datetime', start_datetime),
    Field.Method('end_datetime', end_datetime),
    format=lambda r: T('%s on %s') %(r.title, r.start_date.strftime('%d/%m/%Y'))
