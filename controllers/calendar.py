@@ -26,6 +26,7 @@ def calendar_event():
     """
     Allows to access the "calendar_event" component
     """
+    from controllers_tools import strip_accents
     from calendar_tools import month_list, shortmonth_list, day_list, shortday_list
 
     def get_available_positions(event_id, event_nb_positions_available):
@@ -50,7 +51,8 @@ def calendar_event():
                 month_list=month_list,
                 shortmonth_list=shortmonth_list,
                 day_list=day_list,
-                shortday_list=shortday_list)
+                shortday_list=shortday_list,
+                strip_accents=strip_accents)
 
 def add_booking_request():
     """
