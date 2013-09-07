@@ -26,7 +26,7 @@ db.calendar_event.duration.requires = IS_NULL_OR(IS_IN_DB(db,db.calendar_duratio
 db.define_table('calendar_contact',
     Field('name', label=T('Name'), notnull=True),
     Field('email', requires=IS_EMAIL(), label=T('Email')),
-    Field('phone_number', requires=IS_MATCH('[\d\-\+\(\)\.\ ]+'), label=T('Phone number')),
+    Field('phone_number', requires=IS_NULL_OR(IS_MATCH('[\d\-\+\(\)\.\ ]+')), label=T('Phone number')),
     Field('address', 'text', label=T('Address')),
     Field('event', 'reference calendar_event', label=T('Event'), readable=False, writable=False),
     format='%(name)s'
