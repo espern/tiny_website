@@ -31,8 +31,7 @@ if WEBSITE_PARAMETERS:
 	if WEBSITE_PARAMETERS.seo_meta_generator:
 		response.meta.generator = WEBSITE_PARAMETERS.seo_meta_generator
 
-pages = db(db.page.is_index==False).select(orderby=db.page.rank|db.page.title, cache=(cache.ram,30),cacheable=True)
-
+pages = db((db.page.is_index==False) & ((db.page.is_enabled==True) | (db.page.is_enabled==None))).select(orderby=db.page.rank|db.page.title, cache=(cache.ram,5),cacheable=True)
 pages_menu = HierarchicalMenu()
 response.menu += pages_menu.create_menu(pages)
 
