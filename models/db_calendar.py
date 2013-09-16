@@ -15,6 +15,7 @@ db.define_table('calendar_event',
    Field('start_date','date',label=T('Start date'), notnull=True),
    Field('duration','reference calendar_duration',label=T('Duration')),
    Field('nb_positions_available', 'integer',label=T('Number of positions available (empty=illimited)')),
+   Field('is_enabled', 'boolean', readable=True, writable=True, default=True, label=T('Is enabled')),
    Field.Method('start_datetime', start_datetime),
    Field.Method('end_datetime', end_datetime),
    format=lambda r: T('%s on %s') %(r.title, r.start_date.strftime('%d/%m/%Y'))
@@ -26,7 +27,7 @@ db.calendar_event.duration.requires = IS_NULL_OR(IS_IN_DB(db,db.calendar_duratio
 db.define_table('calendar_contact',
     Field('name', label=T('Name'), notnull=True),
     Field('email', requires=IS_EMAIL(), label=T('Email')),
-    Field('phone_number', requires=IS_MATCH('[\d\-\+\(\)\.\ ]+'), label=T('Phone number')),
+    Field('phone_number', requires=IS_NULL_OR(IS_MATCH('[\d\-\+\(\)\.\ ]+')), label=T('Phone number')),
     Field('address', 'text', label=T('Address')),
     Field('event', 'reference calendar_event', label=T('Event'), readable=False, writable=False),
     format='%(name)s'

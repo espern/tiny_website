@@ -26,6 +26,7 @@ def calendar_event():
     """
     Allows to access the "calendar_event" component
     """
+    from controllers_tools import strip_accents
     from calendar_tools import month_list, shortmonth_list, day_list, shortday_list
 
     def get_available_positions(event_id, event_nb_positions_available):
@@ -50,7 +51,8 @@ def calendar_event():
                 month_list=month_list,
                 shortmonth_list=shortmonth_list,
                 day_list=day_list,
-                shortday_list=shortday_list)
+                shortday_list=shortday_list,
+                strip_accents=strip_accents)
 
 def add_booking_request():
     """
@@ -128,13 +130,12 @@ def edit_events_calendar():
     db.calendar_event.description.readable = db.calendar_event.description.writable = True
     db.calendar_event.duration.readable = db.calendar_event.duration.writable = False
     linked_tables=['page']
-    fields=[db.calendar_event.page,db.calendar_event.title,db.calendar_event.start_date, db.calendar_event.duration, db.calendar_event.nb_positions_available]
+    fields=[db.calendar_event.page,db.calendar_event.title,db.calendar_event.start_date, db.calendar_event.duration,
+             db.calendar_event.nb_positions_available, db.calendar_event.is_enabled]
     orderby = ~db.calendar_event.start_date
     exportclasses=dict(
             csv_with_hidden_cols=False,
             xml=False,
-            html=False,
-            csv=False,
             json=False,
             tsv_with_hidden_cols=False,
             tsv=False)
@@ -154,8 +155,6 @@ def edit_contacts_calendar():
     exportclasses=dict(
             csv_with_hidden_cols=False,
             xml=False,
-            html=False,
-            csv=False,
             json=False,
             tsv_with_hidden_cols=False,
             tsv=False)
