@@ -213,6 +213,8 @@
 'export as csv file': 'exporter sous forme de fichier csv',
 'Export:': 'Export:',
 'False': 'Faux',
+'Fax': 'Fax',
+'Fax : ': 'Fax : ',
 'Feb': 'Févr',
 'February': 'Février',
 'File': 'Fichier',
