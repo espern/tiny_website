@@ -2,10 +2,13 @@
 
 # from gluon.debug import dbg
 
-def index():
-    """
+@auth.requires_membership('manager')
+def settings():
+    website_parameters = db(db.website_parameters).select().first()
+    form = crud.update(db.website_parameters,website_parameters)
+    return dict(form=form)
 
-    """
+def index():
     #Check if WEBSITE_PARAMETERS initialised. If not, we can either start with dummy data, or a blank database
     if not WEBSITE_PARAMETERS:
         form = FORM.confirm(T('I want to start with an empty database'),{T('I want to try the example database'):URL('populate_example_database')})
