@@ -41,11 +41,17 @@
 			ajax_trap=central_component.ajax_trap, vars={'container_id':page.id})}}
 		{{else:}}
 			{{if page.content:}}
-				<div>{{=XML(page.content, sanitize=False)}}</div>
-				{{if pretty_date:}}
-					<hr>
-					<div class="muted"><small>{{=T("Updated %s",pretty_date)}}</small></div>
-				{{pass}}
+				<div>
+					<p>
+					{{=XML(page.content, sanitize=False)}}
+					{{if pretty_date:}}
+						<br />
+						<em>
+							<small class="muted pull-right">{{=T("Updated %s",pretty_date)}}</small>
+						</em>
+					{{pass}}
+					</p>
+				</div>
 			{{pass}}
 		{{pass}}
 	</article>
