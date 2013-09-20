@@ -24,24 +24,31 @@
 	{{pass}}
 {{end}}
 
-{{if page and page.content:}}
-<article>
-	{{if page.subtitle or auth.has_membership('manager'):}}
-		<h3>
-			{{=page.subtitle}}
-			{{if auth.has_membership('manager'):}}
-				{{=manager_toolbar()}}
-				{{=manager_toolbar(page.id)}}
-			{{ pass }}
-		</h3>
-		<hr>
-	{{pass}}
-	<div>{{=XML(page.content, sanitize=False)}}</div>
-	{{if pretty_date:}}
-		<hr>
-		<div class="muted"><small>{{=T("Updated %s",pretty_date)}}</small></div>
-	{{pass}}
-</article>
+{{if page:}}	
+	<article>
+		{{if page.subtitle or auth.has_membership('manager'):}}
+			<h3>
+				{{=page.subtitle}}
+				{{if auth.has_membership('manager'):}}
+					{{=manager_toolbar()}}
+					{{=manager_toolbar(page.id)}}
+				{{ pass }}
+			</h3>
+			<hr>
+		{{pass}}
+		{{if central_component:}}
+			{{=LOAD(central_component.controller, central_component.name, ajax=central_component.ajax,
+			ajax_trap=central_component.ajax_trap, vars={'container_id':page.id})}}
+		{{else:}}
+			{{if page.content:}}
+				<div>{{=XML(page.content, sanitize=False)}}</div>
+				{{if pretty_date:}}
+					<hr>
+					<div class="muted"><small>{{=T("Updated %s",pretty_date)}}</small></div>
+				{{pass}}
+			{{pass}}
+		{{pass}}
+	</article>
 {{pass}}
 
 {{block footer}}

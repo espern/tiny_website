@@ -106,6 +106,7 @@ db.define_table('page',
     Field('left_footer_component', 'reference page_component', label=T('Left footer component')),
     Field('middle_footer_component', 'reference page_component', label=T('Middle footer component')),
     Field('right_footer_component', 'reference page_component', label=T('Right footer component')),
+    Field('central_component', 'reference page_component', label=T('Central component')),
     format='%(title)s'
 )
 
@@ -115,6 +116,7 @@ db.page.right_sidebar_component.requires = IS_EMPTY_OR(IS_IN_DB(db, db.page_comp
 db.page.left_footer_component.requires = IS_EMPTY_OR(IS_IN_DB(db, db.page_component.id, '%(name)s - %(description)s', zero=T('<Empty>')))
 db.page.right_footer_component.requires = IS_EMPTY_OR(IS_IN_DB(db, db.page_component.id, '%(name)s - %(description)s', zero=T('<Empty>')))
 db.page.middle_footer_component.requires = IS_EMPTY_OR(IS_IN_DB(db, db.page_component.id, '%(name)s - %(description)s', zero=T('<Empty>')))
+db.page.central_component.requires = IS_EMPTY_OR(IS_IN_DB(db, db.page_component.id, '%(name)s - %(description)s', zero=T('<Empty>')))
 db.page.url.compute = lambda row: IS_SLUG()(row.title)[0]
 
 pageSelector = HierarchicalSelect(db, db.page, db.page.title, db.page.rank)
