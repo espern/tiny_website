@@ -24,7 +24,7 @@
 	{{pass}}
 {{end}}
 
-{{if page:}}	
+{{if page and (page.content or central_component):}}	
 	<article>
 		{{if page.subtitle or auth.has_membership('manager'):}}
 			<h3>
