@@ -12,15 +12,27 @@
 
 {{block left_sidebar}}
 	{{if left_sidebar_component:}}
-		{{=LOAD(left_sidebar_component.controller, left_sidebar_component.name, ajax=left_sidebar_component.ajax,
-		ajax_trap=left_sidebar_component.ajax_trap, vars={'container_id':page.id})}}
+		{{if left_sidebar_component.container_class:}}
+			<div class="{{=left_sidebar_component.container_class}}">
+		{{else:}}
+			<div>
+		{{pass}}
+			{{=LOAD(left_sidebar_component.controller, left_sidebar_component.name, ajax=left_sidebar_component.ajax,
+			ajax_trap=left_sidebar_component.ajax_trap, vars={'container_id':page.id})}}
+		</div>
 	{{pass}}
 {{end}}
 
 {{block right_sidebar}}
 	{{if right_sidebar_component:}}
-		{{=LOAD(right_sidebar_component.controller, right_sidebar_component.name, ajax=right_sidebar_component.ajax,
-		ajax_trap=right_sidebar_component.ajax_trap, vars={'container_id':page.id})}}
+		{{if right_sidebar_component.container_class:}}
+			<div class="{{=right_sidebar_component.container_class}}">
+		{{else:}}
+			<div>
+		{{pass}}
+			{{=LOAD(right_sidebar_component.controller, right_sidebar_component.name, ajax=right_sidebar_component.ajax,
+			ajax_trap=right_sidebar_component.ajax_trap, vars={'container_id':page.id})}}
+		{{pass}}
 	{{pass}}
 {{end}}
 
@@ -37,8 +49,14 @@
 			<hr>
 		{{pass}}
 		{{if central_component:}}
-			{{=LOAD(central_component.controller, central_component.name, ajax=central_component.ajax,
-			ajax_trap=central_component.ajax_trap, vars={'container_id':page.id})}}
+			{{if central_component.container_class:}}
+				<div class="{{=central_component.container_class}}">
+			{{else:}}
+				<div>
+			{{pass}}
+				{{=LOAD(central_component.controller, central_component.name, ajax=central_component.ajax,
+				ajax_trap=central_component.ajax_trap, vars={'container_id':page.id})}}
+			</div>
 		{{else:}}
 			{{if page.content:}}
 				<div>

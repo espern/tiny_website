@@ -87,7 +87,8 @@ db.define_table('page_component',
     Field('name', unique=True, readable=False, writable=False, label=T('Component name')),
     Field('description', readable=False, writable=False, label=T('Component description')),
     Field('ajax', 'boolean', readable=False, writable=False, default=False, label=T('Component with Ajax')),
-    Field('ajax_trap', 'boolean', readable=False, writable=False, default=False, label=T('Component with Ajax trap'))
+    Field('ajax_trap', 'boolean', readable=False, writable=False, default=False, label=T('Component with Ajax trap')),
+    Field('container_class', readable=False, writable=False, label=T('Class of the container'), comment=T('For example "hidden-phone"'))
 )
 
 db.define_table('page',
