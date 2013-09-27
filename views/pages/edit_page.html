@@ -29,17 +29,10 @@
 		})
 		wysiwygfield.panelInstance("page_content");
 		jQuery('#wysiwyg_management').hide();
-		jQuery('#page_rank__row').hide();
-		jQuery('#page_url__row').hide();
-		jQuery('#page_is_index__row').hide();
-		jQuery('#page_is_enabled__row').hide();
-		jQuery('#page_left_sidebar_enabled__row').hide();
-		jQuery('#page_right_sidebar_enabled__row').hide();
-		jQuery('#page_left_footer_component__row').hide();
-		jQuery('#page_middle_footer_component__row').hide();
-		jQuery('#page_right_footer_component__row').hide();
-		jQuery('#page_central_component__row').hide();
-		jQuery('#page_allow_disqus__row').hide();
+		{{for field in advanced_fields:}}
+			jQuery('#{{=field}}').hide();
+		{{pass}}
+		
 		if (!jQuery('#page_left_sidebar_enabled').attr('checked'))
 			jQuery('#page_left_sidebar_component__row').hide();
 		if (!jQuery('#page_right_sidebar_enabled').attr('checked'))
@@ -56,32 +49,18 @@
 			jQuery('#simple_view').attr('class','active');
 			jQuery('#advanced_view').attr('class','inactive');
 			jQuery('#wysiwyg_management').hide();
-			jQuery('#page_rank__row').hide();
-			jQuery('#page_url__row').hide();
-			jQuery('#page_is_index__row').hide();
-			jQuery('#page_is_enabled__row').hide();
-			jQuery('#page_left_sidebar_enabled__row').hide();
-			jQuery('#page_right_sidebar_enabled__row').hide();
-			jQuery('#page_left_footer_component__row').hide();
-			jQuery('#page_middle_footer_component__row').hide();
-			jQuery('#page_right_footer_component__row').hide();
-			jQuery('#page_central_component__row').hide();
-			jQuery('#page_allow_disqus__row').hide();});
+			{{for field in advanced_fields:}}
+				jQuery('#{{=field}}').hide();
+			{{pass}}
+			});
 		jQuery('#advanced_view').click(function(){
 			jQuery('#advanced_view').attr('class','active');
 			jQuery('#simple_view').attr('class','inactive');
 			jQuery('#wysiwyg_management').show();
-			jQuery('#page_rank__row').show();
-			jQuery('#page_url__row').show();
-			jQuery('#page_is_index__row').show();
-			jQuery('#page_is_enabled__row').show();
-			jQuery('#page_left_sidebar_enabled__row').show();
-			jQuery('#page_right_sidebar_enabled__row').show();
-			jQuery('#page_left_footer_component__row').show();
-			jQuery('#page_middle_footer_component__row').show();
-			jQuery('#page_right_footer_component__row').show();
-			jQuery('#page_central_component__row').show();
-			jQuery('#page_allow_disqus__row').show();});
+			{{for field in advanced_fields:}}
+				jQuery('#{{=field}}').show();
+			{{pass}}
+			});
 		jQuery('#activate_wysiwyg').click(function(){
 			jQuery('#activate_wysiwyg').attr('class','active');
 			jQuery('#remove_wysiwyg').attr('class','inactive');

@@ -68,6 +68,20 @@ def delete_page():
 def edit_page():
     """
     """
+
+    advanced_fields = ["{}_{}__row".format(db.page, field) for field in 
+                            [db.page.rank.name,
+                            db.page.url.name,
+                            db.page.is_index.name,
+                            db.page.is_enabled.name,
+                            db.page.left_sidebar_enabled.name,
+                            db.page.right_sidebar_enabled.name,
+                            db.page.left_footer_component.name,
+                            db.page.middle_footer_component.name,
+                            db.page.right_footer_component.name,
+                            db.page.central_component.name,
+                            db.page.allow_disqus.name]
+                        ]
     page_id = request.args(0)
     if page_id:
         if page_id.isdigit():
@@ -95,4 +109,4 @@ def edit_page():
         #and this is impossible to initialise the upload field with page.url
         db.page.content.readable = db.page.content.writable = False
         form = crud.create(db.page,next='edit_page/[id]')
-    return dict(form=form)
+    return dict(form=form, advanced_fields=advanced_fields)
