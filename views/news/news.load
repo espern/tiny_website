@@ -21,8 +21,19 @@
 							{{=manager_toolbar(news.id)}}
 						{{pass}}
 					</h4>
-					<p>
-						{{=XML(news.text)}}
+					<p>	
+						<section id="news_content">{{=XML(news.text)}}</section>
+						{{if news.max_content_height:}}
+							<script src="{{=URL('static','js/readmore.min.js')}}"></script>
+							<script type="text/javascript">
+								$('#news_content').readmore({
+								 	speed: 100,
+									moreLink: '<a href="#">{{=T("Read more")}}</a>',
+									lessLink: '<a href="#">{{=T("Read less")}}</a>',
+								 	maxHeight: {{=news.max_content_height}}
+								});
+							</script>
+						{{pass}}
 						<br />
 						<em>
 							<small class="muted pull-right">

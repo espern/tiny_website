@@ -110,6 +110,7 @@ db.define_table('page',
     Field('right_footer_component', 'reference page_component', label=T('Right footer component')),
     Field('central_component', 'reference page_component', label=T('Central component')),
     Field('allow_disqus', 'boolean', label=T('Allow disqus (must be configured in website_parameters)')),
+    Field('max_content_height', 'integer', readable=True, writable=True, default=0, label=T('Max height (in pixels) of the page content (0 = no max height)')),
     format='%(title)s'
 )
 
@@ -154,6 +155,7 @@ db.define_table('news',
    Field('date','date',default=request.now,label=T('Date')),
    Field('text','text',label=T('News content')),
    Field('published_on', 'datetime', default=request.now),
+   Field('max_content_height', 'integer', readable=True, writable=True, default=0, label=T('Max height (in pixels) of the news content (0 = no max height)')),
    format='%(text)s'
    )
 

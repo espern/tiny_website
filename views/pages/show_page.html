@@ -32,7 +32,7 @@
 		{{pass}}
 			{{=LOAD(right_sidebar_component.controller, right_sidebar_component.name, ajax=right_sidebar_component.ajax,
 			ajax_trap=right_sidebar_component.ajax_trap, vars={'container_id':page.id})}}
-		{{pass}}
+		</div>
 	{{pass}}
 {{end}}
 
@@ -61,7 +61,18 @@
 			{{if page.content:}}
 				<div>
 					<p>
-					{{=XML(page.content, sanitize=False)}}
+					<section id="page_content">{{=XML(page.content, sanitize=False)}}</section>
+					{{if page.max_content_height:}}
+						<script src="{{=URL('static','js/readmore.min.js')}}"></script>
+						<script type="text/javascript">
+							$('#page_content').readmore({
+							 	speed: 100,
+								moreLink: '<a href="#">{{=T("Read more")}}</a>',
+								lessLink: '<a href="#">{{=T("Read less")}}</a>',
+							 	maxHeight: {{=page.max_content_height}}
+							});
+						</script>
+					{{pass}}
 					{{if pretty_date:}}
 						<br />
 						<em>

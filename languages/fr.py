@@ -338,6 +338,8 @@
 'Manage Cache': 'Editer le cache',
 'Mar': 'Mars',
 'March': 'Mars',
+'Max height (in pixels) of the news content (0 = no max height)': 'Hauteur maxi (en pixels) du contenu (0 = pas de hauteur maxi)',
+'Max height (in pixels) of the page content (0 = no max height)': 'Hauteur maxi (en pixels) du contenu de la page (0 = pas de hauteur maxi)',
 'Max number of images in gallery': "Nombre maximum d'images dans la galerie",
 'Max number of old news': "Nombre maximum d'anciennes actualités",
 'May': 'Mai',
