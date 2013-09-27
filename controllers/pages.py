@@ -21,7 +21,10 @@ def show_page():
             redirect(URL('images'))
         else:
             page = db(db.page.is_index==True).select().first()
-    
+
+    disqus_shortname = None
+    if page.allow_disqus and WEBSITE_PARAMETERS.disqus_shortname:
+        disqus_shortname = WEBSITE_PARAMETERS.disqus_shortname
     pretty_date = prettydate(page.modified_on, T)
     left_sidebar_component = db.page_component(page.left_sidebar_component)
     right_sidebar_component = db.page_component(page.right_sidebar_component)
@@ -39,7 +42,8 @@ def show_page():
                 right_footer_component=right_footer_component,
                 central_component=central_component,
                 manager_toolbar=manager_toolbar,
-                pretty_date=pretty_date)
+                pretty_date=pretty_date,
+                disqus_shortname=disqus_shortname)
 
 @auth.requires_membership('manager')
 def delete_page():

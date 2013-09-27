@@ -51,6 +51,8 @@ if WEBSITE_PARAMETERS.show_booking_menu and nb_booking_requests and (auth.has_me
 if WEBSITE_PARAMETERS.show_event_menu and (auth.has_membership('manager') or auth.has_membership('event_manager')):
 	management_menu += [(T('Events calendar'), False, URL('calendar','edit_events_calendar'))]
 	management_menu += [(T('Contacts calendar'), False, URL('calendar','edit_contacts_calendar'))]
+if auth.has_membership('manager'):
+	management_menu += [(T('Website settings'), False, URL('default','settings'))]
 if management_menu :
 	response.menu += [(T('Website management'), False, None, management_menu)]
 response.menu += [(T('Contact'), False, URL('default','contact_form'))]

@@ -74,7 +74,8 @@ db.define_table('website_parameters',
     Field('seo_meta_keywords', label=T('SEO : Meta "keywords"'), comment=T('Displayed in <meta keywords> tag of the HTML source code')),
     Field('seo_meta_generator', label=T('SEO : Meta "generator"'), comment=T('Displayed in <meta generator> tag of the HTML source code')),
     Field('show_booking_menu', 'boolean', default=True, label=T('Show booking menu'), comment=T('Show the booking menu (to manage booking requests)')),
-    Field('show_event_menu', 'boolean', default=True, label=T('Show event menu'), comment=T('Show the event menu (to manage events on a calendar)'))
+    Field('show_event_menu', 'boolean', default=True, label=T('Show event menu'), comment=T('Show the event menu (to manage events on a calendar)')),
+    Field('disqus_shortname', default=True, label=T('Disqus shortname'), comment=T('Add here your disqus shortname to activate comments on your pages. Note : you need to fill "website_url" too!'))
 ) 
 db.website_parameters.website_url.requires = IS_EMPTY_OR(IS_URL())
 db.website_parameters.mailserver_sender_mail.requires = IS_EMPTY_OR(IS_EMAIL())
@@ -108,6 +109,7 @@ db.define_table('page',
     Field('middle_footer_component', 'reference page_component', label=T('Middle footer component')),
     Field('right_footer_component', 'reference page_component', label=T('Right footer component')),
     Field('central_component', 'reference page_component', label=T('Central component')),
+    Field('allow_disqus', 'boolean', label=T('Allow disqus (must be configured in website_parameters)')),
     format='%(title)s'
 )
 
