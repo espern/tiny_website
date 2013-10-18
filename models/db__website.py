@@ -85,12 +85,15 @@ db.website_parameters.booking_form_bcc.requires = IS_EMPTY_OR(IS_EMAIL())
 
 db.define_table('page_component',
     Field('controller', readable=False, writable=False, default='default', label=T('Component controller')),
-    Field('name', unique=True, readable=False, writable=False, label=T('Component name')),
+    Field('name', unique=False, readable=False, writable=False, label=T('Component name')),
     Field('description', readable=False, writable=False, label=T('Component description')),
     Field('ajax', 'boolean', readable=False, writable=False, default=False, label=T('Component with Ajax')),
     Field('ajax_trap', 'boolean', readable=False, writable=False, default=False, label=T('Component with Ajax trap')),
-    Field('container_class', readable=False, writable=False, label=T('Class of the container'), comment=T('For example "hidden-phone"'))
+    Field('container_class', readable=False, writable=False, label=T('Class of the container'), comment=T('For example "hidden-phone"')),
+    Field('parent', 'reference page_component', label=T('Parent')),
+    Field('rank', 'integer', readable=True, writable=True, default=0, label=T('Rank')),
 )
+db.page_component.parent.requires = IS_EMPTY_OR(IS_IN_DB(db, db.page_component.id, '%(description)s', zero=T('<Empty>')))
 
 db.define_table('page',
     Field('parent', 'reference page', label=T('Parent')),

@@ -14,7 +14,7 @@
 {{block header}}
 	{{if header_component:}}
 		{{=LOAD(header_component.controller, header_component.name, ajax=header_component.ajax,
-		ajax_trap=header_component.ajax_trap, vars={'container_id':page.id})}}
+		ajax_trap=header_component.ajax_trap, vars={'container_id':page.id, 'component_id': header_component.id})}}
 	{{pass}}
 {{end}}
 
@@ -26,7 +26,7 @@
 			<div>
 		{{pass}}
 			{{=LOAD(left_sidebar_component.controller, left_sidebar_component.name, ajax=left_sidebar_component.ajax,
-			ajax_trap=left_sidebar_component.ajax_trap, vars={'container_id':page.id})}}
+			ajax_trap=left_sidebar_component.ajax_trap, vars={'container_id':page.id, 'component_id': left_sidebar_component.id})}}
 		</div>
 	{{pass}}
 {{end}}
@@ -39,7 +39,7 @@
 			<div>
 		{{pass}}
 			{{=LOAD(right_sidebar_component.controller, right_sidebar_component.name, ajax=right_sidebar_component.ajax,
-			ajax_trap=right_sidebar_component.ajax_trap, vars={'container_id':page.id})}}
+			ajax_trap=right_sidebar_component.ajax_trap, vars={'container_id':page.id, 'component_id': right_sidebar_component.id})}}
 		</div>
 	{{pass}}
 {{end}}
@@ -63,7 +63,7 @@
 				<div>
 			{{pass}}
 				{{=LOAD(central_component.controller, central_component.name, ajax=central_component.ajax,
-				ajax_trap=central_component.ajax_trap, vars={'container_id':page.id})}}
+				ajax_trap=central_component.ajax_trap, vars={'container_id':page.id, 'component_id': central_component.id})}}
 			</div>
 		{{else:}}
 			{{if page.content:}}
@@ -124,19 +124,19 @@
 		<div class="span4 column">
 			{{if left_footer_component:}}
 				{{=LOAD(left_footer_component.controller, left_footer_component.name, ajax=left_footer_component.ajax,
-				ajax_trap=left_footer_component.ajax_trap, vars={'container_id':page.id})}}
+				ajax_trap=left_footer_component.ajax_trap, vars={'container_id':page.id, 'component_id': left_footer_component.id})}}
 			{{pass}}
 		</div>
 		<div class="span4 column">
 			{{if middle_footer_component:}}
 				{{=LOAD(middle_footer_component.controller, middle_footer_component.name, ajax=middle_footer_component.ajax,
-				ajax_trap=middle_footer_component.ajax_trap, vars={'container_id':page.id})}}
+				ajax_trap=middle_footer_component.ajax_trap, vars={'container_id':page.id, 'component_id': middle_footer_component.id})}}
 			{{pass}}
 		</div>
 		<div class="span4 column">
 			{{if right_footer_component:}}
 				{{=LOAD(right_footer_component.controller, right_footer_component.name, ajax=right_footer_component.ajax,
-				ajax_trap=right_footer_component.ajax_trap, vars={'container_id':page.id})}}
+				ajax_trap=right_footer_component.ajax_trap, vars={'container_id':page.id, 'component_id': right_footer_component.id})}}
 			{{pass}}
 		</div>
 	</div>

@@ -111,6 +111,14 @@ def newsletter():
     return dict(form=form)
 
 
+def meta_component():
+    """
+    Allows to access the "meta_component" component
+    """
+    components = db(db.page_component.parent == request.vars.component_id).select(orderby = db.page_component.rank)
+    page = db.page(request.vars.container_id)
+    return dict(page=page, components=components)
+
 def call():
     """
     exposes services. for example:

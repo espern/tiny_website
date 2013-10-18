@@ -169,6 +169,23 @@ if not WEBSITE_PARAMETERS or not WEBSITE_PARAMETERS.last_fixture_date or WEBSITE
 				pages.update(right_footer_component=newsletter_component)
 
 
+	component = db(db.page_component.name == 'meta_component.load').select().first()
+	component_description = 'Meta component (container)'
+	if component:
+		#add component description
+		if not component.description:
+			component.description = component_description
+			component.update_record()
+	else:
+		db.page_component.insert(
+			controller='default',
+			name='meta_component.load',
+			description=component_description,
+			ajax=False,
+			ajax_trap=False
+		)
+
+
 	#Create the default calendar durations
 	if db(db.calendar_duration.id > 0).count() == 0:
 		db.calendar_duration.insert(
