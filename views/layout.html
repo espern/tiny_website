@@ -100,6 +100,7 @@
           <span class="icon-bar"></span>
         </button>
         {{=response.logo or ''}}
+        
         <ul id="navbar" class="nav pull-right">{{='auth' in globals() and auth.navbar(mode="dropdown") or ''}}</ul>
         <div class="nav-collapse">
           {{is_mobile=request.user_agent().is_mobile}}
@@ -129,11 +130,15 @@
               {{pass}}
           </div>
         {{pass}}
+          <div class="span12">
+              {{block header}}
+              {{end}}
+          </div>
     </header>
 
     <section id="main" class="main row">
         {{if left_sidebar_enabled:}}
-        <div class="span3 left-sidebar">
+        <div class="span3">
             {{block left_sidebar}}
             <p></p>
             {{end}}

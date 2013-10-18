@@ -26,6 +26,7 @@ def show_page():
     if page.allow_disqus and WEBSITE_PARAMETERS.disqus_shortname:
         disqus_shortname = WEBSITE_PARAMETERS.disqus_shortname
     pretty_date = prettydate(page.modified_on, T)
+    header_component = db.page_component(page.header_component)
     left_sidebar_component = db.page_component(page.left_sidebar_component)
     right_sidebar_component = db.page_component(page.right_sidebar_component)
     left_footer_component = db.page_component(page.left_footer_component)
@@ -33,6 +34,7 @@ def show_page():
     right_footer_component = db.page_component(page.right_footer_component)
     central_component = db.page_component(page.central_component)
     return dict(page=page,
+                header_component=header_component,
                 left_sidebar_enabled=page.left_sidebar_enabled,
                 right_sidebar_enabled=page.right_sidebar_enabled,
                 left_sidebar_component=left_sidebar_component,
@@ -74,6 +76,7 @@ def edit_page():
                             db.page.url.name,
                             db.page.is_index.name,
                             db.page.is_enabled.name,
+                            db.page.header_component.name,
                             db.page.left_sidebar_enabled.name,
                             db.page.right_sidebar_enabled.name,
                             db.page.left_footer_component.name,

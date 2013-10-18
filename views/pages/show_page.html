@@ -10,6 +10,14 @@
     </title>
 {{end}}
 
+
+{{block header}}
+	{{if header_component:}}
+		{{=LOAD(header_component.controller, header_component.name, ajax=header_component.ajax,
+		ajax_trap=header_component.ajax_trap, vars={'container_id':page.id})}}
+	{{pass}}
+{{end}}
+
 {{block left_sidebar}}
 	{{if left_sidebar_component:}}
 		{{if left_sidebar_component.container_class:}}

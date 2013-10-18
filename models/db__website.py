@@ -103,6 +103,7 @@ db.define_table('page',
     Field('is_enabled', 'boolean', readable=True, writable=True, default=True, label=T('Is enabled')),
     Field('left_sidebar_enabled', 'boolean', default=False, label=T('Left sidebar')),
     Field('right_sidebar_enabled', 'boolean', default=False, label=T('Right sidebar')),
+    Field('header_component', 'reference page_component', label=T('Header component')),
     Field('left_sidebar_component', 'reference page_component', label=T('Left sidebar component')),
     Field('right_sidebar_component', 'reference page_component', label=T('Right sidebar component')),
     Field('left_footer_component', 'reference page_component', label=T('Left footer component')),
@@ -115,6 +116,7 @@ db.define_table('page',
 )
 
 db.page.parent.requires = IS_EMPTY_OR(IS_IN_DB(db, db.page.id, '%(title)s', zero=T('<Empty>')))
+db.page.header_component.requires = IS_EMPTY_OR(IS_IN_DB(db, db.page_component.id, '%(name)s - %(description)s', zero=T('<Empty>')))
 db.page.left_sidebar_component.requires = IS_EMPTY_OR(IS_IN_DB(db, db.page_component.id, '%(name)s - %(description)s', zero=T('<Empty>')))
 db.page.right_sidebar_component.requires = IS_EMPTY_OR(IS_IN_DB(db, db.page_component.id, '%(name)s - %(description)s', zero=T('<Empty>')))
 db.page.left_footer_component.requires = IS_EMPTY_OR(IS_IN_DB(db, db.page_component.id, '%(name)s - %(description)s', zero=T('<Empty>')))
