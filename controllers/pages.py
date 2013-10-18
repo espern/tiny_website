@@ -80,7 +80,8 @@ def edit_page():
                             db.page.middle_footer_component.name,
                             db.page.right_footer_component.name,
                             db.page.central_component.name,
-                            db.page.allow_disqus.name]
+                            db.page.allow_disqus.name,
+                            db.page.max_content_height.name]
                         ]
     page_id = request.args(0)
     if page_id:
