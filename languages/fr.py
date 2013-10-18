@@ -256,7 +256,7 @@
 'Google maps plan url': 'URL pour google maps plan',
 'Group ID': 'Groupe ID',
 'Groups': 'Groupes',
-'Header component': 'Composant entête',
+'Header component': 'Composant entête	',
 'Hello World': 'Bonjour le monde',
 'Home': 'Accueil',
 'How did you get here?': 'Comment êtes-vous arrivé ici?',
