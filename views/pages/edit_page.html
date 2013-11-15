@@ -20,7 +20,7 @@
 	<script>jQuery('#page_content').css('width','600px').css('height','50px');</script>
 {{pass}}
 <script>
-	jQuery(document).ready(function(){
+	$(document).ready(function(){
 		var wysiwygfield = new nicEditor({
 			iconsPath :"{{=URL('static', 'nicEdit/nicEditorIcons.gif')}}",
 			buttonList : ['bold','italic','underline','strikeThrough','left', 'center',
@@ -28,48 +28,48 @@
 			uploadURI : "{{=URL('images', 'nicedit_image_upload', args=request.args(0))}}",
 		})
 		wysiwygfield.panelInstance("page_content");
-		jQuery('#wysiwyg_management').hide();
+		$('#wysiwyg_management').hide();
 		{{for field in advanced_fields:}}
-			jQuery('#{{=field}}').hide();
+			$('#{{=field}}').hide();
 		{{pass}}
 		
-		if (!jQuery('#page_left_sidebar_enabled').attr('checked'))
-			jQuery('#page_left_sidebar_component__row').hide();
-		if (!jQuery('#page_right_sidebar_enabled').attr('checked'))
-			jQuery('#page_right_sidebar_component__row').hide();
-		jQuery('#page_left_sidebar_enabled').change(function(){
-			if(jQuery('#page_left_sidebar_enabled').attr('checked'))
-				jQuery('#page_left_sidebar_component__row').show();
-			else jQuery('#page_left_sidebar_component__row').hide();});
-		jQuery('#page_right_sidebar_enabled').change(function(){
-			if(jQuery('#page_right_sidebar_enabled').attr('checked'))
-				jQuery('#page_right_sidebar_component__row').show();
-			else jQuery('#page_right_sidebar_component__row').hide();});
-		jQuery('#simple_view').click(function(){
-			jQuery('#simple_view').attr('class','active');
-			jQuery('#advanced_view').attr('class','inactive');
-			jQuery('#wysiwyg_management').hide();
+		if (!$('#page_left_sidebar_enabled').attr('checked'))
+			$('#page_left_sidebar_component__row').hide();
+		if (!$('#page_right_sidebar_enabled').attr('checked'))
+			$('#page_right_sidebar_component__row').hide();
+		$('#page_left_sidebar_enabled').change(function(){
+			if($('#page_left_sidebar_enabled').attr('checked'))
+				$('#page_left_sidebar_component__row').show();
+			else $('#page_left_sidebar_component__row').hide();});
+		$('#page_right_sidebar_enabled').change(function(){
+			if($('#page_right_sidebar_enabled').attr('checked'))
+				$('#page_right_sidebar_component__row').show();
+			else $('#page_right_sidebar_component__row').hide();});
+		$('#simple_view').click(function(){
+			$('#simple_view').attr('class','active');
+			$('#advanced_view').attr('class','inactive');
+			$('#wysiwyg_management').hide();
 			{{for field in advanced_fields:}}
-				jQuery('#{{=field}}').hide();
+				$('#{{=field}}').hide();
 			{{pass}}
 			});
-		jQuery('#advanced_view').click(function(){
-			jQuery('#advanced_view').attr('class','active');
-			jQuery('#simple_view').attr('class','inactive');
-			jQuery('#wysiwyg_management').show();
+		$('#advanced_view').click(function(){
+			$('#advanced_view').attr('class','active');
+			$('#simple_view').attr('class','inactive');
+			$('#wysiwyg_management').show();
 			{{for field in advanced_fields:}}
-				jQuery('#{{=field}}').show();
+				$('#{{=field}}').show();
 			{{pass}}
 			});
-		jQuery('#activate_wysiwyg').click(function(){
-			jQuery('#activate_wysiwyg').attr('class','active');
-			jQuery('#remove_wysiwyg').attr('class','inactive');
+		$('#activate_wysiwyg').click(function(){
+			$('#activate_wysiwyg').attr('class','active');
+			$('#remove_wysiwyg').attr('class','inactive');
 			wysiwygfield.panelInstance("page_content");});
-		jQuery('#remove_wysiwyg').click(function(){
-			jQuery('#activate_wysiwyg').attr('class','inactive');
-			jQuery('#remove_wysiwyg').attr('class','active');
+		$('#remove_wysiwyg').click(function(){
+			$('#activate_wysiwyg').attr('class','inactive');
+			$('#remove_wysiwyg').attr('class','active');
 			wysiwygfield.removeInstance("page_content");});
-		jQuery('input[type=submit]').click(function(){
+		$('input[type=submit]').click(function(){
 			wysiwygfield.panelInstance("page_content");});
 	});
 </script>
