@@ -35,12 +35,14 @@
 							</script>
 						{{pass}}
 						<br />
-						<em>
-							<small class="muted pull-right">
-								{{=T('Published on ')}}
-								{{=news.published_on.strftime("%d/%m/%Y %H:%M") }}
-							</small>
-						</em>
+						{{if news.published_on:}}
+							<em>
+								<small class="muted pull-right">
+									{{=T('Published on ')}}
+									{{=news.published_on.strftime("%d/%m/%Y %H:%M") }}
+								</small>
+							</em>
+						{{pass}}
 					</p>
 				</p>
 			</div>
