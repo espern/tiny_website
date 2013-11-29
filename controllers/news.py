@@ -33,6 +33,14 @@ def delete_news():
     return dict(news=news, form=form)
 
 
+def newsletter_unsubscribe():
+    if request.vars.email:
+        q = db.registered_user.email==request.vars.email
+        user = db(q).select()
+        if user:
+            db(q).update(subscribe_to_newsletter=False)
+            return dict(text=T("You have been successfully unsubscribed from the newsletter. You won't receive any email anymore."))
+    return dict(text=T("This email is not recognized. We cannot unsubscribe you."))
 
 
 def rss_news():

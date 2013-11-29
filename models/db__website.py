@@ -152,6 +152,7 @@ db.define_table('registered_user',
     Field('first_name', label=T('First name')),
     Field('last_name', label=T('Last name')),
     Field('email', unique=True, requires=[IS_EMAIL(), IS_NOT_IN_DB(db, 'registered_user.email')], label=T('Email')),
+    Field('subscribe_to_newsletter', 'boolean', default=True, label=T("User want to receive newsletter emails")),
     format='%(email)s'
     )
 
@@ -160,6 +161,8 @@ db.define_table('news',
    Field('date','date',default=request.now,label=T('Date')),
    Field('text','text',label=T('News content')),
    Field('published_on', 'datetime', default=request.now),
+   Field('send_mail', 'boolean', readable=True, writable=True, default=False, label=T('Send an email to the registered users to inform them')),
+   Field('mail_sent', 'boolean', readable=False, writable=False, default=False, label=T('An email has been send to the registered users')),
    Field('max_content_height', 'integer', readable=True, writable=True, default=0, label=T('Max height (in pixels) of the news content (0 = no max height)')),
    format='%(text)s'
    )

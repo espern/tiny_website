@@ -103,6 +103,7 @@ def newsletter():
     """
     Allows to access the "newsletter" component
     """
+    db.registered_user.subscribe_to_newsletter.readable = db.registered_user.subscribe_to_newsletter.writable = False
     form = SQLFORM(db.registered_user, _class='blueText')
     if form.process().accepted:
        response.flash = T('form accepted')
