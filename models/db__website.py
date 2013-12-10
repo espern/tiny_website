@@ -128,8 +128,8 @@ db.page.middle_footer_component.requires = IS_EMPTY_OR(IS_IN_DB(db, db.page_comp
 db.page.central_component.requires = IS_EMPTY_OR(IS_IN_DB(db, db.page_component.id, '%(name)s - %(description)s', zero=T('<Empty>')))
 db.page.url.compute = lambda row: IS_SLUG()(row.title)[0]
 
-#pageSelector = HierarchicalSelect(db, db.page, db.page.title, db.page.rank)
-#db.page.parent.widget = pageSelector.widget
+pageSelector = HierarchicalSelect(db, db.page, db.page.title, db.page.rank)
+db.page.parent.widget = pageSelector.widget
 
 db.define_table('image',
     Field('page', 'reference page', label=T('Page')),
