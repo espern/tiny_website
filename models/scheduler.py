@@ -30,13 +30,17 @@ def mail_send():
             news.update_record()
             db.commit()
         registered_users = db((db.registered_user.subscribe_to_newsletter==True)).select()
-        for r_user in registered_users:
-            footer = T("You receive this email because you subscribed on %s website.\nTo unsubscribe from this newsletter, please click here : %s") % (
-                            WEBSITE_PARAMETERS.website_url, URL(WEBSITE_PARAMETERS.website_url, 'news', 'mailing_unsubscribe', vars=dict(email=r_user.email)))
-            mail.send(
-                        to=r_user.email,
-                        subject=mail_subject,
-                        message = message+footer
-                    )
+        if registered_users:
+            for r_user in registered_users:
+                footer = T("You receive this email because you subscribed on %s website.\nTo unsubscribe from this newsletter, please click here : %s") % (
+                                WEBSITE_PARAMETERS.website_url, URL(WEBSITE_PARAMETERS.website_url, 'news', 'mailing_unsubscribe', vars=dict(email=r_user.email)))
+                mail.send(
+                            to=r_user.email,
+                            subject=mail_subject,
+                            message = message+footer
+                        )
+        else:
+            return "no registered users"
     else:
         return "no news to send..."
+    return "complete"
