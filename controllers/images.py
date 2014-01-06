@@ -67,7 +67,7 @@ def edit_image():
 def images():
     manager_toolbar = ManagerToolbar('image')
     images = db(db.image).select(cache=(cache.ram, 60), cacheable=True, orderby=db.image.page)
-    pages = list(set([i.page for i in images if i.page <> 0]))
+    pages = list(set([i.page for i in images if i.page != 0]))
     return dict(images=images,
                 pages=pages,
                 manager_toolbar=manager_toolbar)

@@ -10,7 +10,7 @@
 {{prev_page=None}}
 {{for file in files:}}
 		{{if file.page != prev_page:}}
-			{{if prev_page <> None:}}
+			{{if prev_page != None:}}
 				</div>
 			{{pass}}
 			<div class="span10 file-box">
