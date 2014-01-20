@@ -8,7 +8,7 @@
 			{{pass}}
 		</h3>
 		{{for news in newsS:}}
-			{{if news.date < request.now.date():}}
+			{{if news.blur_when_passed and news.date < request.now.date():}}
 				<div class="greyText">
 			{{else:}}
 				<div>	

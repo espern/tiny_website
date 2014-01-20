@@ -240,6 +240,8 @@ db.define_table('news',
     label=T('An email has been send to the registered users')),
    Field('max_content_height', 'integer', readable=True, writable=True, default=0,
     label=T('Max height (in pixels) of the news content (0 = no max height)')),
+   Field('blur_when_passed', 'boolean', default=True,
+        label=T("The event is blurred when date < current date")),
    format='%(text)s'
    )
 

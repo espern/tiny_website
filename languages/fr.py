@@ -530,6 +530,7 @@
 'Telephone': 'Téléphone',
 'The "query" is a condition like "db.table1.field1==\'value\'". Something like "db.table1.field1==db.table2.field2" results in a SQL JOIN.': 'La "query" est une condition comme "db.table1.champ1==\'valeur\'". Quelque chose comme "db.table1.champ1==db.table2.champ2" résulte en un JOIN SQL.',
 'The Core': 'Le noyau',
+'The event is blurred when date < current date': "L'évènement est grisé lorsque date < date courante",
 'The output of the file is a dictionary that was rendered by the view %s': 'La sortie de ce fichier est un dictionnaire qui été restitué par la vue %s',
 'The Views': 'Les Vues',
 'There was an error in the form': 'Il y a une erreur dans le formulaire',
