@@ -15,7 +15,8 @@ class HierarchicalSelect(object):
        
         path += self.hierarchyseparator
         self.options.append((field['id'], path+field[self.title]))
-        [self._childs_list(child, (depth+1)) for child in self.rows.find(lambda row: row.parent == field.id)]   
+        [self._childs_list(child, (depth+1)) for child in self.rows.find(
+                lambda row: row.parent == field.id)]   
 
     def widget(self, field, value):
         self.fieldname = field.name
@@ -23,7 +24,8 @@ class HierarchicalSelect(object):
         self.rows = self.db(self.tablename).select(orderby=self.order)
         self.options.append(("", T('<Empty>'))) #add root node
 
-        [self._childs_list(field,0) for field in self.rows.find(lambda row: row.parent < 1)] 
+        [self._childs_list(field,0) for field in self.rows.find(
+                lambda row: row.parent < 1)] 
         opt=[OPTION(name, _value=key) for key,name in self.options]
         sel = SELECT(opt,_id="%s_%s" % (self.tablename, self.fieldname),
                         _class=self.type, 
