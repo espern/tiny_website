@@ -110,7 +110,9 @@ db.define_table('website_parameters',
     Field('show_event_menu', 'boolean', default=True, label=T('Show event menu'),
         comment=T('Show the event menu (to manage events on a calendar)')),
     Field('disqus_shortname', default=True, label=T('Disqus shortname'),
-        comment=T('Add here your disqus shortname to activate comments on your pages. Note : you need to fill "website_url" too!'))
+        comment=T('Add here your disqus shortname to activate comments on your pages. Note : you need to fill "website_url" too!')),
+    Field('send_mail_daily', 'boolean', default=False,
+        label=T('Send mails daily (during the fixtures, without using the scheduler...)')),
 ) 
 db.website_parameters.website_url.requires = IS_EMPTY_OR(IS_URL())
 db.website_parameters.mailserver_sender_mail.requires = IS_EMPTY_OR(IS_EMAIL())

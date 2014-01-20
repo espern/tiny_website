@@ -2,16 +2,19 @@
 #from gluon.debug import dbg
     
 if not WEBSITE_PARAMETERS or not WEBSITE_PARAMETERS.last_fixture_date or WEBSITE_PARAMETERS.last_fixture_date < request.now.date():
-	#Create a mail_send scheduler task if needed
-	if db_sched(db_sched.scheduler_task.task_name == "mail_send").count() == 0:
-		scheduler.queue_task(
-        function='mail_send',
-        pargs=[],
-        pvars={},
-        repeats=0, # run illimited times
-        period=86400, # every 86400 seconds (1 day)
-        timeout=300, # should take less than 300 seconds (5 minutes)
-        )
+	if WEBSITE_PARAMETERS.send_mail_daily:
+		print news_mail_send()
+	else:
+		#Create a mail_send scheduler task if needed
+		if db_sched(db_sched.scheduler_task.task_name == "news_mail_send").count() == 0:
+			scheduler.queue_task(
+	        function='news_mail_send',
+	        pargs=[],
+	        pvars={},
+	        repeats=0, # run illimited times
+	        period=86400, # every 86400 seconds (1 day)
+	        timeout=300, # should take less than 300 seconds (5 minutes)
+	        )
 	#Create a "manager" group
 	if db(db.auth_group.role == "manager").count() == 0:
 	    db.auth_group.insert(

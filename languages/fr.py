@@ -1,10 +1,11 @@
-# coding: utf8
+# coding: utf-8
 {
 '\n                Name : %s\n                Email : %s\n                Subject : %s\n                Message : %s\n            ': '                Nom : %s\r\n                E-mail : %s\r\n                Sujet : %s\r\n                Message : %s\r\n            ',
 '\n            Name : %s\n            Email : %s\n            Subject : %s\n            Message : %s\n        ': '            Nom : %s\r\n            E-mail : %s\r\n            Sujet: %s\r\n            Message : %s\r\n        ',
 '\n            The following person would like to book %s :\n\n            Name : %s\n            Email : %s\n            Phone number : %s\n            Address : %s\n            From : %s\n            During : %s\n            Remark : %s\n        ': 'La personne suivante aimerait réserver %s :\r\n\r\nNom : %s\r\nE-mail : %s\r\nTéléphone : %s\r\nAdresse : %s\r\nA partir du : %s\r\nDurée : %s\r\nRemarque : %s',
 '\n*** %s ***\n%s\n\n': '*** %s ***%s',
 ' in : %s': ' par : %s',
+'!=': '!=',
 '!langcode!': 'fr',
 '!langname!': 'Français',
 '"update" is an optional expression like "field1=\'newvalue\'". You cannot update or delete the results of a JOIN': '"update" est une expression optionnelle comme "champ1=\'nouvellevaleur\'". Vous ne pouvez mettre à jour ou supprimer les résultats d\'un JOIN',
@@ -474,6 +475,7 @@
 'Search': 'Chercher',
 'Semantic': 'Sémantique',
 'Send an email to the registered users to inform them': 'Envoyer un email aux utilisateurs enregistrés pour les tenir informés',
+'Send mails daily (during the fixtures, without using the scheduler...)': 'Envoyer les emails quotidiennemnt (pendant les fixtures, sans utiliser le scheduler....)',
 'Send to': 'Envoyer à',
 'Sender email adress of the mailserver (used to send email in forms)': "Adresse d'expéditeur du serveur e-mail (utilisé pour envoyer les e-mails dans les formulaires)",
 'SEO : Meta "author"': 'Référencement : Meta "author"',
