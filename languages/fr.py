@@ -475,7 +475,7 @@
 'Search': 'Chercher',
 'Semantic': 'Sémantique',
 'Send an email to the registered users to inform them': 'Envoyer un email aux utilisateurs enregistrés pour les tenir informés',
-'Send mails daily (during the fixtures, without using the scheduler...)': 'Envoyer les emails quotidiennemnt (pendant les fixtures, sans utiliser le scheduler....)',
+'Send mails daily (during the fixtures, without using the scheduler...)': 'Envoyer les emails quotidiennement (pendant les fixtures, sans utiliser le scheduler....)',
 'Send to': 'Envoyer à',
 'Sender email adress of the mailserver (used to send email in forms)': "Adresse d'expéditeur du serveur e-mail (utilisé pour envoyer les e-mails dans les formulaires)",
 'SEO : Meta "author"': 'Référencement : Meta "author"',
