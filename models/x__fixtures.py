@@ -2,7 +2,7 @@
 #from gluon.debug import dbg
     
 if not WEBSITE_PARAMETERS or not WEBSITE_PARAMETERS.last_fixture_date or WEBSITE_PARAMETERS.last_fixture_date < request.now.date():
-	if WEBSITE_PARAMETERS.send_mail_daily:
+	if WEBSITE_PARAMETERS and WEBSITE_PARAMETERS.send_mail_daily:
 		print news_mail_send()
 	else:
 		#Create a mail_send scheduler task if needed

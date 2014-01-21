@@ -1,26 +1,43 @@
 # -*- coding: utf-8 -*-
 
-# from gluon.debug import dbg
-
 @auth.requires_membership('manager')
 def settings():
+    """
+    Secured page to manage the website settings
+    """
     website_parameters = db(db.website_parameters).select().first()
     form = crud.update(db.website_parameters,website_parameters)
     return dict(form=form)
 
 def index():
-    #Check if WEBSITE_PARAMETERS initialised. If not, we can either start with dummy data, or a blank database
+    """
+    Index page of the website.
+
+    Can be accessed : 
+        - For the first time : proposes to start with an example database or empty data
+        - Next times : returns the index page
+    """
+    # Check if WEBSITE_PARAMETERS initialised.
+    # If not, we can either start with "example" data, or a blank database
+    # WEBSITE_PARAMETERS is a global variable contains all the parameters for this app.
+    # WEBSITE_PARAMETERS is defined in db_menu.py model file
     if not WEBSITE_PARAMETERS:
         form = FORM.confirm(T('I want to start with an empty database'),{T('I want to try the example database'):URL('populate_example_database')})
         if form.accepted:
             redirect(URL('default','create_empty_database'))
         return dict(form=form)
+
+    # Get the index page from the database and return it
     page = db(db.page.is_index==True).select().first()
     if not page:
         raise HTTP(404, T('sorry, the page you requested does not exist'))
     redirect(URL('pages','show_page',args=page.url))
     
 def create_empty_database():
+    """
+    Creates an empty database for the website.
+    This function is called from index()
+    """
     form = SQLFORM(db.website_parameters)
     if form.process().accepted:
         if db(db.page.is_index == True).count() == 0:
@@ -39,8 +56,28 @@ def create_empty_database():
     return dict(form=form)
     
 def populate_example_database():
+    """
+    Creates an example database for the website.
+    This function is called from index()
+
+    The principle : we have fixtures model files with a "non-python"
+    extension ( *.tiny_demo). To populate the database we rename *.tiny_demo
+    files in *.py files. Then we reload the page.
+    Web2py internals will see the new *.py model files, and execute them.
+    Then, we can rename the *.py fixtures files in *.tiny_demo files to avoid
+    poppulating the database at next load.
+    We have also static files (images) which are renamed from *.tiny_demo into *.jpg
+    to show them or not
+
+
+    :request.args(0): mock parameter. Used only to know that the function is 
+        called from itself.
+
+    :type request.args(0): boolean.
+    """
     from os import rename
 
+    # Get all the fixtures files from the project : models and static files
     fixtures_path = path.join(request.folder,'models')
     banner_image_path = path.join(request.folder,'static', 'images', 'banner')
     photo_gallery_path = path.join(request.folder,'static', 'images', 'photo_gallery')
@@ -48,24 +85,38 @@ def populate_example_database():
     uploaded_files_path = path.join(request.folder,'static', 'uploaded_files')
 
     if request.args(0):
-        #rename x_fixtures.bak in x_fixtures.py to avoid populate the database in the future
+        # The page is called from itself : populating is done.
+        # Rename x_fixtures.py in x_fixtures.tiny_demo to avoid 
+        # populating the database the next time
+        # and redirect to the index page
         if path.exists(path.join(fixtures_path,'x_fixtures.py')):
-            rename(path.join(fixtures_path,'x_fixtures.py'),path.join(fixtures_path,'x_fixtures.tiny_demo'))
+            rename(path.join(fixtures_path,'x_fixtures.py'),
+                path.join(fixtures_path,'x_fixtures.tiny_demo'))
         redirect(URL('index'))
-    #rename x_fixtures.bak in x_fixtures.py to populate the database
+
+    # Rename x_fixtures.tiny_demo to in x_fixtures.py
     if path.exists(path.join(fixtures_path,'x_fixtures.tiny_demo')):
-        rename(path.join(fixtures_path,'x_fixtures.tiny_demo'),path.join(fixtures_path,'x_fixtures.py'))
-    #activate the demo banner
+        rename(path.join(fixtures_path,'x_fixtures.tiny_demo'),
+            path.join(fixtures_path,'x_fixtures.py'))
+
+    # activate the demo banner
     if path.exists(path.join(banner_image_path,'banner.tiny_demo')):
-        rename(path.join(banner_image_path,'banner.tiny_demo'),path.join(banner_image_path,'banner.jpg'))
-    #activate photo gallery images
+        rename(path.join(banner_image_path,'banner.tiny_demo'),
+            path.join(banner_image_path,'banner.jpg'))
+
+    # activate photo gallery images
     for i in range(1,7):
         if path.exists(path.join(photo_gallery_path,'demo%d.tiny_demo' %i)):
-            rename(path.join(photo_gallery_path,'demo%d.tiny_demo' %i),path.join(photo_gallery_path,'demo%d.jpg' %i))
-    #activate photo gallery thumb images
+            rename(path.join(photo_gallery_path,'demo%d.tiny_demo' %i),
+                path.join(photo_gallery_path,'demo%d.jpg' %i))
+
+    # activate photo gallery thumb images
     for i in range(1,7):
         if path.exists(path.join(photo_gallery_thumb_path,'demo%d.tiny_demo' %i)):        
-            rename(path.join(photo_gallery_thumb_path,'demo%d.tiny_demo' %i),path.join(photo_gallery_thumb_path,'demo%d.jpg' %i))
+            rename(path.join(photo_gallery_thumb_path,'demo%d.tiny_demo' %i),
+                path.join(photo_gallery_thumb_path,'demo%d.jpg' %i))
+
+    # Redirect to the current controller to run once the fixtures model file
     redirect(URL(populate_example_database,args=True))
 
 def user():
@@ -102,6 +153,9 @@ def address():
 def newsletter():
     """
     Allows to access the "newsletter" component
+
+    Newsletter component shows a form where visitors can register to receive
+    news about the website
     """
     db.registered_user.subscribe_to_newsletter.readable = db.registered_user.subscribe_to_newsletter.writable = False
     form = SQLFORM(db.registered_user, _class='blueText')
@@ -115,6 +169,10 @@ def newsletter():
 def meta_component():
     """
     Allows to access the "meta_component" component
+
+    Meta-component allows you to "group" several components into one.
+    For example, you can show a "newsletter" component above a "photo gallery"
+    component at the same placeholder.
     """
     components = db(db.page_component.parent == request.vars.component_id).select(orderby = db.page_component.rank)
     page = db.page(request.vars.container_id)
@@ -149,12 +207,9 @@ def data():
 
 def contact_form():
     """
-    Contact form
+    Generates the contact-form
     """
     from gluon.tools import Recaptcha
-
-    public_key = '6LfBX90SAAAAAKZn2zPK5i72PZsnm9Ouj6BC67k7'
-    private_key = '6LfBX90SAAAAADRYFTj5xMyZnZoWycdkCBlF_Djb '
     
     form=SQLFORM.factory(
         Field('your_name',requires=IS_NOT_EMPTY(), label=T('Your name')),
@@ -163,19 +218,31 @@ def contact_form():
         Field('message', 'text',requires=IS_NOT_EMPTY(), label=T('Message'))
         )
 
+    # Select the addresses to show in the contact form
     contacts = db(db.contact.show_in_contact_form == True).select()
     opt=[OPTION(contact.name, _value=contact.id) for contact in contacts]
     sel = SELECT(opt,_id="%s_%s" % ('no_table', 'send_to'),
                             _class='generic-widget', 
                             _name='send_to'
                         )
+
+    # Add an extra field "send to" in the form. This field is a SELECT field
+    # containing the possibles addresses (see above)
     my_extra_element = TR(TD(LABEL(T('Send to')),_class='w2p_fl'),TD(sel,_class='w2p_fw'), _id="no_table_send_to__row")
     form[0].insert(-2,my_extra_element)
+
     nb_contact=len(contacts)
-    ## Uncomment here to add the captcha...
-    #form.element('table').insert(-1,(T('Confirm that you are not a machine'),Recaptcha(request, public_key, private_key),''))
+
+    ########### Uncomment below to use a captcha...
+    ########### Here we use "Recaptcha" service. 
+    ########### For mode informations, see https://www.google.com/recaptcha/admin/creat
+    # public_key = '6LfBX90SAAAAAKZn2zPK5i72PZsnm9Ouj6BC67k7'
+    # private_key = '6LfBX90SAAAAADRYFTj5xMyZnZoWycdkCBlF_Djb '
+    # form.element('table').insert(-1,(T('Confirm that you are not a machine'),Recaptcha(request, public_key, private_key),''))
+    ###########
 
     if form.process().accepted:
+        # Select the address to send
         a_contact = db.contact(form.vars.send_to)
         if nb_contact > 1:
             mail_subject = T('Question from %s for %s on %s website') % (form.vars.your_name,a_contact.name,WEBSITE_PARAMETERS.website_name)

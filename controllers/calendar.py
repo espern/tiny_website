@@ -3,18 +3,23 @@
 def calendar_booking():
     """
     Allows to access the "calendar_boking" component
+
+    :request.vars.container_id: id of the "containing" page
+        (i.e the id of the page which contains the calendar)
+    :type request.vars.container_id: int.
     """
     from calendar_tools import month_list, shortmonth_list, day_list, shortday_list
 
+    # Get the current page
     page = db.page(request.vars.container_id)
     if page and page.is_index:
-        #Index page : we show all booking requests
+        # Index page : we show all booking requests
         r=db.calendar_booking_request.id > 0
     else:
+        # Specific page : we show events related to the page
         r=db.calendar_booking_request.page==page
     rows = db()(db.calendar_booking_request.is_confirmed==True).select()
 
-    #dbg.set_trace()
     return dict(rows=rows,
                 page=page,
                 month_list=month_list,
@@ -25,13 +30,24 @@ def calendar_booking():
 def calendar_event():
     """
     Allows to access the "calendar_event" component
+
+    :request.vars.container_id: id of the "containing" page
+        (i.e the id of the page which contains the calendar)
+    :type request.vars.container_id: int.
     """
     from controllers_tools import strip_accents
     from calendar_tools import month_list, shortmonth_list, day_list, shortday_list
 
     def get_available_positions(event_id, event_nb_positions_available):
         """
-            Number of available positions for this event (None = illimited)
+        Calculates the number of remaining available positions for one event
+        Remaining positions = available positions - number of contacts on this event
+
+        :param event_id: The name to use.
+        :type event_id: int.
+        :param event_nb_positions_available: Number of available positions for this event.
+        :type event_nb_positions_available: int.
+        :returns:  int -- Number of events. (None = illimited)
         """
         if event_nb_positions_available == None:
             return None
@@ -39,12 +55,15 @@ def calendar_event():
 
     page = db.page(request.vars.container_id)
     if page and page.is_index:
-        #Index page : we show all events
+        # Index page : we show all events
         r=db.calendar_event.id > 0
     else:
+        # Specific page : we show events related to the page
         r=db.calendar_event.page==page
     rows = db(r).select()
-    events_available_positions = dict((event.id, get_available_positions(event.id, event.nb_positions_available)) for event in rows)
+    events_available_positions = dict(
+            (event.id, get_available_positions(event.id, event.nb_positions_available)
+            ) for event in rows)
     return dict(rows=rows,
                 page=page,
                 events_available_positions=events_available_positions,
@@ -57,13 +76,18 @@ def calendar_event():
 def add_booking_request():
     """
     Add a booking request to a calendar event
+
+    :request.args(0): id of the page where to add the booking request
+    :type request.args(0): int
     """
     page = db.page(request.args(0))
     if not page:
         redirect(URL('index'))
+
     form = SQLFORM.factory(db.calendar_contact, db.calendar_booking_request)
     page_low_title = page.title.lower()
     if form.process().accepted:
+        # Form accepted : we create the the contact and the booking request records
         _id = db.calendar_contact.insert(**db.calendar_contact._filter_fields(form.vars))
         form.vars.contact=_id
         form.vars.page=page.id
@@ -71,7 +95,7 @@ def add_booking_request():
         
         duration = db.calendar_duration(form.vars.duration)
 
-        #send an email
+        # send an email to the contact
         message=T("""
             The following person would like to book %s :
 
@@ -84,6 +108,7 @@ def add_booking_request():
             Remark : %s
         """) % (page_low_title, form.vars.name, form.vars.email, form.vars.phone_number, form.vars.address,
                 form.vars.start_date.strftime("%d/%m/%Y"), duration.name if duration else '', form.vars.remark)
+
         if mail.send(to=WEBSITE_PARAMETERS.booking_form_email,
                   cc=[WEBSITE_PARAMETERS.booking_form_cc if WEBSITE_PARAMETERS.booking_form_cc else ''],
                   bcc=[WEBSITE_PARAMETERS.booking_form_bcc if WEBSITE_PARAMETERS.booking_form_bcc else ''],
@@ -100,6 +125,9 @@ def add_booking_request():
 
 @auth.requires(auth.has_membership('manager') or auth.has_membership('booking_manager'))
 def edit_booking_requests():
+    """
+    Edit all the booking requests using a SQLFORM.smartgrid
+    """
     db.calendar_booking_request.is_confirmed.readable = db.calendar_booking_request.is_confirmed.writable = True
     db.calendar_booking_request.page.readable = db.calendar_booking_request.page.writable = True
     db.calendar_booking_request.contact.readable = db.calendar_booking_request.contact.writable = True
@@ -125,6 +153,9 @@ def edit_booking_requests():
 
 @auth.requires(auth.has_membership('manager') or auth.has_membership('event_manager'))
 def edit_events_calendar():
+    """
+    Edit all calendar events using a SQLFORM.smartgrid
+    """
     db.calendar_event.page.readable = db.calendar_event.page.writable = True
     db.calendar_event.title.readable = db.calendar_event.title.writable = True
     db.calendar_event.description.readable = db.calendar_event.description.writable = True
@@ -148,6 +179,9 @@ def edit_events_calendar():
 
 @auth.requires(auth.has_membership('manager') or auth.has_membership('event_manager'))
 def edit_contacts_calendar():
+    """
+    Edit all calendar contacts using a SQLFORM.smartgrid
+    """
     db.calendar_contact.event.readable = db.calendar_contact.event.writable = True
     linked_tables=['calendar_event']
     fields=[db.calendar_contact.name,db.calendar_contact.email, db.calendar_contact.phone_number, db.calendar_contact.address, db.calendar_contact.event]
