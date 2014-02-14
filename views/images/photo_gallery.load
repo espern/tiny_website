@@ -38,7 +38,7 @@
 							{{pass}}
 							<p>
 								<a data-toggle="modal" href="#image{{=index}}">
-									<img src="{{=URL('static','images/photo_gallery/thumbs/%s' %(image.thumb))}}">
+									<div align="center"><img src="{{=URL('static','images/photo_gallery/thumbs/%s' %(image.thumb))}}"></div>
 								</a>
 							</p>
 						</div>
